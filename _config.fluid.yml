@@ -767,8 +767,8 @@ post:
 # Based on GitHub Issues
 # See: https://utteranc.es
 utterances:
-  repo: git@github.com:Zcxx0322/Zcxx0322.github.io.git
-  issue_term: pathname
+  repo: Zcxx0322/Zcxx0322.github.io
+  issue_term: title
   label: utterances
   theme: github-light
   theme_dark: github-dark
