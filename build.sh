@@ -48,7 +48,6 @@ show_progress 3
 
 echo "清空 Zcxx0322.github.io 部署目录..."
 rm -rf "$DEPLOY_PATH"/*
-cp "$LOG_BUILD_PATH"/img "$LOG_BUILD_PATH"/public/ 
 show_progress 2
 
 echo "拷贝静态资源到 Zcxx0322.github.io..."
