@@ -22,6 +22,37 @@ show_progress() {
     echo ""
 }
 
+ensure_git_repo_is_synced() {
+    local repo_path=$1
+    local repo_url=$2
+
+    cd "$repo_path" || exit
+
+    if [ ! -d ".git" ]; then
+        echo "初始化 Git 仓库..."
+        git init
+        git remote add origin "$repo_url"
+    fi
+
+    echo "检查远程更新..."
+    git fetch origin
+    LOCAL=$(git rev-parse HEAD)
+    REMOTE=$(git rev-parse origin/main)
+    BASE=$(git merge-base HEAD origin/main)
+
+    if [ "$LOCAL" = "$REMOTE" ]; then
+        echo "本地仓库已是最新。"
+    elif [ "$LOCAL" = "$BASE" ]; then
+        echo "拉取最新更新..."
+        git pull origin main || { echo "拉取失败，请手动处理冲突。"; exit 1; }
+    elif [ "$REMOTE" = "$BASE" ]; then
+        echo "本地存在未推送的提交，继续处理。"
+    else
+        echo "本地与远程仓库存在冲突，请手动解决后再继续。"
+        exit 1
+    fi
+}
+
 echo "开始部署 Hexo 博客..."
 
 echo "清除 Hexo 缓存..."
@@ -33,14 +64,11 @@ echo "生成静态资源..."
 hexo generate
 show_progress 3
 
+echo "确保 LogBuild 仓库同步..."
+ensure_git_repo_is_synced "$LOG_BUILD_PATH" "$LOG_BUILD_REPO"
+
 echo "提交 LogBuild 仓库..."
 cd "$LOG_BUILD_PATH" || exit
-
-if [ ! -d ".git" ]; then
-    git init
-    git remote add origin "$LOG_BUILD_REPO"
-fi
-
 git add .
 git commit -m "$COMMIT_MESSAGE"
 git push -u origin main
@@ -54,14 +82,11 @@ echo "拷贝静态资源到 Zcxx0322.github.io..."
 cp -r "$LOG_BUILD_PATH/public/"* "$DEPLOY_PATH"
 show_progress 3
 
+echo "确保 Zcxx0322.github.io 仓库同步..."
+ensure_git_repo_is_synced "$DEPLOY_PATH" "$DEPLOY_REPO"
+
 echo "提交 Zcxx0322.github.io 仓库..."
 cd "$DEPLOY_PATH" || exit
-
-if [ ! -d ".git" ]; then
-    git init
-    git remote add origin "$DEPLOY_REPO"
-fi
-
 git add .
 git commit -m "$COMMIT_MESSAGE"
 git push -u origin main
