@@ -59,7 +59,9 @@ echo "提交 Zcxx0322.github.io 仓库..."
 cd "$DEPLOY_PATH" || exit
 
 # 确保在 main 分支，并拉取最新代码
-git checkout main && git pull origin main --rebase
+git checkout main || exit  # 如果不在 main 分支，则切换到 main 分支
+git pull origin main --rebase || exit  # 拉取远程最新代码
+
 git add .
 git commit -m "$COMMIT_MESSAGE"
 git push -u origin main
