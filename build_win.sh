@@ -2,24 +2,38 @@
 
 LOG_BUILD_PATH="C:/Users/36117/Desktop/zcx/LogBuild"
 DEPLOY_PATH="C:/Users/36117/Desktop/zcx/Zcxx0322.github.io"
-
 LOG_BUILD_REPO="git@github.com:Zcxx0322/LogBuild.git"
 DEPLOY_REPO="git@github.com:Zcxx0322/Zcxx0322.github.io.git"
 
+# 提示输入提交信息
 read -p "请输入更新信息: " COMMIT_MESSAGE
 
+# 显示进度条
 show_progress() {
     local duration=$1
     local bar="##################################################"
     local bar_length=${#bar}
+    local sleep_time=$2
 
     for ((i = 1; i <= duration; i++)); do
         local percent=$((i * 100 / duration))
         local bar_fill_length=$((percent * bar_length / 100))
         printf "\r[%s%*s] %d%%" "${bar:0:bar_fill_length}" $((bar_length - bar_fill_length)) "" "$percent"
-        sleep 1
+        [ -n "$sleep_time" ] && sleep "$sleep_time"
     done
     echo ""
+}
+
+# Git 提交操作
+git_commit_push() {
+    local repo_path=$1
+    local commit_message=$2
+
+    cd "$repo_path" || exit
+    git add .
+    git commit -m "$commit_message"
+    git push -u origin main
+    show_progress 3
 }
 
 echo "开始部署 Hexo 博客..."
@@ -32,18 +46,9 @@ show_progress 3
 
 # 提交 LogBuild 仓库
 echo "提交 LogBuild 仓库..."
-git add .
-git commit -m "$COMMIT_MESSAGE"
-git push -u origin main
-show_progress 3
+git_commit_push "$LOG_BUILD_PATH" "$COMMIT_MESSAGE"
 
-# 清空 Zcxx0322.github.io 部署目录，保留 .git 和 README.md
-echo "清空 Zcxx0322.github.io 部署目录（保留 .git 和 README.md）..."
-cd "$DEPLOY_PATH" || exit
-find . -mindepth 1 ! -name "README.md" ! -name ".git" -exec rm -rf {} +
-show_progress 2
-
-# 拷贝静态资源到部署目录
+# 拷贝静态资源到部署目录，覆盖现有文件
 echo "拷贝静态资源到 Zcxx0322.github.io..."
 if [ -d "$LOG_BUILD_PATH/public" ]; then
     cp -r "$LOG_BUILD_PATH/public/"* "$DEPLOY_PATH"
@@ -56,15 +61,6 @@ show_progress 3
 
 # 提交 Zcxx0322.github.io 仓库
 echo "提交 Zcxx0322.github.io 仓库..."
-cd "$DEPLOY_PATH" || exit
-
-# 确保在 main 分支，并拉取最新代码
-git checkout main || exit  # 如果不在 main 分支，则切换到 main 分支
-git pull origin main --rebase || exit  # 拉取远程最新代码
-
-git add .
-git commit -m "$COMMIT_MESSAGE"
-git push -u origin main
-show_progress 3
+git_commit_push "$DEPLOY_PATH" "$COMMIT_MESSAGE"
 
 echo "部署完成！提交信息：$COMMIT_MESSAGE"
