@@ -22,67 +22,65 @@ show_progress() {
     echo ""
 }
 
-ensure_git_repo_is_synced() {
-    local repo_path=$1
-    local repo_url=$2
-
-    cd "$repo_path" || exit
-
-    if [ ! -d ".git" ]; then
-        echo "初始化 Git 仓库..."
-        git init
-        git remote add origin "$repo_url"
-    fi
-
-    echo "检查远程更新..."
-    git fetch origin
-    LOCAL=$(git rev-parse HEAD)
-    REMOTE=$(git rev-parse origin/main)
-    BASE=$(git merge-base HEAD origin/main)
-
-    if [ "$LOCAL" = "$REMOTE" ]; then
-        echo "本地仓库已是最新。"
-    elif [ "$LOCAL" = "$BASE" ]; then
-        echo "拉取最新更新..."
-        git pull origin main || { echo "拉取失败，请手动解决冲突。"; exit 1; }
-    elif [ "$REMOTE" = "$BASE" ]; then
-        echo "本地存在未推送的提交，继续处理。"
-    else
-        echo "本地与远程仓库存在冲突，请手动解决后再继续。"
-        exit 1
-    fi
-}
-
 echo "开始部署 Hexo 博客..."
 
+# 清除 Hexo 缓存
 echo "清除 Hexo 缓存..."
 cd "$LOG_BUILD_PATH" || exit
 hexo clean
 show_progress 2
 
+# 检查并删除意外生成的 nul 文件
+if [ -f "$LOG_BUILD_PATH/nul" ]; then
+    echo "检测到意外生成的 nul 文件，正在清理..."
+    rm -f "$LOG_BUILD_PATH/nul"
+fi
+
+# 生成静态资源
 echo "生成静态资源..."
 hexo generate
 show_progress 3
 
-echo "确保 LogBuild 仓库同步..."
-ensure_git_repo_is_synced "$LOG_BUILD_PATH" "$LOG_BUILD_REPO"
-
+# 提交 LogBuild 仓库
 echo "提交 LogBuild 仓库..."
 cd "$LOG_BUILD_PATH" || exit
+
+if [ ! -d ".git" ]; then
+    git init
+    git remote add origin "$LOG_BUILD_REPO"
+fi
+
 git add .
 git commit -m "$COMMIT_MESSAGE"
 git push -u origin main
 show_progress 3
 
-echo "同步到 Zcxx0322.github.io 部署目录（保留 README.md 文件）..."
-robocopy "$LOG_BUILD_PATH/public/" "$DEPLOY_PATH" /MIR /XF "README.md" > nul
+# 清空 Zcxx0322.github.io 部署目录，但保留 README.md
+echo "清空 Zcxx0322.github.io 部署目录（保留 README.md）..."
+cd "$DEPLOY_PATH" || exit
+find . -mindepth 1 ! -name "README.md" -exec rm -rf {} +
 show_progress 2
 
-echo "确保 Zcxx0322.github.io 仓库同步..."
-ensure_git_repo_is_synced "$DEPLOY_PATH" "$DEPLOY_REPO"
+# 拷贝静态资源
+echo "拷贝静态资源到 Zcxx0322.github.io..."
+if [ -d "$LOG_BUILD_PATH/public" ]; then
+    cp -r "$LOG_BUILD_PATH/public/"* "$DEPLOY_PATH"
+    echo "静态资源拷贝完成。"
+else
+    echo "错误：未找到 public 目录，请检查 Hexo 是否正确生成静态文件。"
+    exit 1
+fi
+show_progress 3
 
+# 提交 Zcxx0322.github.io 仓库
 echo "提交 Zcxx0322.github.io 仓库..."
 cd "$DEPLOY_PATH" || exit
+
+if [ ! -d ".git" ]; then
+    git init
+    git remote add origin "$DEPLOY_REPO"
+fi
+
 git add .
 git commit -m "$COMMIT_MESSAGE"
 git push -u origin main
