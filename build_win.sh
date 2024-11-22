@@ -24,46 +24,26 @@ show_progress() {
 
 echo "开始部署 Hexo 博客..."
 
-# 清除 Hexo 缓存
-echo "清除 Hexo 缓存..."
+# 清除 Hexo 缓存并生成静态资源
+echo "清除 Hexo 缓存并生成静态资源..."
 cd "$LOG_BUILD_PATH" || exit
-hexo clean
-show_progress 2
-
-# 检查并删除意外生成的 nul 文件
-if [ -f "$LOG_BUILD_PATH/nul" ]; then
-    echo "检测到意外生成的 nul 文件，正在清理..."
-    rm -f "$LOG_BUILD_PATH/nul"
-fi
-
-# 生成静态资源
-echo "生成静态资源..."
-hexo generate
+hexo clean && hexo generate
 show_progress 3
 
 # 提交 LogBuild 仓库
 echo "提交 LogBuild 仓库..."
-cd "$LOG_BUILD_PATH" || exit
-
-if [ ! -d ".git" ]; then
-    git init
-    git remote add origin "$LOG_BUILD_REPO"
-else
-    git pull origin main --rebase  # 拉取远程仓库最新的提交，避免冲突
-fi
-
 git add .
 git commit -m "$COMMIT_MESSAGE"
 git push -u origin main
 show_progress 3
 
-# 清空 Zcxx0322.github.io 部署目录，但保留 README.md 和 .git
-echo "清空 Zcxx0322.github.io 部署目录（保留 README.md 和 .git）..."
+# 清空 Zcxx0322.github.io 部署目录，保留 .git 和 README.md
+echo "清空 Zcxx0322.github.io 部署目录（保留 .git 和 README.md）..."
 cd "$DEPLOY_PATH" || exit
 find . -mindepth 1 ! -name "README.md" ! -name ".git" -exec rm -rf {} +
 show_progress 2
 
-# 拷贝静态资源
+# 拷贝静态资源到部署目录
 echo "拷贝静态资源到 Zcxx0322.github.io..."
 if [ -d "$LOG_BUILD_PATH/public" ]; then
     cp -r "$LOG_BUILD_PATH/public/"* "$DEPLOY_PATH"
@@ -78,17 +58,11 @@ show_progress 3
 echo "提交 Zcxx0322.github.io 仓库..."
 cd "$DEPLOY_PATH" || exit
 
-if [ ! -d ".git" ]; then
-    git init
-    git remote add origin "$DEPLOY_REPO"
-    git checkout -b main  # 如果没有 .git，创建并切换到 main 分支
-else
-    git pull origin main --rebase  # 拉取远程仓库最新的提交，避免冲突
-fi
-
+# 确保在 main 分支，并拉取最新代码
+git checkout main && git pull origin main --rebase
 git add .
 git commit -m "$COMMIT_MESSAGE"
 git push -u origin main
-show_progress 5
+show_progress 3
 
 echo "部署完成！提交信息：$COMMIT_MESSAGE"
