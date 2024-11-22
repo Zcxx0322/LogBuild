@@ -45,9 +45,6 @@ show_progress 3
 echo "提交 LogBuild 仓库..."
 cd "$LOG_BUILD_PATH" || exit
 
-# 确保本地切换到 main 分支
-git checkout main
-
 if [ ! -d ".git" ]; then
     git init
     git remote add origin "$LOG_BUILD_REPO"
@@ -60,10 +57,10 @@ git commit -m "$COMMIT_MESSAGE"
 git push -u origin main
 show_progress 3
 
-# 清空 Zcxx0322.github.io 部署目录，但保留 README.md
-echo "清空 Zcxx0322.github.io 部署目录（保留 README.md）..."
+# 清空 Zcxx0322.github.io 部署目录，但保留 README.md 和 .git
+echo "清空 Zcxx0322.github.io 部署目录（保留 README.md 和 .git）..."
 cd "$DEPLOY_PATH" || exit
-find . -mindepth 1 ! -name "README.md" -exec rm -rf {} +
+find . -mindepth 1 ! -name "README.md" ! -name ".git" -exec rm -rf {} +
 show_progress 2
 
 # 拷贝静态资源
@@ -83,8 +80,8 @@ cd "$DEPLOY_PATH" || exit
 
 if [ ! -d ".git" ]; then
     git init
-    git checkout main
     git remote add origin "$DEPLOY_REPO"
+    git checkout -b main  # 如果没有 .git，创建并切换到 main 分支
 else
     git pull origin main --rebase  # 拉取远程仓库最新的提交，避免冲突
 fi
