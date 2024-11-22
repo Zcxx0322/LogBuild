@@ -48,6 +48,8 @@ cd "$LOG_BUILD_PATH" || exit
 if [ ! -d ".git" ]; then
     git init
     git remote add origin "$LOG_BUILD_REPO"
+else
+    git pull origin main --rebase  # 拉取远程仓库最新的提交，避免冲突
 fi
 
 git add .
@@ -79,6 +81,8 @@ cd "$DEPLOY_PATH" || exit
 if [ ! -d ".git" ]; then
     git init
     git remote add origin "$DEPLOY_REPO"
+else
+    git pull origin main --rebase  # 拉取远程仓库最新的提交，避免冲突
 fi
 
 git add .
