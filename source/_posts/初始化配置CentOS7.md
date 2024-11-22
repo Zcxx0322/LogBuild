@@ -1,8 +1,9 @@
 ---
 title: 初始化配置CentOS 7
-date: 2024-11-21 17:50:36
 tags: CentOS7
 categories: CentOS7
+index_img: /img/CentOS7.png
+date: 2024-11-21 17:50:36
 ---
 
 # 1. 初始化配置CentOS 7
