@@ -45,6 +45,9 @@ show_progress 3
 echo "提交 LogBuild 仓库..."
 cd "$LOG_BUILD_PATH" || exit
 
+# 确保本地切换到 main 分支
+git checkout main
+
 if [ ! -d ".git" ]; then
     git init
     git remote add origin "$LOG_BUILD_REPO"
@@ -77,6 +80,9 @@ show_progress 3
 # 提交 Zcxx0322.github.io 仓库
 echo "提交 Zcxx0322.github.io 仓库..."
 cd "$DEPLOY_PATH" || exit
+
+# 确保本地切换到 main 分支
+git checkout main
 
 if [ ! -d ".git" ]; then
     git init
