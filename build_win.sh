@@ -81,13 +81,17 @@ show_progress 3
 echo "提交 Zcxx0322.github.io 仓库..."
 cd "$DEPLOY_PATH" || exit
 
-# 确保本地切换到 main 分支
-git checkout main
-
 if [ ! -d ".git" ]; then
+    git init
+    git checkout main
+    git remote add origin "$DEPLOY_REPO"
+else
     git pull origin main --rebase  # 拉取远程仓库最新的提交，避免冲突
 fi
+
 git add .
+git commit -m "$COMMIT_MESSAGE"
+git push -u origin main
 show_progress 5
 
 echo "部署完成！提交信息：$COMMIT_MESSAGE"
