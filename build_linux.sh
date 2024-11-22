@@ -74,13 +74,9 @@ git commit -m "$COMMIT_MESSAGE"
 git push -u origin main
 show_progress 3
 
-echo "清空 Zcxx0322.github.io 部署目录..."
-rm -rf "$DEPLOY_PATH"/*
+echo "同步到 Zcxx0322.github.io 部署目录（保留 README.md 文件）..."
+rsync -av --delete --exclude "README.md" "$LOG_BUILD_PATH/public/" "$DEPLOY_PATH"
 show_progress 2
-
-echo "拷贝静态资源到 Zcxx0322.github.io..."
-cp -r "$LOG_BUILD_PATH/public/"* "$DEPLOY_PATH"
-show_progress 3
 
 echo "确保 Zcxx0322.github.io 仓库同步..."
 ensure_git_repo_is_synced "$DEPLOY_PATH" "$DEPLOY_REPO"

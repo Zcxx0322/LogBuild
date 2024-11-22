@@ -44,7 +44,7 @@ ensure_git_repo_is_synced() {
         echo "本地仓库已是最新。"
     elif [ "$LOCAL" = "$BASE" ]; then
         echo "拉取最新更新..."
-        git pull origin main || { echo "拉取失败，请手动处理冲突。"; exit 1; }
+        git pull origin main || { echo "拉取失败，请手动解决冲突。"; exit 1; }
     elif [ "$REMOTE" = "$BASE" ]; then
         echo "本地存在未推送的提交，继续处理。"
     else
@@ -74,13 +74,9 @@ git commit -m "$COMMIT_MESSAGE"
 git push -u origin main
 show_progress 3
 
-echo "清空 Zcxx0322.github.io 部署目录..."
-rm -rf "$DEPLOY_PATH"/*
+echo "同步到 Zcxx0322.github.io 部署目录（保留 README.md 文件）..."
+robocopy "$LOG_BUILD_PATH/public/" "$DEPLOY_PATH" /MIR /XF "README.md" > nul
 show_progress 2
-
-echo "拷贝静态资源到 Zcxx0322.github.io..."
-cp -r "$LOG_BUILD_PATH/public/"* "$DEPLOY_PATH"
-show_progress 3
 
 echo "确保 Zcxx0322.github.io 仓库同步..."
 ensure_git_repo_is_synced "$DEPLOY_PATH" "$DEPLOY_REPO"
