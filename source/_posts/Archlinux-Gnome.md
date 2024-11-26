@@ -1,7 +1,7 @@
 ---
-title: Archlinux+Gnome
-tags: Archlinux
-categories: Archlinux
+title: ArchLinux+Gnome
+tags: ArchLinux
+categories: ArchLinux
 index_img: /img/archlinux.jpg
 date: 2024-11-26 14:35:57
 ---
@@ -31,18 +31,19 @@ cfdisk
 
 ## 1.1. 新建EFI分区
 
-![](/img/arch1.png)
+![](/img/arch1.jpg)
+
 ## 1.2. 新建交换分区
 
 *可选可不选，类似于虚拟内存*
 
-![](/img/arch2.png)
+![](C:\Users\36117\Desktop\zcx\LogBuild\source\img\arch2.png)
 
 ## 1.3. 新建主分区
 
 *剩下全部建立到一起为根目录分区，类型默认即可*。
 
-![](/img/arch3.png)
+![](C:\Users\36117\Desktop\zcx\LogBuild\source\img\arch3.png)
 
 选中`Write`,输入`yes`确定，选择`Quit`退出分区。
 
@@ -54,7 +55,7 @@ fdisk -l
 
 *确定好自己每一个分区的类型，目的，名称。*
 
-![](/img/arch4.png)
+![](C:\Users\36117\Desktop\zcx\LogBuild\source\img\arch4.png)
 
 # 2. 格式化分区
 
