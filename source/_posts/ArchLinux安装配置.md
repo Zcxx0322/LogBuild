@@ -139,7 +139,7 @@ swapon /dev/sda2
 
 # 4. 连接WIFI
 
-[官方文档]: https://wiki.archlinux.org/title/Iwd#iwctl
+如果想要了解该方法的原理请参考[官方文档](https://wiki.archlinux.org/title/Iwd#iwctl)
 
 *这里以WIFI网卡名称 wlan0  和 WIFI硬件名称 phy0为例*
 
