@@ -31,7 +31,7 @@ cfdisk
 
 ## 1.1. 新建EFI分区
 
-![](/img/arch1.jpg)
+![](/img/arch1.png)
 
 ## 1.2. 新建交换分区
 
