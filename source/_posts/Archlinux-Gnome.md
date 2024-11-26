@@ -10,7 +10,7 @@ date: 2024-11-26 14:35:57
 
 *ArchLinux安装可以在启动镜像之后，通过SSH连接复制以下命令字符完成安装。步骤如下：*
 
-当然这里涉及到联网的问题，以直接跳转到 [连接WIFI](#4-连接wifi)
+当然这里涉及到联网的问题，[4. 连接WIFI](#4-连接wifi)
 
 1. `ip a` 查看IP地址；
 2. `systemctl start sshd` 启动SSH服务；
@@ -31,19 +31,18 @@ cfdisk
 
 ## 1.1. 新建EFI分区
 
-![](C:\Users\36117\Desktop\zcx\LogBuild\source\img\arch1.png)
-
+![](/img/arch1.jpg)
 ## 1.2. 新建交换分区
 
 *可选可不选，类似于虚拟内存*
 
-![](C:\Users\36117\Desktop\zcx\LogBuild\source\img\arch2.png)
+![](/img/arch2.png)
 
 ## 1.3. 新建主分区
 
 *剩下全部建立到一起为根目录分区，类型默认即可*。
 
-![](C:\Users\36117\Desktop\zcx\LogBuild\source\img\arch3.png)
+![](/img/arch3.png)
 
 选中`Write`,输入`yes`确定，选择`Quit`退出分区。
 
@@ -55,7 +54,7 @@ fdisk -l
 
 *确定好自己每一个分区的类型，目的，名称。*
 
-![](C:\Users\36117\Desktop\zcx\LogBuild\source\img\arch4.png)
+![](/img/arch4.png)
 
 # 2. 格式化分区
 
