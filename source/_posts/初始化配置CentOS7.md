@@ -109,7 +109,7 @@ ldconfig -p | grep ${prefix}
 ```
 
 **终端输出**
-```bash
+```cmd
 [root@localhost ~]# ldconfig -p | grep ${prefix}
         libssl.so.1.1 (libc6,x86-64) => /usr/local/openssl-1.1.1n/lib/libssl.so.1.1
         libssl.so (libc6,x86-64) => /usr/local/openssl-1.1.1n/lib/libssl.so
@@ -148,7 +148,7 @@ echo "export PATH=${bin_dir}:${PATH}" > /etc/profile.d/python${pkg_short_num}.sh
 which python${pkg_short_num} | grep ${prefix}
 ```
 **终端输出**
-```bash
+```cmd
 /usr/local/python-3.10.5/bin/python3
 ```
 
@@ -167,8 +167,7 @@ echo -e "PIP软链接：pip${pkg_ver_num}\nPython3软链接：python${pkg_ver_nu
 echo -e "执行命令：pip${pkg_ver_num} list\n" && pip${pkg_ver_num} list
 ```
 **终端输出**
-```bash
-
+```cmd
 执行命令：pip310 list
 
 Package    Version
@@ -185,7 +184,7 @@ setuptools 58.1.0
 <font color=red>注：可能会因为源的问题导致更新pip失败！</font>
 
 - 这里提供pip换源的方式
-```bahs
+```bash
 mkdir -p ~/.pip
 cat > ~/.pip/pip.conf <<EOF
 [global]
@@ -285,7 +284,6 @@ systemctl reload sshd
 ```bash
 echo '127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4' > /etc/hosts
 ```
-
 
 
 
