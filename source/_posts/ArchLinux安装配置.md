@@ -1,5 +1,5 @@
 ---
-title: ArchLinux+Gnome
+title: ArchLinux安装配置
 tags: ArchLinux
 categories: ArchLinux
 index_img: /img/archlinux.jpg
