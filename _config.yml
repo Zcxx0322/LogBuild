@@ -104,9 +104,3 @@ deploy:
   type: git
   repo: git@github.com:Zcxx0322/LogBuild.git
   branch: main
-
-markdown:
-  render:
-    html: true
-    linkify: true
-    typographer: true
