@@ -6,24 +6,23 @@ index_img: /img/CentOS7.png
 date: 2024-11-21 17:50:36
 ---
 
-# 1. 初始化配置CentOS 7
+# 1. 配置YUM
 
-## 1.1. 配置YUM
-
-### 1.1.1. 仅安装64位软件包
+### 1.1. 仅安装64位软件包
 
 ```bash
 echo "exclude=*.i386 *.i586 *.i686" >> /etc/yum.conf
 ```
 
-### 1.1.2. 强制YUM使用IPv4
+### 1.2. 强制YUM使用IPv4
 ```bash
 echo 'ip_resolve=4' >> /etc/yum.conf
 ```
 
-## 1.2. 更新系统
+# 2. 更新系统
 
-### 1.2.1. YUM换源
+## 2.1. YUM换源
+
 ```bash
 mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bak
 
@@ -50,19 +49,21 @@ EOF
 yum clean all
 yum makecache
 ```
-### 1.2.2. 更新
+## 2.2. 更新
+
 ```bash
 yum update -y
 ```
-## 1.3. EPEL镜像设置
+# 3. EPEL镜像设置
 
-### 1.3.1. 安装EPEL软件包
+## 3.1. 安装EPEL软件包
 
 ```bash
 yum install -y epel-release
 ```
 
-### 1.3.2. 设置国内镜像服务器，加速EPEL软件包下载
+## 3.2. 设置国内镜像服务器，加速EPEL软件包下载
+
 ```bash
 sed -e 's!^metalink=!#metalink=!g' \
     -e 's!^#baseurl=!baseurl=!g' \
@@ -71,18 +72,21 @@ sed -e 's!^metalink=!#metalink=!g' \
     -i /etc/yum.repos.d/epel*.repo
 ```
 
-### 1.3.3. 创建YUM缓存，减少网络请求
+## 3.3. 创建YUM缓存，减少网络请求
+
 ```bash
 yum makecache
 ```
 
-## 1.4. 安装常用软件
+# 4. 安装常用软件
+
 ```bash
 yum install -y vim-enhanced wget curl yum-utils tree pwgen unzip expect tar xz bash-completion-extras
 ```
-## 1.5. 安装Python3.8+
+## 4.1 安装Python3.8+
 
-### 1.5.1. 安装依赖：OpenSSL 1.1+
+### 4.1.1. 安装依赖：OpenSSL 1.1+
+
 - 安装OpenSSL 1.1+软件包
 ```bash
 pkg_name=openssl
@@ -117,7 +121,7 @@ ldconfig -p | grep ${prefix}
         libcrypto.so (libc6,x86-64) => /usr/local/openssl-1.1.1n/lib/libcrypto.so
 ```
 
-### 1.5.2. 安装Python3.8+
+### 4.1.2. 安装Python3.8+
 - 设置Python3.8+安装变量
 ```bash
 pkg_name=python
@@ -167,6 +171,7 @@ echo -e "PIP软链接：pip${pkg_ver_num}\nPython3软链接：python${pkg_ver_nu
 echo -e "执行命令：pip${pkg_ver_num} list\n" && pip${pkg_ver_num} list
 ```
 **终端输出**
+
 ```cmd
 执行命令：pip310 list
 
@@ -196,25 +201,28 @@ use-deprecated=legacy-resolver
 EOF
 ```
 
-## 1.6. 安装命令行编辑工具
+## 4.2. 安装命令行编辑工具
 
-### 1.6.1. XML编辑工具
+### 4.2.1. XML编辑工具
 ```bash
 yum install -y xmlstarlet
 ```
 
-### 1.6.2 INI和Java Properties文件编辑工具
+### 4.2.2 INI和Java Properties文件编辑工具
 ```bash
 yum install -y crudini
 ```
 
-## 1.7. 设置系统时区
+# 5. 设置系统时区
+
 *当前系统时区设置为 中国上海*
+
 ```bash
 yes|cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 ```
 
-## 1.8. 安装时间同步服务
+# 6. 安装时间同步服务
+
 安装时间同步软件chrony
 ```bash
 yum install -y chrony
@@ -230,33 +238,38 @@ systemctl enable chronyd
 systemctl start chronyd
 ```
 
-## 1.9. 禁用IPv6
+# 7. 禁用IPv6
+
 永久禁用IPv6，重启后生效
 ```bash
 echo "net.ipv6.conf.all.disable_ipv6 = 1" >>  /etc/sysctl.conf
 echo "net.ipv6.conf.default.disable_ipv6 = 1" >>  /etc/sysctl.conf
 ```
 
-## 1.10. 删除安装日志
+# 8. 删除安装日志
+
 ```bash
 rm -f ~/anaconda-ks.cfg  ~/install.log  ~/install.log.syslog
 ```
 
-## 1.11. 禁用SELINUX
+# 9. 禁用SELINUX
+
 ```bash
 echo SELINUX=disabled>/etc/selinux/config
 echo SELINUXTYPE=targeted>>/etc/selinux/config
 ```
-## 1.12. 设置最大文件句柄
+# 10. 设置最大文件句柄
+
 *也许你听过，"Linux下，一切皆文件"。 文件句柄 种类很多，常见的有普通文件句柄（C语言中 open() 函数返回的就是文件句柄）、网络相关句柄等*
 
 永久设置打开文件（句柄）的最大数量，重启后生效
 ```bash
-echo "*               soft   nofile            65535" >> /etc/security/limits.conf
-echo "*               hard   nofile            65535" >> /etc/security/limits.conf
+echo "* soft nofile 65535" | sudo tee -a /etc/security/limits.conf
+echo "* hard nofile 65535" | sudo tee -a /etc/security/limits.conf
 ```
 
-## 1.13. 优化SSH服务
+# 11. 优化SSH服务
+
 - 修改SSH服务端配置文件sshd_config，加速登录速度、设置连接保持等
 ```bash
 # SSH连接时，服务端会将客户端IP反向解析为域名，导致登录过程缓慢
@@ -278,9 +291,10 @@ systemctl reload sshd
 
 - 退出当前Shell，重新登录SSH后，新配置生效
 
-## 1.14. 设置主机名
+# 12. 设置主机名
 
-### 1.14.1 初始化本地解析设置
+## 12.1. 初始化本地解析设置
+
 ```bash
 echo '127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4' > /etc/hosts
 ```
