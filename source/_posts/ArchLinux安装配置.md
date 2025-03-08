@@ -308,6 +308,15 @@ pacman -S linux linux-headers linux-lts linux-lts-headers
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
+<font color="red">Windows+Linux双引导</font>
+
+```bash
+pacman -S grub os-prober ntfs-3g
+sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
+```
+
+<font color="red">下次进入GNOME桌面后，执行 grub-mkconfig -o /boot/grub/grub.cfg​ 命令就会自动将Windows系统加入到Grub启动菜单</font>
+
 ## 7.11. 安装桌面
 
 ```bash
