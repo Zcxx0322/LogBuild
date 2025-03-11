@@ -2,6 +2,7 @@
 title: Prometheus
 tags: Prometheus
 categories: Prometheus
+index_img: /img/prometheus.png
 date: 2025-03-08 14:10:14
 ---
 

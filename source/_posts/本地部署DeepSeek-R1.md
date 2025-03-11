@@ -2,6 +2,7 @@
 title: 本地部署DeepSeek-R1
 date: 2025-03-11 09:35:51
 tags: DeepSeek
+index_img: /img/deepseek+ollama.png
 categories: DeepSeek
 ---
 
