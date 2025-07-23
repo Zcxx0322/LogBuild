@@ -1,7 +1,7 @@
 #!/bin/bash
 
-LOG_BUILD_PATH="D:\workspace\LogBuild"
-DEPLOY_PATH="D:\workspace\Zcxx0322.github.io"
+LOG_BUILD_PATH="E:\workspace\LogBuild"
+DEPLOY_PATH="E:\workspace\Zcxx0322.github.io"
 LOG_BUILD_REPO="git@github.com:Zcxx0322/LogBuild.git"
 DEPLOY_REPO="git@github.com:Zcxx0322/Zcxx0322.github.io.git"
 
