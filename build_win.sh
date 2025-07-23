@@ -8,7 +8,7 @@ DEPLOY_REPO="git@github.com:Zcxx0322/Zcxx0322.github.io.git"
 # 提示输入提交信息
 read -p "请输入更新信息: " COMMIT_MESSAGE
 
-# 显示进度条
+# 显示进度条    
 show_progress() {
     local duration=$1
     local bar="##################################################"

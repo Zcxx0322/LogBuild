@@ -139,7 +139,8 @@ systemctl status mysqld
 ```bash
 MYSQL_TMP_ROOT_PASSWORD=$(grep 'A temporary password' /var/log/mysqld/error.log | tail -n 1 | awk '{print $NF}')
 
-export BY_MYSQL_ROOT_PASSWORD=$(pwgen -csnB 10)_$(pwgen -csnB 10)
+# 这里我的密码设置为geek
+export BY_MYSQL_ROOT_PASSWORD=geek
 # 永久保存临时配置（重新登录或重启都有效）
 sed -i '/export BY_/d' ~/.bash_profile && env | grep BY_ | awk '{print "export "$1}' >> ~/.bash_profile
 
@@ -152,7 +153,7 @@ mysqladmin -uroot -p"${MYSQL_TMP_ROOT_PASSWORD}" password ${BY_MYSQL_ROOT_PASSWO
 ```terminal
 MySQL用户名：root
 MySQL临时密码：caJ<TYnjX8iC
-MySQL新密码：kdp3VnTup4_d4P3aa3m4q
+MySQL新密码：geek
 ```
 
 ### 1.2.7. 本机无密码配置
@@ -188,10 +189,11 @@ host = localhost
 mysql -e "show databases;"
 ```
 
-### 1.2.8. 卸载密码插件(可选)
-*默认的密码复杂度要求太高可以卸载它*
-```bash
-mysql -e "uninstall plugin validate_password;"
+### 1.2.8. 修改密码策略(可选)
+*默认的密码复杂度要求太高导致修改密码报错可以执行*
+```mysql
+set global validate_password_policy=0;
+set global validate_password_length=0;
 ```
 
 

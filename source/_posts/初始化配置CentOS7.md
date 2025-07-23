@@ -258,7 +258,14 @@ rm -f ~/anaconda-ks.cfg  ~/install.log  ~/install.log.syslog
 echo SELINUX=disabled>/etc/selinux/config
 echo SELINUXTYPE=targeted>>/etc/selinux/config
 ```
-# 10. 设置最大文件句柄
+
+# 10. 关闭防火墙
+```bash
+systemctl disable firewalld
+systemctl stop firewalld
+```
+
+# 11. 设置最大文件句柄
 
 *也许你听过，"Linux下，一切皆文件"。 文件句柄 种类很多，常见的有普通文件句柄（C语言中 open() 函数返回的就是文件句柄）、网络相关句柄等*
 
@@ -268,7 +275,7 @@ echo "* soft nofile 65535" | sudo tee -a /etc/security/limits.conf
 echo "* hard nofile 65535" | sudo tee -a /etc/security/limits.conf
 ```
 
-# 11. 优化SSH服务
+# 12. 优化SSH服务
 
 - 修改SSH服务端配置文件sshd_config，加速登录速度、设置连接保持等
 ```bash
@@ -291,12 +298,17 @@ systemctl reload sshd
 
 - 退出当前Shell，重新登录SSH后，新配置生效
 
-# 12. 设置主机名
+# 13. 设置主机名
 
-## 12.1. 初始化本地解析设置
+## 13.1. 初始化本地解析设置
 
 ```bash
 echo '127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4' > /etc/hosts
+```
+
+# 14. 重启
+```bash
+reboot
 ```
 
 
