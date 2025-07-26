@@ -216,6 +216,17 @@ $db['pass'] = 'geek';
 $db['name'] = 'phpipam'
 ```
 
+## 6.3. 配置 Cron 任务
+
+用于扫描网络状态：
+
+```bash
+sudo crontab -e
+
+*/5 * * * * /usr/bin/php /var/www/html/phpipam/functions/scripts/pingCheck.php
+*/5 * * * * /usr/bin/php /var/www/html/phpipam/functions/scripts/discoveryCheck.php
+```
+
 # 7. 关闭SELinux和防火墙
 
 ```bash
@@ -229,13 +240,20 @@ systemctl stop firewalld
 reboot
 ```
 
-# 8. 访问phpipam
+# 8. 访问phpipam开始安装
 
 ```url
 http://虚拟机IP/phpipam/
 ```
 
+# 9. 常见问题解决
 
+- **PHP 扩展缺失**：根据报错安装对应扩展（如 `php-pecl-zip`）。
+- **文件权限问题**：确保 `/var/www/html/phpipam` 属主为 `apache`。
+- **数据库连接错误**：检查数据库用户权限及密码。
+- **页面空白**：检查 PHP 错误日志 `/var/log/php-fpm/error.log`。
+
+完成以上步骤后，即可通过 Web 界面管理 IP 地址。如需 HTTPS，可使用 Let's Encrypt 配置 SSL 证
 
 
 
