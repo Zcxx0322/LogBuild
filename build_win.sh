@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Windows Git Bash 路径要用 / 或双反斜杠
+# Windows Git Bash 路径
 LOG_BUILD_PATH="/e/workspace/LogBuild"
 DEPLOY_PATH="/e/workspace/Zcxx0322.github.io"
 LOG_BUILD_REPO="git@github.com:Zcxx0322/LogBuild.git"
@@ -52,8 +52,11 @@ git_commit_push "$LOG_BUILD_PATH" "$COMMIT_MESSAGE"
 # 拷贝静态资源到部署目录，覆盖现有文件
 echo "拷贝静态资源到 Zcxx0322.github.io..."
 if [ -d "$LOG_BUILD_PATH/public" ]; then
-    # 使用 . 保证复制隐藏文件和子目录
-    cp -r "$LOG_BUILD_PATH/public/." "$DEPLOY_PATH"
+    # 清空目标目录（保留 .git）
+    find "$DEPLOY_PATH" -mindepth 1 -maxdepth 1 ! -name ".git" -exec rm -rf {} +
+
+    # 使用 rsync 复制 public 内容到部署目录
+    rsync -av --progress "$LOG_BUILD_PATH/public/" "$DEPLOY_PATH/"
     echo "静态资源拷贝完成。"
 else
     echo "错误：未找到 public 目录，请检查 Hexo 是否正确生成静态文件。"
