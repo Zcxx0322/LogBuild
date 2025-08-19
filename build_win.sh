@@ -49,13 +49,10 @@ show_progress 3
 echo "提交 LogBuild 仓库..."
 git_commit_push "$LOG_BUILD_PATH" "$COMMIT_MESSAGE"
 
-# 拷贝静态资源到部署目录，覆盖现有文件
+# 拷贝静态资源到部署目录，安全覆盖（不删除非 Hexo 文件）
 echo "拷贝静态资源到 Zcxx0322.github.io..."
 if [ -d "$LOG_BUILD_PATH/public" ]; then
-    # 清空目标目录（保留 .git）
-    find "$DEPLOY_PATH" -mindepth 1 -maxdepth 1 ! -name ".git" -exec rm -rf {} +
-
-    # 使用 rsync 复制 public 内容到部署目录
+    # 使用 rsync 覆盖 public 内容到部署目录，但不删除其他文件
     rsync -av --progress "$LOG_BUILD_PATH/public/" "$DEPLOY_PATH/"
     echo "静态资源拷贝完成。"
 else
