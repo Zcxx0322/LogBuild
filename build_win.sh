@@ -1,14 +1,15 @@
 #!/bin/bash
 
-LOG_BUILD_PATH="E:\\workspace\\LogBuild"
-DEPLOY_PATH="E:\\workspace\\Zcxx0322.github.io"
+# Windows Git Bash 路径要用 / 或双反斜杠
+LOG_BUILD_PATH="/e/workspace/LogBuild"
+DEPLOY_PATH="/e/workspace/Zcxx0322.github.io"
 LOG_BUILD_REPO="git@github.com:Zcxx0322/LogBuild.git"
 DEPLOY_REPO="git@github.com:Zcxx0322/Zcxx0322.github.io.git"
 
 # 提示输入提交信息
 read -p "请输入更新信息: " COMMIT_MESSAGE
 
-# 显示进度条    
+# 显示进度条
 show_progress() {
     local duration=$1
     local bar="##################################################"
@@ -29,7 +30,7 @@ git_commit_push() {
     local repo_path=$1
     local commit_message=$2
 
-    cd "$repo_path" || exit
+    cd "$repo_path" || { echo "无法进入目录 $repo_path"; exit 1; }
     git add .
     git commit -m "$commit_message"
     git push -u origin main
@@ -51,7 +52,8 @@ git_commit_push "$LOG_BUILD_PATH" "$COMMIT_MESSAGE"
 # 拷贝静态资源到部署目录，覆盖现有文件
 echo "拷贝静态资源到 Zcxx0322.github.io..."
 if [ -d "$LOG_BUILD_PATH/public" ]; then
-    cp -r "$LOG_BUILD_PATH/public/"* "$DEPLOY_PATH"
+    # 使用 . 保证复制隐藏文件和子目录
+    cp -r "$LOG_BUILD_PATH/public/." "$DEPLOY_PATH"
     echo "静态资源拷贝完成。"
 else
     echo "错误：未找到 public 目录，请检查 Hexo 是否正确生成静态文件。"
