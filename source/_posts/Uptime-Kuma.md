@@ -152,10 +152,12 @@ npm config set registry https://registry.npmmirror.com
 
 ## 4.3. Uptime Kuma
 
-> [!CAUTION]
->
-> - 由于安装脚本默认会将git分支切换回main，所以修改package.json文件。
-> - 考虑到下载链接是外网地址，所以将download-dist.js文件中原有的 dist.tar.gz 下载链接修改为国内加速源。
+{% note warning %}
+
+- 由于安装脚本默认会将git分支切换回main，所以修改package.json文件。
+- 考虑到下载链接是外网地址，所以将download-dist.js文件中原有的 dist.tar.gz 下载链接修改为国内加速源。
+
+{% endnote %}
 
 ```bash
 # 拉取仓库
