@@ -52,7 +52,14 @@ git_commit_push "$LOG_BUILD_PATH" "$COMMIT_MESSAGE"
 # 拷贝静态资源到部署目录，安全覆盖（不删除非 Hexo 文件）
 echo "拷贝静态资源到 Zcxx0322.github.io..."
 if [ -d "$LOG_BUILD_PATH/public" ]; then
-    cp -r "$LOG_BUILD_PATH/public/." "$DEPLOY_PATH"
+    # 遍历 public 下的文件和文件夹，强制覆盖到部署目录
+    for item in "$LOG_BUILD_PATH/public"/* "$LOG_BUILD_PATH/public"/.*; do
+        # 排除 . 和 ..
+        [ "$(basename "$item")" = "." ] && continue
+        [ "$(basename "$item")" = ".." ] && continue
+
+        cp -rf "$item" "$DEPLOY_PATH/"
+    done
     echo "静态资源拷贝完成。"
 else
     echo "错误：未找到 public 目录，请检查 Hexo 是否正确生成静态文件。"
