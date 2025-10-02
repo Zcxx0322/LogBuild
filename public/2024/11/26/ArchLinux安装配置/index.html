@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" color-mode="light">
+<html lang="zh-CN" color-mode="light">
 
   <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="author" content="John Doe" />
+  <meta name="author" content="Zcxx0322" />
   <!-- Open Graph Description 简短摘要-->
   
   <!-- 用于搜索引擎的文章摘要 -->
@@ -18,7 +18,7 @@
       
       |
     
-     Hexo
+     Zcxx0322运维杂记
   </title>
 
   
@@ -162,12 +162,12 @@
       <div class="post-title">ArchLinux安装配置</div>
       <div class="post-attach">
         <span class="post-pubtime">
-          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          <i class="iconfont icon-updatetime mr-10" title="更新时间"></i>
           2025-10-02 16:02:51
         </span>
         
               <span class="post-tags">
-                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                <i class="iconfont icon-tags mr-10" title="标签"></i>
                 
                 <span class="span--tag mr-8">
                   <a href="/tags/ArchLinux/" title="ArchLinux">
@@ -308,18 +308,18 @@
             
               <a href="/2024/11/21/CentOS7%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%8E%E4%BC%98%E5%8C%96%E9%85%8D%E7%BD%AE/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
-                <span>Prev</span>
+                <span>上一页</span>
               </a>
             
           </div>
           <div class="post-attach">
             <span class="post-pubtime">
-              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              <i class="iconfont icon-updatetime mr-10" title="更新时间"></i>
               2025-10-02 16:02:51
             </span>
             
                   <span class="post-tags">
-                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    <i class="iconfont icon-tags mr-10" title="标签"></i>
                     
                     <span class="span--tag mr-8">
                       <a href="/tags/ArchLinux/" title="ArchLinux">
@@ -333,7 +333,7 @@
           <div class="post-foot-prev">
             
               <a href="/2024/12/02/CentOS7%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81IP/" target="_self">
-                <span>Next</span>
+                <span>下一页</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>
             
@@ -346,7 +346,7 @@
     <i class="iconfont icon-catalog"></i>
   </div>
   <div class="post-catalog hidden" id="catalog">
-    <div class="title">Contents</div>
+    <div class="title">目录</div>
     <div class="catalog-content">
       
         <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%89%8D%E8%AF%B4%E6%98%8E"><span class="toc-text">安装前说明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%BB%BA%E7%AB%8B%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA"><span class="toc-text">1. 建立硬盘分区</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E6%96%B0%E5%BB%BAEFI%E5%88%86%E5%8C%BA"><span class="toc-text">1.1. 新建EFI分区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E6%96%B0%E5%BB%BA%E4%BA%A4%E6%8D%A2%E5%88%86%E5%8C%BA"><span class="toc-text">1.2. 新建交换分区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E6%96%B0%E5%BB%BA%E4%B8%BB%E5%88%86%E5%8C%BA"><span class="toc-text">1.3. 新建主分区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E6%9F%A5%E7%9C%8B%E5%88%86%E5%8C%BA%E6%83%85%E5%86%B5"><span class="toc-text">1.4. 查看分区情况</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%88%86%E5%8C%BA"><span class="toc-text">2. 格式化分区</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E6%A0%BC%E5%BC%8F%E5%8C%96%E4%B8%BB%E5%88%86%E5%8C%BA"><span class="toc-text">2.1. 格式化主分区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E6%A0%BC%E5%BC%8F%E5%8C%96%E4%BA%A4%E6%8D%A2%E5%88%86%E5%8C%BA%EF%BC%88%E6%9C%AA%E8%AE%BE%E7%BD%AE%E5%B0%B1%E8%B7%B3%E8%BF%87%EF%BC%89"><span class="toc-text">2.2. 格式化交换分区（未设置就跳过）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E6%A0%BC%E5%BC%8F%E5%8C%96EFI%E5%88%86%E5%8C%BA"><span class="toc-text">2.3. 格式化EFI分区</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E6%8C%82%E8%BD%BD%E5%88%86%E5%8C%BA"><span class="toc-text">3. 挂载分区</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E8%BF%9E%E6%8E%A5WIFI"><span class="toc-text">4. 连接WIFI</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E5%9F%BA%E7%A1%80%E5%8C%85%E5%AE%89%E8%A3%85"><span class="toc-text">5. 基础包安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-%E8%AE%BE%E7%BD%AE%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90"><span class="toc-text">5.1. 设置国内镜像源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-%E5%AE%89%E8%A3%85%E5%9F%BA%E7%A1%80%E5%8C%85"><span class="toc-text">5.2. 安装基础包</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-%E5%BC%80%E6%9C%BA%E6%8C%82%E8%BD%BD%E5%88%86%E5%8C%BA"><span class="toc-text">6. 开机挂载分区</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-%E5%88%87%E6%8D%A2%E5%88%B0%E5%85%A8%E6%96%B0ArchLinux%E7%B3%BB%E7%BB%9F"><span class="toc-text">7. 切换到全新ArchLinux系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-%E8%AE%BE%E7%BD%AE%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90"><span class="toc-text">7.1. 设置国内镜像源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-%E5%AE%89%E8%A3%85vim-sudo"><span class="toc-text">7.2. 安装vim sudo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-3-%E8%AE%BE%E7%BD%AE%E6%97%B6%E5%8C%BA"><span class="toc-text">7.3. 设置时区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-4-%E6%9C%AC%E5%9C%B0%E5%8C%96%E8%AF%AD%E8%A8%80%E6%94%AF%E6%8C%81"><span class="toc-text">7.4. 本地化语言支持</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-5-%E9%94%AE%E7%9B%98%E5%B8%83%E5%B1%80"><span class="toc-text">7.5. 键盘布局</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-6-%E8%AE%BE%E7%BD%AE%E4%B8%BB%E6%9C%BA%E5%90%8D"><span class="toc-text">7.6. 设置主机名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-7-%E6%9C%AC%E5%9C%B0%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE"><span class="toc-text">7.7. 本地网络配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-8-%E8%AE%BE%E7%BD%AEroot%E5%AF%86%E7%A0%81"><span class="toc-text">7.8.  设置root密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-9-%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7"><span class="toc-text">7.9. 创建用户</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-10-%E5%AE%89%E8%A3%85Grub%E5%BC%95%E5%AF%BC"><span class="toc-text">7.10. 安装Grub引导</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-11-%E5%AE%89%E8%A3%85%E6%A1%8C%E9%9D%A2"><span class="toc-text">7.11. 安装桌面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-12-%E9%87%8D%E5%90%AF"><span class="toc-text">7.12. 重启</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-13-%E8%AE%BE%E7%BD%AEpacman"><span class="toc-text">7.13. 设置pacman</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-14-%E5%AE%89%E8%A3%85%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6"><span class="toc-text">7.14. 安装常用软件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-15-%E7%B3%BB%E7%BB%9F%E8%AE%BE%E7%BD%AE"><span class="toc-text">7.15. 系统设置</span></a></li></ol></li></ol>
@@ -451,7 +451,7 @@
           </a>
         </span>
         
-          <input type="text" class="search-input" id="search-input" placeholder="Search...">
+          <input type="text" class="search-input" id="search-input" placeholder="搜索...">
         
         <span class="search-close-icon" id="search-close-icon">
           <a href="javascript: void(0)">
@@ -503,7 +503,7 @@
       'use strict';
       var $input = document.getElementById(search_id);
       var $resultContent = document.getElementById(content_id);
-      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
       $.ajax({
         // 0x01. load xml file
         url: path,
@@ -599,7 +599,7 @@
             });
             str += "</ul>";
             if (str.indexOf('<li>') === -1) {
-              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
             }
             $resultContent.innerHTML = str;
           });
@@ -607,9 +607,9 @@
         error: function(xhr, status, error) {
           $resultContent.innerHTML = ""
           if (xhr.status === 404) {
-            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>未找到search.xml文件，具体请参考：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
           } else {
-            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>请求失败，尝试重新刷新页面或稍后重试。<span></ul>";
           }
         }
       });
@@ -650,12 +650,12 @@
       </a>
       <div class="share-content hidden">
         
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + ArchLinux%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE + '&url=' + http%3A%2F%2Fexample.com%2F2024%2F11%2F26%2FArchLinux%25E5%25AE%2589%25E8%25A3%2585%25E9%2585%258D%25E7%25BD%25AE%2F + '" target="_blank" title="Twitter">
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + ArchLinux%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE + '&url=' + https%3A%2F%2Fzcxx0322.github.io%2F2024%2F11%2F26%2FArchLinux%25E5%25AE%2589%25E8%25A3%2585%25E9%2585%258D%25E7%25BD%25AE%2F + '" target="_blank" title="Twitter">
             <i class="iconfont icon-twitter"></i>
           </a>
         
         
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2024/11/26/ArchLinux%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" target="_blank" title="Facebook">
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://zcxx0322.github.io/2024/11/26/ArchLinux%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" target="_blank" title="Facebook">
             <i class="iconfont icon-facebooksquare"></i>
           </a>
         

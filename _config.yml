@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
+title: Zcxx0322运维杂记
+subtitle: '运维杂记'
 description: ''
 keywords:
-author: John Doe
-language: en
-timezone: ''
+author: Zcxx0322
+language: zh-CN
+timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://zcxx0322.github.io
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -29,6 +29,7 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
+  - README.md
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -101,4 +102,8 @@ theme: oranges
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: 'git'
+  repo: https://github.com/zcxx0322/zcxx0322.github.io.git
+  branch: main
+  message: "文档更新 {{ now('YYYY-MM-DD') }}"
+

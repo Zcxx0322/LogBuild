@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" color-mode="light">
+<html lang="zh-CN" color-mode="light">
 
   <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="author" content="John Doe" />
+  <meta name="author" content="Zcxx0322" />
   <!-- Open Graph Description 简短摘要-->
   
   <!-- 用于搜索引擎的文章摘要 -->
@@ -18,7 +18,7 @@
       
       |
     
-     Hexo
+     Zcxx0322运维杂记
   </title>
 
   
@@ -162,12 +162,12 @@
       <div class="post-title">CentOS7初始化与优化配置</div>
       <div class="post-attach">
         <span class="post-pubtime">
-          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          <i class="iconfont icon-updatetime mr-10" title="更新时间"></i>
           2025-10-02 16:02:48
         </span>
         
               <span class="post-tags">
-                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                <i class="iconfont icon-tags mr-10" title="标签"></i>
                 
                 <span class="span--tag mr-8">
                   <a href="/tags/CentOS7/" title="CentOS7">
@@ -312,12 +312,12 @@
           </div>
           <div class="post-attach">
             <span class="post-pubtime">
-              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              <i class="iconfont icon-updatetime mr-10" title="更新时间"></i>
               2025-10-02 16:02:48
             </span>
             
                   <span class="post-tags">
-                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    <i class="iconfont icon-tags mr-10" title="标签"></i>
                     
                     <span class="span--tag mr-8">
                       <a href="/tags/CentOS7/" title="CentOS7">
@@ -331,7 +331,7 @@
           <div class="post-foot-prev">
             
               <a href="/2024/11/26/ArchLinux%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" target="_self">
-                <span>Next</span>
+                <span>下一页</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>
             
@@ -344,7 +344,7 @@
     <i class="iconfont icon-catalog"></i>
   </div>
   <div class="post-catalog hidden" id="catalog">
-    <div class="title">Contents</div>
+    <div class="title">目录</div>
     <div class="catalog-content">
       
         <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CentOS7%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%8E%E4%BC%98%E5%8C%96%E9%85%8D%E7%BD%AE"><span class="toc-text">CentOS7初始化与优化配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%85%8D%E7%BD%AE-YUM"><span class="toc-text">1. 配置 YUM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E4%BB%85%E5%AE%89%E8%A3%85-64-%E4%BD%8D%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="toc-text">1.1 仅安装 64 位软件包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%BC%BA%E5%88%B6-YUM-%E4%BD%BF%E7%94%A8-IPv4"><span class="toc-text">1.2 强制 YUM 使用 IPv4</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%9B%B4%E6%96%B0%E7%B3%BB%E7%BB%9F"><span class="toc-text">2. 更新系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-YUM-%E6%8D%A2%E6%BA%90"><span class="toc-text">2.1 YUM 换源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E6%9B%B4%E6%96%B0"><span class="toc-text">2.2 更新</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-EPEL-%E9%95%9C%E5%83%8F%E8%AE%BE%E7%BD%AE"><span class="toc-text">3. EPEL 镜像设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%AE%89%E8%A3%85-EPEL-%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="toc-text">3.1 安装 EPEL 软件包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E8%AE%BE%E7%BD%AE%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">3.2 设置国内镜像服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E5%88%9B%E5%BB%BA-YUM-%E7%BC%93%E5%AD%98"><span class="toc-text">3.3 创建 YUM 缓存</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%AE%89%E8%A3%85%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6"><span class="toc-text">4. 安装常用软件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E5%AE%89%E8%A3%85-Python-3-10"><span class="toc-text">4.1 安装 Python 3.10+</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-1-%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96%EF%BC%9AOpenSSL-1-1"><span class="toc-text">4.1.1 安装依赖：OpenSSL 1.1+</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-2-%E5%AE%89%E8%A3%85-Python-3-10"><span class="toc-text">4.1.2 安装 Python 3.10+</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E5%AE%89%E8%A3%85%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%BC%96%E8%BE%91%E5%B7%A5%E5%85%B7"><span class="toc-text">4.2 安装命令行编辑工具</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-1-XML-%E7%BC%96%E8%BE%91%E5%B7%A5%E5%85%B7"><span class="toc-text">4.2.1 XML 编辑工具</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-2-INI-%E4%B8%8E-Java-Properties-%E7%BC%96%E8%BE%91%E5%B7%A5%E5%85%B7"><span class="toc-text">4.2.2 INI 与 Java Properties 编辑工具</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E8%AE%BE%E7%BD%AE%E7%B3%BB%E7%BB%9F%E6%97%B6%E5%8C%BA"><span class="toc-text">5. 设置系统时区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%AE%89%E8%A3%85%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1"><span class="toc-text">6. 安装时间同步服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E7%A6%81%E7%94%A8-IPv6"><span class="toc-text">7. 禁用 IPv6</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E5%88%A0%E9%99%A4%E5%AE%89%E8%A3%85%E6%97%A5%E5%BF%97"><span class="toc-text">8. 删除安装日志</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E7%A6%81%E7%94%A8-SELinux"><span class="toc-text">9. 禁用 SELinux</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99"><span class="toc-text">10. 关闭防火墙</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E8%AE%BE%E7%BD%AE%E6%9C%80%E5%A4%A7%E6%96%87%E4%BB%B6%E5%8F%A5%E6%9F%84"><span class="toc-text">11. 设置最大文件句柄</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-%E4%BC%98%E5%8C%96-SSH-%E6%9C%8D%E5%8A%A1"><span class="toc-text">12. 优化 SSH 服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-%E8%AE%BE%E7%BD%AE%E4%B8%BB%E6%9C%BA%E5%90%8D"><span class="toc-text">13. 设置主机名</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#13-1-%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9C%AC%E5%9C%B0%E8%A7%A3%E6%9E%90%E8%AE%BE%E7%BD%AE"><span class="toc-text">13.1 初始化本地解析设置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-%E9%87%8D%E5%90%AF"><span class="toc-text">14. 重启</span></a></li></ol></li></ol>
@@ -449,7 +449,7 @@
           </a>
         </span>
         
-          <input type="text" class="search-input" id="search-input" placeholder="Search...">
+          <input type="text" class="search-input" id="search-input" placeholder="搜索...">
         
         <span class="search-close-icon" id="search-close-icon">
           <a href="javascript: void(0)">
@@ -501,7 +501,7 @@
       'use strict';
       var $input = document.getElementById(search_id);
       var $resultContent = document.getElementById(content_id);
-      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
       $.ajax({
         // 0x01. load xml file
         url: path,
@@ -597,7 +597,7 @@
             });
             str += "</ul>";
             if (str.indexOf('<li>') === -1) {
-              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
             }
             $resultContent.innerHTML = str;
           });
@@ -605,9 +605,9 @@
         error: function(xhr, status, error) {
           $resultContent.innerHTML = ""
           if (xhr.status === 404) {
-            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>未找到search.xml文件，具体请参考：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
           } else {
-            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>请求失败，尝试重新刷新页面或稍后重试。<span></ul>";
           }
         }
       });
@@ -648,12 +648,12 @@
       </a>
       <div class="share-content hidden">
         
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + CentOS7%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%8E%E4%BC%98%E5%8C%96%E9%85%8D%E7%BD%AE + '&url=' + http%3A%2F%2Fexample.com%2F2024%2F11%2F21%2FCentOS7%25E5%2588%259D%25E5%25A7%258B%25E5%258C%2596%25E4%25B8%258E%25E4%25BC%2598%25E5%258C%2596%25E9%2585%258D%25E7%25BD%25AE%2F + '" target="_blank" title="Twitter">
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + CentOS7%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%8E%E4%BC%98%E5%8C%96%E9%85%8D%E7%BD%AE + '&url=' + https%3A%2F%2Fzcxx0322.github.io%2F2024%2F11%2F21%2FCentOS7%25E5%2588%259D%25E5%25A7%258B%25E5%258C%2596%25E4%25B8%258E%25E4%25BC%2598%25E5%258C%2596%25E9%2585%258D%25E7%25BD%25AE%2F + '" target="_blank" title="Twitter">
             <i class="iconfont icon-twitter"></i>
           </a>
         
         
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2024/11/21/CentOS7%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%8E%E4%BC%98%E5%8C%96%E9%85%8D%E7%BD%AE/" target="_blank" title="Facebook">
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://zcxx0322.github.io/2024/11/21/CentOS7%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%8E%E4%BC%98%E5%8C%96%E9%85%8D%E7%BD%AE/" target="_blank" title="Facebook">
             <i class="iconfont icon-facebooksquare"></i>
           </a>
         

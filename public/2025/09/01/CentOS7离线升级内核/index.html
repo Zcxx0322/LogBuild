@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" color-mode="light">
+<html lang="zh-CN" color-mode="light">
 
   <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="author" content="John Doe" />
+  <meta name="author" content="Zcxx0322" />
   <!-- Open Graph Description 简短摘要-->
   
   <!-- 用于搜索引擎的文章摘要 -->
@@ -18,7 +18,7 @@
       
       |
     
-     Hexo
+     Zcxx0322运维杂记
   </title>
 
   
@@ -162,12 +162,12 @@
       <div class="post-title">CentOS7离线升级内核</div>
       <div class="post-attach">
         <span class="post-pubtime">
-          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          <i class="iconfont icon-updatetime mr-10" title="更新时间"></i>
           2025-10-02 16:02:55
         </span>
         
               <span class="post-tags">
-                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                <i class="iconfont icon-tags mr-10" title="标签"></i>
                 
                 <span class="span--tag mr-8">
                   <a href="/tags/CentOS7/" title="CentOS7">
@@ -233,18 +233,18 @@
             
               <a href="/2025/09/01/Nginx/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
-                <span>Prev</span>
+                <span>上一页</span>
               </a>
             
           </div>
           <div class="post-attach">
             <span class="post-pubtime">
-              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              <i class="iconfont icon-updatetime mr-10" title="更新时间"></i>
               2025-10-02 16:02:55
             </span>
             
                   <span class="post-tags">
-                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    <i class="iconfont icon-tags mr-10" title="标签"></i>
                     
                     <span class="span--tag mr-8">
                       <a href="/tags/CentOS7/" title="CentOS7">
@@ -266,7 +266,7 @@
     <i class="iconfont icon-catalog"></i>
   </div>
   <div class="post-catalog hidden" id="catalog">
-    <div class="title">Contents</div>
+    <div class="title">目录</div>
     <div class="catalog-content">
       
         <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CentOS7-%E7%A6%BB%E7%BA%BF%E5%8D%87%E7%BA%A7%E5%86%85%E6%A0%B8"><span class="toc-text">CentOS7 离线升级内核</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%8E%AF%E5%A2%83%E7%A1%AE%E8%AE%A4"><span class="toc-text">1. 环境确认</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%87%86%E5%A4%87-RPM-%E5%8C%85"><span class="toc-text">2. 准备 RPM 包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%A7%BB%E9%99%A4%E6%97%A7%E5%B7%A5%E5%85%B7%EF%BC%88%E9%81%BF%E5%85%8D%E5%86%B2%E7%AA%81%EF%BC%89"><span class="toc-text">3. 移除旧工具（避免冲突）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%AE%89%E8%A3%85%E6%96%B0%E5%86%85%E6%A0%B8%E5%8F%8A%E5%B7%A5%E5%85%B7"><span class="toc-text">4. 安装新内核及工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%9B%B4%E6%96%B0-GRUB-%E5%BC%95%E5%AF%BC%E9%85%8D%E7%BD%AE"><span class="toc-text">5. 更新 GRUB 引导配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E9%87%8D%E5%90%AF%E5%B9%B6%E9%AA%8C%E8%AF%81"><span class="toc-text">6. 重启并验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%9B%9E%E9%80%80%E6%96%B9%E6%A1%88"><span class="toc-text">7. 回退方案</span></a></li></ol></li></ol>
@@ -371,7 +371,7 @@
           </a>
         </span>
         
-          <input type="text" class="search-input" id="search-input" placeholder="Search...">
+          <input type="text" class="search-input" id="search-input" placeholder="搜索...">
         
         <span class="search-close-icon" id="search-close-icon">
           <a href="javascript: void(0)">
@@ -423,7 +423,7 @@
       'use strict';
       var $input = document.getElementById(search_id);
       var $resultContent = document.getElementById(content_id);
-      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
       $.ajax({
         // 0x01. load xml file
         url: path,
@@ -519,7 +519,7 @@
             });
             str += "</ul>";
             if (str.indexOf('<li>') === -1) {
-              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
             }
             $resultContent.innerHTML = str;
           });
@@ -527,9 +527,9 @@
         error: function(xhr, status, error) {
           $resultContent.innerHTML = ""
           if (xhr.status === 404) {
-            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>未找到search.xml文件，具体请参考：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
           } else {
-            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>请求失败，尝试重新刷新页面或稍后重试。<span></ul>";
           }
         }
       });
@@ -570,12 +570,12 @@
       </a>
       <div class="share-content hidden">
         
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + CentOS7%E7%A6%BB%E7%BA%BF%E5%8D%87%E7%BA%A7%E5%86%85%E6%A0%B8 + '&url=' + http%3A%2F%2Fexample.com%2F2025%2F09%2F01%2FCentOS7%25E7%25A6%25BB%25E7%25BA%25BF%25E5%258D%2587%25E7%25BA%25A7%25E5%2586%2585%25E6%25A0%25B8%2F + '" target="_blank" title="Twitter">
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + CentOS7%E7%A6%BB%E7%BA%BF%E5%8D%87%E7%BA%A7%E5%86%85%E6%A0%B8 + '&url=' + https%3A%2F%2Fzcxx0322.github.io%2F2025%2F09%2F01%2FCentOS7%25E7%25A6%25BB%25E7%25BA%25BF%25E5%258D%2587%25E7%25BA%25A7%25E5%2586%2585%25E6%25A0%25B8%2F + '" target="_blank" title="Twitter">
             <i class="iconfont icon-twitter"></i>
           </a>
         
         
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2025/09/01/CentOS7%E7%A6%BB%E7%BA%BF%E5%8D%87%E7%BA%A7%E5%86%85%E6%A0%B8/" target="_blank" title="Facebook">
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://zcxx0322.github.io/2025/09/01/CentOS7%E7%A6%BB%E7%BA%BF%E5%8D%87%E7%BA%A7%E5%86%85%E6%A0%B8/" target="_blank" title="Facebook">
             <i class="iconfont icon-facebooksquare"></i>
           </a>
         
