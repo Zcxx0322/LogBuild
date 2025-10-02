@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="John Doe" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
+    
+      ArchLinux安装配置 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/img/zcxx0322.png">
+    <link rel="icon" href="/img/icon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+    
+<link rel="stylesheet" href="/css/figcaption/mac-block.css">
+
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a target="_blank" rel="noopener" href="https://github.com/Zcxx0322">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/img/zcxx0322.png" alt="">
+      
+    </a>
+    <div class="nickname"><a target="_blank" rel="noopener" href="https://github.com/Zcxx0322">Zcxx0322</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/friends/">
+          <a href="/friends/">Friends</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">ArchLinux安装配置</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2025-10-02 16:02:51
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/ArchLinux/" title="ArchLinux">
+                    #ArchLinux
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="安装前说明"><a href="#安装前说明" class="headerlink" title="安装前说明"></a>安装前说明</h1><p><em>ArchLinux安装可以在启动镜像之后，通过SSH连接复制以下命令字符完成安装。步骤如下：</em></p>
+<p>当然这里涉及到联网的问题，请参考<a href="#4-%E8%BF%9E%E6%8E%A5WIFI">连接WIFI</a></p>
+<ol>
+<li><code>ip a</code> 查看IP地址；</li>
+<li><code>systemctl start sshd</code> 启动SSH服务；</li>
+<li><code>passwd</code> 修改启动镜像root用户密码；</li>
+<li>使用任意SSH客户端软件，连接启动镜像IP地址的22端口即可。</li>
+</ol>
+<p><em>如果是安装中途连接SSH的，请注意适时执行 <code>arch-chroot /mnt</code> 命令进入安装目标硬盘。否则，所有安装操作重启系统后无效（安装到了启动镜像中）。</em></p>
+<h1 id="1-建立硬盘分区"><a href="#1-建立硬盘分区" class="headerlink" title="1. 建立硬盘分区"></a>1. 建立硬盘分区</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cfdisk</span><br></pre></td></tr></table></figure>
+
+<p><em>按照本教程安装<font color='red'>ArchLinux</font> ，硬盘至少需要10G以上。</em></p>
+<p><em>如果使用UEFI启动方式，需要新建 <code>/dev/sda1</code> 容量300~500M，并且设置为启动分区，其余分区编号顺延。</em></p>
+<h2 id="1-1-新建EFI分区"><a href="#1-1-新建EFI分区" class="headerlink" title="1.1. 新建EFI分区"></a>1.1. 新建EFI分区</h2><p><img src="/img/arch1.png"></p>
+<h2 id="1-2-新建交换分区"><a href="#1-2-新建交换分区" class="headerlink" title="1.2. 新建交换分区"></a>1.2. 新建交换分区</h2><p><em>可选可不选，类似于虚拟内存</em></p>
+<p><img src="/img/arch2.png"></p>
+<h2 id="1-3-新建主分区"><a href="#1-3-新建主分区" class="headerlink" title="1.3. 新建主分区"></a>1.3. 新建主分区</h2><p><em>剩下全部建立到一起为根目录分区，类型默认即可</em>。</p>
+<p><img src="/img/arch3.png"></p>
+<p>选中<code>Write</code>,输入<code>yes</code>确定，选择<code>Quit</code>退出分区。</p>
+<h2 id="1-4-查看分区情况"><a href="#1-4-查看分区情况" class="headerlink" title="1.4. 查看分区情况"></a>1.4. 查看分区情况</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l</span><br></pre></td></tr></table></figure>
+
+<p><em>确定好自己每一个分区的类型，目的，名称。</em></p>
+<p><img src="/img/arch4.png"></p>
+<h1 id="2-格式化分区"><a href="#2-格式化分区" class="headerlink" title="2. 格式化分区"></a>2. 格式化分区</h1><h2 id="2-1-格式化主分区"><a href="#2-1-格式化主分区" class="headerlink" title="2.1. 格式化主分区"></a>2.1. 格式化主分区</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs.ext4 /dev/sda3</span><br></pre></td></tr></table></figure>
+
+<p><em>此为格式化分区，会擦除数据</em></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">root@archiso ~ # mkfs.ext4 /dev/sda3</span><br><span class="line">mke2fs <span class="number">1</span>.<span class="number">47</span>.<span class="number">1</span> (<span class="number">20</span>-May-<span class="number">2024</span>)</span><br><span class="line">Creating filesystem with <span class="number">4065792</span> <span class="number">4</span>k blocks and <span class="number">1018000</span> inodes</span><br><span class="line">Filesystem UUID: <span class="number">809</span>a516d-<span class="number">805</span>b-<span class="number">4</span>ec4-afa9-dc7538873a12</span><br><span class="line">Superblock backups stored on blocks:</span><br><span class="line">        <span class="number">32768</span>, <span class="number">98304</span>, <span class="number">163840</span>, <span class="number">229376</span>, <span class="number">294912</span>, <span class="number">819200</span>, <span class="number">884736</span>, <span class="number">1605632</span>, <span class="number">2654208</span></span><br><span class="line"></span><br><span class="line">Allocating group tables: done</span><br><span class="line">Writing inode tables: done</span><br><span class="line">Creating journal (<span class="number">16384</span> blocks): done</span><br><span class="line">Writing superblocks and filesystem accounting information: done</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-格式化交换分区（未设置就跳过）"><a href="#2-2-格式化交换分区（未设置就跳过）" class="headerlink" title="2.2. 格式化交换分区（未设置就跳过）"></a>2.2. 格式化交换分区（未设置就跳过）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkswap /dev/sda2</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@archiso ~ # mkswap /dev/sda2</span><br><span class="line">Setting up swapspace version <span class="number">1</span>, size = <span class="number">4</span> GiB (<span class="number">4294963200</span> bytes)</span><br><span class="line"><span class="function">no label, <span class="title">UUID</span>=<span class="title">e32cf483</span>-6326-4<span class="title">d86</span>-8210-<span class="title">bfe78fefb050</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-格式化EFI分区"><a href="#2-3-格式化EFI分区" class="headerlink" title="2.3. 格式化EFI分区"></a>2.3. 格式化EFI分区</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs.fat -F 32 /dev/sda1</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@archiso ~ # mkfs.fat -F <span class="number">32</span> /dev/sda1</span><br><span class="line">mkfs.fat <span class="number">4</span>.<span class="number">2</span> (<span class="number">2021</span>-<span class="number">01</span>-<span class="number">31</span>)</span><br></pre></td></tr></table></figure>
+
+<p>*可运行<code>lsblk -f</code>*确认分区或格式错误</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root@archiso ~ # lsblk -f</span><br><span class="line">NAME   FSTYPE   FSVER            <span class="built_in">LABEL</span>       UUID                                 FSAVAIL FSUSE% MOUNTPOINTS</span><br><span class="line">loop0  squashfs <span class="number">4</span>.<span class="number">0</span>                                                                     <span class="number">0</span>   <span class="number">100</span>% /run/archiso/airootfs</span><br><span class="line">sda</span><br><span class="line">├─sda1 vfat     FAT32                        B52E-<span class="number">2</span>E89</span><br><span class="line">├─sda2 swap     <span class="number">1</span>                            e32cf483-<span class="number">6326</span>-<span class="number">4</span>d86-<span class="number">8210</span>-bfe78fefb050</span><br><span class="line">└─sda3 ext4     <span class="number">1</span>.<span class="number">0</span>                          <span class="number">809</span>a516d-<span class="number">805</span>b-<span class="number">4</span>ec4-afa9-dc7538873a12</span><br><span class="line">sr0    iso9660  Joliet Extension ARCH_202411 <span class="number">2024</span>-<span class="number">11</span>-<span class="number">01</span>-<span class="number">10</span>-<span class="number">09</span>-<span class="number">22</span>-<span class="number">00</span>                     <span class="number">0</span>   <span class="number">100</span>% /run/archiso/bootmnt</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-挂载分区"><a href="#3-挂载分区" class="headerlink" title="3. 挂载分区"></a>3. 挂载分区</h1><ul>
+<li>挂载主分区</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/sda3 /mnt</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>挂载EFI分区</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount --<span class="built_in">mkdir</span> /dev/sda1 /mnt/boot</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>挂载交换分区</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swapon /dev/sda2</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-连接WIFI"><a href="#4-连接WIFI" class="headerlink" title="4. 连接WIFI"></a>4. 连接WIFI</h1><p>如果想要了解该方法的原理请参考<a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Iwd#iwctl">官方文档</a></p>
+<p><em>这里以WIFI网卡名称 wlan0  和 WIFI硬件名称 phy0为例</em></p>
+<p><em>执行<code>iwctl</code>命令，进入iwd交互shell：</em></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># 获得WIFI网卡名称 wlan0 和WIFI硬件名称 phy0</span><br><span class="line">device list</span><br><span class="line"></span><br><span class="line">device wlan0 <span class="built_in">set</span>-property Powered on</span><br><span class="line">adapter phy0 <span class="built_in">set</span>-property Powered on</span><br><span class="line"></span><br><span class="line"># 不会有任何屏幕输出</span><br><span class="line">station wlan0 scan</span><br><span class="line"></span><br><span class="line"># 列表WIFI清单</span><br><span class="line">station wlan0 get-networks</span><br><span class="line"></span><br><span class="line"># 会提示输入连接密码，其中 GEEKCAMP_5G 是选择的WIFI SSID</span><br><span class="line">station wlan0 connect GEEKCAMP_5G</span><br><span class="line"></span><br><span class="line"># 查看WIFI连接</span><br><span class="line">station	wlan0 show</span><br><span class="line"></span><br><span class="line"># 退出iwd Shell</span><br><span class="line"><span class="keyword">exit</span></span><br></pre></td></tr></table></figure>
+
+<p><em>测试网络连接：</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping qq.com</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-基础包安装"><a href="#5-基础包安装" class="headerlink" title="5. 基础包安装"></a>5. 基础包安装</h1><h2 id="5-1-设置国内镜像源"><a href="#5-1-设置国内镜像源" class="headerlink" title="5.1. 设置国内镜像源"></a>5.1. 设置国内镜像源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> &lt;&lt; <span class="string">EOF &gt; /etc/pacman.d/mirrorlist</span></span><br><span class="line"><span class="string">Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/\$repo/os/\$arch</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="5-2-安装基础包"><a href="#5-2-安装基础包" class="headerlink" title="5.2. 安装基础包"></a>5.2. 安装基础包</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacstrap /mnt base</span><br></pre></td></tr></table></figure>
+
+<h1 id="6-开机挂载分区"><a href="#6-开机挂载分区" class="headerlink" title="6. 开机挂载分区"></a>6. 开机挂载分区</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</span><br></pre></td></tr></table></figure>
+
+<h1 id="7-切换到全新ArchLinux系统"><a href="#7-切换到全新ArchLinux系统" class="headerlink" title="7. 切换到全新ArchLinux系统"></a>7. 切换到全新ArchLinux系统</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arch-chroot /mnt</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-1-设置国内镜像源"><a href="#7-1-设置国内镜像源" class="headerlink" title="7.1. 设置国内镜像源"></a>7.1. 设置国内镜像源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> &lt;&lt; <span class="string">EOF &gt; /etc/pacman.d/mirrorlist</span></span><br><span class="line"><span class="string">Server = https://mirrors.aliyun.com/archlinux/\$repo/os/\$arch</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="7-2-安装vim-sudo"><a href="#7-2-安装vim-sudo" class="headerlink" title="7.2. 安装vim sudo"></a>7.2. 安装vim sudo</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S vim <span class="built_in">sudo</span> </span><br></pre></td></tr></table></figure>
+
+<h2 id="7-3-设置时区"><a href="#7-3-设置时区" class="headerlink" title="7.3. 设置时区"></a>7.3. 设置时区</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ln</span> -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-4-本地化语言支持"><a href="#7-4-本地化语言支持" class="headerlink" title="7.4. 本地化语言支持"></a>7.4. 本地化语言支持</h2><p><em>启用语言参数：</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;en_US.UTF-8 UTF-8&quot;</span> &gt;&gt; /etc/locale.gen</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;zh_CN.GB18030 GB18030&quot;</span> &gt;&gt; /etc/locale.gen</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;zh_CN.GBK GBK&quot;</span> &gt;&gt; /etc/locale.gen</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;zh_CN.UTF-8 UTF-8&quot;</span> &gt;&gt; /etc/locale.gen</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;zh_CN GB2312&quot;</span> &gt;&gt; /etc/locale.gen</span><br></pre></td></tr></table></figure>
+
+<p><em>生成locale：</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locale-gen</span><br></pre></td></tr></table></figure>
+
+<p><em>设置系统默认语言：</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;LANG=en_US.UTF-8&quot;</span> &gt; /etc/locale.conf</span><br></pre></td></tr></table></figure>
+
+<p><font color="red">全局设置为英文，tty控制台不会乱码，新用户默认目录也是英文名称，方便使用。</font></p>
+<p><font color="red">新用户登录桌面后，自行找到控制面板中的 “Region and Language”（区域和语言）设置为 <code>汉语</code> 即可。设置后，如果提示更新目录名称为中文，请选择 “保留旧的文件名”，除非你想在终端经常打中文目录名称（累死你~~）。</font></p>
+<h2 id="7-5-键盘布局"><a href="#7-5-键盘布局" class="headerlink" title="7.5. 键盘布局"></a>7.5. 键盘布局</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="built_in">echo</span> <span class="string">&quot;KEYMAP=us&quot;</span> &gt; /etc/vconsole.conf</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-6-设置主机名"><a href="#7-6-设置主机名" class="headerlink" title="7.6. 设置主机名"></a>7.6. 设置主机名</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;archlinux&#x27;</span> &gt; /etc/hostname</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-7-本地网络配置"><a href="#7-7-本地网络配置" class="headerlink" title="7.7. 本地网络配置"></a>7.7. 本地网络配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;127.0.0.1 localhost&#x27;</span> &gt; /etc/hosts</span><br><span class="line"><span class="comment"># 添加主机名对应的设置</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;127.0.0.1 archlinux&#x27;</span> &gt;&gt; /etc/hosts</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-8-设置root密码"><a href="#7-8-设置root密码" class="headerlink" title="7.8.  设置root密码"></a>7.8.  设置root密码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-9-创建用户"><a href="#7-9-创建用户" class="headerlink" title="7.9. 创建用户"></a>7.9. 创建用户</h2><p><em>新增用户</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd -m 你的用户名</span><br></pre></td></tr></table></figure>
+
+<p><em>设置用户密码</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd 你的用户名</span><br></pre></td></tr></table></figure>
+
+<p><em>添加到sudo列表</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;你的用户名   ALL=(ALL:ALL) NOPASSWD: ALL&#x27;</span> &gt;&gt; /etc/sudoers</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-10-安装Grub引导"><a href="#7-10-安装Grub引导" class="headerlink" title="7.10. 安装Grub引导"></a>7.10. 安装Grub引导</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pacman -S grub efibootmgr</span><br><span class="line"></span><br><span class="line">grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=<span class="built_in">arch</span></span><br><span class="line"></span><br><span class="line">pacman -S linux linux-headers linux-lts linux-lts-headers</span><br><span class="line"></span><br><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
+
+<p><font color="red">Windows+Linux双引导</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pacman -S grub os-prober ntfs-3g</span><br><span class="line">sed -i <span class="string">&#x27;s/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g&#x27;</span> /etc/default/grub</span><br></pre></td></tr></table></figure>
+
+<p><font color="red">下次进入GNOME桌面后，执行 grub-mkconfig -o &#x2F;boot&#x2F;grub&#x2F;grub.cfg​ 命令就会自动将Windows系统加入到Grub启动菜单</font></p>
+<h2 id="7-11-安装桌面"><a href="#7-11-安装桌面" class="headerlink" title="7.11. 安装桌面"></a>7.11. 安装桌面</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更新软件包索引</span></span><br><span class="line">pacman -Syy</span><br><span class="line"></span><br><span class="line"><span class="comment"># 桌面环境</span></span><br><span class="line">pacman -S gnome vim networkmanager</span><br><span class="line"></span><br><span class="line"><span class="comment"># WIFI驱动</span></span><br><span class="line">pacman -S linux-firmware</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拼音输入法</span></span><br><span class="line">pacman -S ibus-sunpinyin sunpinyin sunpinyin-data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显卡驱动</span></span><br><span class="line">pacman -S xf86-video-fbdev xf86-video-intel xf86-video-vesa xf86-video-ati xf86-video-amdgpu</span><br><span class="line"></span><br><span class="line"><span class="comment"># 汉字字体</span></span><br><span class="line">pacman -S wqy-microhei wqy-zenhei</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开机启动</span></span><br><span class="line">systemctl <span class="built_in">enable</span> NetworkManager</span><br><span class="line">systemctl <span class="built_in">enable</span> gdm</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-12-重启"><a href="#7-12-重启" class="headerlink" title="7.12. 重启"></a>7.12. 重启</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exit</span></span><br><span class="line"></span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-13-设置pacman"><a href="#7-13-设置pacman" class="headerlink" title="7.13. 设置pacman"></a>7.13. 设置pacman</h2><p><em>增加 <code>Arch Linux 中文社区仓库</code> 的腾讯镜像服务器：</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入root</span></span><br><span class="line"><span class="built_in">sudo</span> -i</span><br><span class="line"></span><br><span class="line"><span class="built_in">cat</span> &lt;&lt; <span class="string">EOF &gt;&gt; /etc/pacman.conf</span></span><br><span class="line"><span class="string">[archlinuxcn]</span></span><br><span class="line"><span class="string">Server = https://mirrors.cloud.tencent.com/archlinuxcn/\$arch</span></span><br><span class="line"><span class="string">SigLevel = Optional TrustAll</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="7-14-安装常用软件"><a href="#7-14-安装常用软件" class="headerlink" title="7.14. 安装常用软件"></a>7.14. 安装常用软件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Syy</span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> pacman -S archlinuxcn-keyring</span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> pacman -S gedit vim screen thunderbird thunderbird-i18n-zh-cn openssh bash-completion cmake git curl wget filezilla gcc make mlocate nginx ntp p7zip rsync virtualbox virtualbox-guest-iso virtualbox-host-dkms file-roller parted sshpass rdesktop qt5-base qt6-base fakeroot yay openssl wireshark-qt base-devel code gnome-terminal os-prober</span><br><span class="line"></span><br><span class="line">yay -S google-chrome</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-15-系统设置"><a href="#7-15-系统设置" class="headerlink" title="7.15. 系统设置"></a>7.15. 系统设置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GNOME 桌面设置</span></span><br><span class="line">gsettings <span class="built_in">set</span> org.gnome.nautilus.preferences always-use-location-entry <span class="literal">true</span></span><br><span class="line">gsettings <span class="built_in">set</span> org.gnome.nautilus.preferences default-sort-order name</span><br><span class="line">gsettings <span class="built_in">set</span> org.gtk.Settings.FileChooser sort-directories-first <span class="literal">true</span></span><br><span class="line">gsettings <span class="built_in">set</span> org.gnome.desktop.interface clock-show-date <span class="literal">true</span></span><br><span class="line">gsettings <span class="built_in">set</span> org.gnome.desktop.interface clock-show-seconds <span class="literal">true</span></span><br><span class="line"><span class="comment"># Ctrl+Shift+Alt+R 录像时，30秒后自动结束。设置为0,不限制</span></span><br><span class="line">gsettings <span class="built_in">set</span> org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0</span><br><span class="line"><span class="comment"># 禁用最近文件访问记录</span></span><br><span class="line">gsettings <span class="built_in">set</span> org.gnome.desktop.privacy remember-recent-files <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># virtualbox 设置</span></span><br><span class="line"><span class="built_in">sudo</span> gpasswd -a root vboxusers</span><br><span class="line"><span class="built_in">sudo</span> gpasswd -a <span class="variable">$USER</span> vboxusers</span><br><span class="line"><span class="comment"># wireshark 设置</span></span><br><span class="line"><span class="built_in">sudo</span> gpasswd -a root wireshark</span><br><span class="line"><span class="built_in">sudo</span> gpasswd -a <span class="variable">$USER</span> wireshark</span><br><span class="line"></span><br><span class="line"><span class="comment"># 系统日志</span></span><br><span class="line"><span class="built_in">sudo</span> gpasswd -a <span class="variable">$USER</span> adm</span><br><span class="line"><span class="built_in">sudo</span> gpasswd -a <span class="variable">$USER</span> systemd-journal</span><br><span class="line"><span class="built_in">sudo</span> gpasswd -a <span class="variable">$USER</span> wheel</span><br><span class="line"></span><br><span class="line"><span class="comment"># docker</span></span><br><span class="line"><span class="comment">#sudo gpasswd -a $USER docker</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> grpunconv</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开机启动</span></span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> systemd-timesyncd</span><br><span class="line"><span class="built_in">sudo</span> systemctl start systemd-timesyncd</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> sshd</span><br><span class="line"><span class="built_in">sudo</span> systemctl mask tmp.mount</span><br></pre></td></tr></table></figure>
+
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2024/11/21/CentOS7%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%8E%E4%BC%98%E5%8C%96%E9%85%8D%E7%BD%AE/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2025-10-02 16:02:51
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/ArchLinux/" title="ArchLinux">
+                        #ArchLinux
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2024/12/02/CentOS7%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81IP/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%89%8D%E8%AF%B4%E6%98%8E"><span class="toc-text">安装前说明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%BB%BA%E7%AB%8B%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA"><span class="toc-text">1. 建立硬盘分区</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E6%96%B0%E5%BB%BAEFI%E5%88%86%E5%8C%BA"><span class="toc-text">1.1. 新建EFI分区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E6%96%B0%E5%BB%BA%E4%BA%A4%E6%8D%A2%E5%88%86%E5%8C%BA"><span class="toc-text">1.2. 新建交换分区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E6%96%B0%E5%BB%BA%E4%B8%BB%E5%88%86%E5%8C%BA"><span class="toc-text">1.3. 新建主分区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E6%9F%A5%E7%9C%8B%E5%88%86%E5%8C%BA%E6%83%85%E5%86%B5"><span class="toc-text">1.4. 查看分区情况</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%88%86%E5%8C%BA"><span class="toc-text">2. 格式化分区</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E6%A0%BC%E5%BC%8F%E5%8C%96%E4%B8%BB%E5%88%86%E5%8C%BA"><span class="toc-text">2.1. 格式化主分区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E6%A0%BC%E5%BC%8F%E5%8C%96%E4%BA%A4%E6%8D%A2%E5%88%86%E5%8C%BA%EF%BC%88%E6%9C%AA%E8%AE%BE%E7%BD%AE%E5%B0%B1%E8%B7%B3%E8%BF%87%EF%BC%89"><span class="toc-text">2.2. 格式化交换分区（未设置就跳过）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E6%A0%BC%E5%BC%8F%E5%8C%96EFI%E5%88%86%E5%8C%BA"><span class="toc-text">2.3. 格式化EFI分区</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E6%8C%82%E8%BD%BD%E5%88%86%E5%8C%BA"><span class="toc-text">3. 挂载分区</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E8%BF%9E%E6%8E%A5WIFI"><span class="toc-text">4. 连接WIFI</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E5%9F%BA%E7%A1%80%E5%8C%85%E5%AE%89%E8%A3%85"><span class="toc-text">5. 基础包安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-%E8%AE%BE%E7%BD%AE%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90"><span class="toc-text">5.1. 设置国内镜像源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-%E5%AE%89%E8%A3%85%E5%9F%BA%E7%A1%80%E5%8C%85"><span class="toc-text">5.2. 安装基础包</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-%E5%BC%80%E6%9C%BA%E6%8C%82%E8%BD%BD%E5%88%86%E5%8C%BA"><span class="toc-text">6. 开机挂载分区</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-%E5%88%87%E6%8D%A2%E5%88%B0%E5%85%A8%E6%96%B0ArchLinux%E7%B3%BB%E7%BB%9F"><span class="toc-text">7. 切换到全新ArchLinux系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-%E8%AE%BE%E7%BD%AE%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90"><span class="toc-text">7.1. 设置国内镜像源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-%E5%AE%89%E8%A3%85vim-sudo"><span class="toc-text">7.2. 安装vim sudo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-3-%E8%AE%BE%E7%BD%AE%E6%97%B6%E5%8C%BA"><span class="toc-text">7.3. 设置时区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-4-%E6%9C%AC%E5%9C%B0%E5%8C%96%E8%AF%AD%E8%A8%80%E6%94%AF%E6%8C%81"><span class="toc-text">7.4. 本地化语言支持</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-5-%E9%94%AE%E7%9B%98%E5%B8%83%E5%B1%80"><span class="toc-text">7.5. 键盘布局</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-6-%E8%AE%BE%E7%BD%AE%E4%B8%BB%E6%9C%BA%E5%90%8D"><span class="toc-text">7.6. 设置主机名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-7-%E6%9C%AC%E5%9C%B0%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE"><span class="toc-text">7.7. 本地网络配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-8-%E8%AE%BE%E7%BD%AEroot%E5%AF%86%E7%A0%81"><span class="toc-text">7.8.  设置root密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-9-%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7"><span class="toc-text">7.9. 创建用户</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-10-%E5%AE%89%E8%A3%85Grub%E5%BC%95%E5%AF%BC"><span class="toc-text">7.10. 安装Grub引导</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-11-%E5%AE%89%E8%A3%85%E6%A1%8C%E9%9D%A2"><span class="toc-text">7.11. 安装桌面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-12-%E9%87%8D%E5%90%AF"><span class="toc-text">7.12. 重启</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-13-%E8%AE%BE%E7%BD%AEpacman"><span class="toc-text">7.13. 设置pacman</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-14-%E5%AE%89%E8%A3%85%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6"><span class="toc-text">7.14. 安装常用软件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-15-%E7%B3%BB%E7%BB%9F%E8%AE%BE%E7%BD%AE"><span class="toc-text">7.15. 系统设置</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2025 Oranges</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+    <div class="footer-views">
+      
+          本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        
+      
+          本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        
+      
+          本站访客数<span id="busuanzi_value_site_uv"></span>人
+        
+      
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + ArchLinux%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE + '&url=' + http%3A%2F%2Fexample.com%2F2024%2F11%2F26%2FArchLinux%25E5%25AE%2589%25E8%25A3%2585%25E9%2585%258D%25E7%25BD%25AE%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2024/11/26/ArchLinux%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  </body>
+</html>

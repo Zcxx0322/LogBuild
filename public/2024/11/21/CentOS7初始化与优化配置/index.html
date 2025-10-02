@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="John Doe" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
+    
+      CentOS7初始化与优化配置 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/img/zcxx0322.png">
+    <link rel="icon" href="/img/icon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+    
+<link rel="stylesheet" href="/css/figcaption/mac-block.css">
+
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a target="_blank" rel="noopener" href="https://github.com/Zcxx0322">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/img/zcxx0322.png" alt="">
+      
+    </a>
+    <div class="nickname"><a target="_blank" rel="noopener" href="https://github.com/Zcxx0322">Zcxx0322</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/friends/">
+          <a href="/friends/">Friends</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">CentOS7初始化与优化配置</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2025-10-02 16:02:48
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/CentOS7/" title="CentOS7">
+                    #CentOS7
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <hr>
+<h1 id="CentOS7初始化与优化配置"><a href="#CentOS7初始化与优化配置" class="headerlink" title="CentOS7初始化与优化配置"></a>CentOS7初始化与优化配置</h1><h2 id="1-配置-YUM"><a href="#1-配置-YUM" class="headerlink" title="1. 配置 YUM"></a>1. 配置 YUM</h2><h3 id="1-1-仅安装-64-位软件包"><a href="#1-1-仅安装-64-位软件包" class="headerlink" title="1.1 仅安装 64 位软件包"></a>1.1 仅安装 64 位软件包</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;exclude=*.i386 *.i586 *.i686&quot;</span> &gt;&gt; /etc/yum.conf</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-强制-YUM-使用-IPv4"><a href="#1-2-强制-YUM-使用-IPv4" class="headerlink" title="1.2 强制 YUM 使用 IPv4"></a>1.2 强制 YUM 使用 IPv4</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;ip_resolve=4&#x27;</span> &gt;&gt; /etc/yum.conf</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="2-更新系统"><a href="#2-更新系统" class="headerlink" title="2. 更新系统"></a>2. 更新系统</h2><h3 id="2-1-YUM-换源"><a href="#2-1-YUM-换源" class="headerlink" title="2.1 YUM 换源"></a>2.1 YUM 换源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mv</span> /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bak</span><br><span class="line"></span><br><span class="line"><span class="built_in">cat</span> &lt;&lt;<span class="string">EOF &gt; /etc/yum.repos.d/CentOS-Base.repo</span></span><br><span class="line"><span class="string">[base]</span></span><br><span class="line"><span class="string">name=CentOS-\$releasever - Base</span></span><br><span class="line"><span class="string">baseurl=https://mirrors.aliyun.com/centos/\$releasever/os/\$basearch/</span></span><br><span class="line"><span class="string">gpgcheck=1</span></span><br><span class="line"><span class="string">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[updates]</span></span><br><span class="line"><span class="string">name=CentOS-\$releasever - Updates</span></span><br><span class="line"><span class="string">baseurl=https://mirrors.aliyun.com/centos/\$releasever/updates/\$basearch/</span></span><br><span class="line"><span class="string">gpgcheck=1</span></span><br><span class="line"><span class="string">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[extras]</span></span><br><span class="line"><span class="string">name=CentOS-\$releasever - Extras</span></span><br><span class="line"><span class="string">baseurl=https://mirrors.aliyun.com/centos/\$releasever/extras/\$basearch/</span></span><br><span class="line"><span class="string">gpgcheck=1</span></span><br><span class="line"><span class="string">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line">yum clean all</span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-更新"><a href="#2-2-更新" class="headerlink" title="2.2 更新"></a>2.2 更新</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum update -y</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="3-EPEL-镜像设置"><a href="#3-EPEL-镜像设置" class="headerlink" title="3. EPEL 镜像设置"></a>3. EPEL 镜像设置</h2><h3 id="3-1-安装-EPEL-软件包"><a href="#3-1-安装-EPEL-软件包" class="headerlink" title="3.1 安装 EPEL 软件包"></a>3.1 安装 EPEL 软件包</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y epel-release</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-设置国内镜像服务器"><a href="#3-2-设置国内镜像服务器" class="headerlink" title="3.2 设置国内镜像服务器"></a>3.2 设置国内镜像服务器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sed -e <span class="string">&#x27;s!^metalink=!#metalink=!g&#x27;</span> \</span><br><span class="line">    -e <span class="string">&#x27;s!^#baseurl=!baseurl=!g&#x27;</span> \</span><br><span class="line">    -e <span class="string">&#x27;s!//download\.fedoraproject\.org/pub!//mirrors.aliyun.com!g&#x27;</span> \</span><br><span class="line">    -e <span class="string">&#x27;s!http://mirrors!https://mirrors!g&#x27;</span> \</span><br><span class="line">    -i /etc/yum.repos.d/epel*.repo</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-创建-YUM-缓存"><a href="#3-3-创建-YUM-缓存" class="headerlink" title="3.3 创建 YUM 缓存"></a>3.3 创建 YUM 缓存</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="4-安装常用软件"><a href="#4-安装常用软件" class="headerlink" title="4. 安装常用软件"></a>4. 安装常用软件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y vim-enhanced wget curl yum-utils tree pwgen unzip expect tar xz bash-completion-extras</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-1-安装-Python-3-10"><a href="#4-1-安装-Python-3-10" class="headerlink" title="4.1 安装 Python 3.10+"></a>4.1 安装 Python 3.10+</h3><h4 id="4-1-1-安装依赖：OpenSSL-1-1"><a href="#4-1-1-安装依赖：OpenSSL-1-1" class="headerlink" title="4.1.1 安装依赖：OpenSSL 1.1+"></a>4.1.1 安装依赖：OpenSSL 1.1+</h4><ul>
+<li>安装 OpenSSL 1.1+ 软件包</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">pkg_name=openssl</span><br><span class="line">pkg_ver=1.1.1n</span><br><span class="line">pkg_rel=1</span><br><span class="line">pkg=<span class="variable">$&#123;pkg_name&#125;</span>-<span class="variable">$&#123;pkg_ver&#125;</span></span><br><span class="line">tar_name=<span class="variable">$&#123;pkg_name&#125;</span>-<span class="variable">$&#123;pkg_ver&#125;</span>-<span class="variable">$&#123;pkg_rel&#125;</span>.el7.x86_64.tar.gz</span><br><span class="line">url=http://dl.cdgeekcamp.com/centos/7/<span class="variable">$&#123;pkg_name&#125;</span>/<span class="variable">$&#123;pkg_ver&#125;</span>/<span class="variable">$&#123;tar_name&#125;</span></span><br><span class="line">prefix=/usr/local/<span class="variable">$&#123;pkg&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">test</span> -d <span class="variable">$&#123;prefix&#125;</span> || (wget <span class="variable">$&#123;url&#125;</span> -O /tmp/<span class="variable">$&#123;tar_name&#125;</span> &amp;&amp; tar xf /tmp/<span class="variable">$&#123;tar_name&#125;</span> -C $(<span class="built_in">dirname</span> <span class="variable">$&#123;prefix&#125;</span>))</span><br><span class="line"></span><br><span class="line"><span class="built_in">rm</span> -f /tmp/<span class="variable">$&#123;tar_name&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>更新动态链接库配置</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">egrep <span class="string">&quot;^<span class="variable">$&#123;prefix&#125;</span>/lib&quot;</span> /etc/ld.so.conf || (<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$&#123;prefix&#125;</span>/lib&quot;</span> &gt;&gt; /etc/ld.so.conf &amp;&amp; ldconfig)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>确认配置</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ldconfig -p | grep <span class="variable">$&#123;prefix&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>终端输出</strong></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ldconfig -p | grep $&#123;prefix&#125;</span><br><span class="line">        libssl.so.<span class="number">1</span>.<span class="number">1</span> (libc6,x86-<span class="number">64</span>) =&gt; /usr/local/openssl-<span class="number">1</span>.<span class="number">1</span>.<span class="number">1</span>n/lib/libssl.so.<span class="number">1</span>.<span class="number">1</span></span><br><span class="line">        libssl.so (libc6,x86-<span class="number">64</span>) =&gt; /usr/local/openssl-<span class="number">1</span>.<span class="number">1</span>.<span class="number">1</span>n/lib/libssl.so</span><br><span class="line">        libcrypto.so.<span class="number">1</span>.<span class="number">1</span> (libc6,x86-<span class="number">64</span>) =&gt; /usr/local/openssl-<span class="number">1</span>.<span class="number">1</span>.<span class="number">1</span>n/lib/libcrypto.so.<span class="number">1</span>.<span class="number">1</span></span><br><span class="line">        libcrypto.so (libc6,x86-<span class="number">64</span>) =&gt; /usr/local/openssl-<span class="number">1</span>.<span class="number">1</span>.<span class="number">1</span>n/lib/libcrypto.so</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-1-2-安装-Python-3-10"><a href="#4-1-2-安装-Python-3-10" class="headerlink" title="4.1.2 安装 Python 3.10+"></a>4.1.2 安装 Python 3.10+</h4><ul>
+<li>设置 Python 3.10+ 安装变量</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">pkg_name=python</span><br><span class="line">pkg_ver=3.10.5</span><br><span class="line">pkg_short_num=3</span><br><span class="line">pkg_ver_num=310</span><br><span class="line">pkg_rel=1</span><br><span class="line">pkg=<span class="variable">$&#123;pkg_name&#125;</span>-<span class="variable">$&#123;pkg_ver&#125;</span></span><br><span class="line">tar_name=<span class="variable">$&#123;pkg_name&#125;</span>-<span class="variable">$&#123;pkg_ver&#125;</span>-<span class="variable">$&#123;pkg_rel&#125;</span>.el7.x86_64.tar.gz</span><br><span class="line">url=http://dl.cdgeekcamp.com/centos/7/python/3/<span class="variable">$&#123;tar_name&#125;</span></span><br><span class="line">prefix=/usr/local/<span class="variable">$&#123;pkg&#125;</span></span><br><span class="line">bin_dir=<span class="variable">$&#123;prefix&#125;</span>/bin</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装 Python 3.10+ 软件包</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">test</span> -d <span class="variable">$&#123;prefix&#125;</span> || (wget <span class="variable">$&#123;url&#125;</span> -O /tmp/<span class="variable">$&#123;tar_name&#125;</span> &amp;&amp; tar xf /tmp/<span class="variable">$&#123;tar_name&#125;</span> -C $(<span class="built_in">dirname</span> <span class="variable">$&#123;prefix&#125;</span>))</span><br><span class="line"></span><br><span class="line"><span class="built_in">rm</span> -f /tmp/<span class="variable">$&#123;tar_name&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>设置环境变量</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;export PATH=<span class="variable">$&#123;bin_dir&#125;</span>:<span class="variable">$&#123;PATH&#125;</span>&quot;</span> &gt; /etc/profile.d/python<span class="variable">$&#123;pkg_short_num&#125;</span>.sh</span><br><span class="line">. /etc/profile</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>确认设置</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">which</span> python<span class="variable">$&#123;pkg_short_num&#125;</span> | grep <span class="variable">$&#123;prefix&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>终端输出</strong></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/python-<span class="number">3</span>.<span class="number">10</span>.<span class="number">5</span>/bin/python3</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>设置软链接</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$&#123;bin_dir&#125;</span></span><br><span class="line"><span class="built_in">test</span> -L pip<span class="variable">$&#123;pkg_ver_num&#125;</span> || <span class="built_in">ln</span> -v -s pip<span class="variable">$&#123;pkg_short_num&#125;</span> pip<span class="variable">$&#123;pkg_ver_num&#125;</span></span><br><span class="line"><span class="built_in">test</span> -L python<span class="variable">$&#123;pkg_ver_num&#125;</span> || <span class="built_in">ln</span> -v -s python<span class="variable">$&#123;pkg_short_num&#125;</span> python<span class="variable">$&#123;pkg_ver_num&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">&quot;PIP软链接：pip<span class="variable">$&#123;pkg_ver_num&#125;</span>\nPython3软链接：python<span class="variable">$&#123;pkg_ver_num&#125;</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>测试 pip 命令</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> -e <span class="string">&quot;执行命令：pip<span class="variable">$&#123;pkg_ver_num&#125;</span> list\n&quot;</span> &amp;&amp; pip<span class="variable">$&#123;pkg_ver_num&#125;</span> list</span><br></pre></td></tr></table></figure>
+
+<p><strong>终端输出</strong></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">执行命令：pip310 list</span><br><span class="line"></span><br><span class="line">Package    Version</span><br><span class="line">---------- -------</span><br><span class="line">pip        <span class="number">22</span>.<span class="number">1</span>.<span class="number">2</span></span><br><span class="line">setuptools <span class="number">58</span>.<span class="number">1</span>.<span class="number">0</span></span><br><span class="line"></span><br><span class="line">[notice] A new release of pip available: <span class="number">22</span>.<span class="number">1</span>.<span class="number">2</span> -&gt; <span class="number">24</span>.<span class="number">3</span>.<span class="number">1</span></span><br><span class="line">[notice] To update, run: pip install --upgrade pip</span><br></pre></td></tr></table></figure>
+
+<p><em>若出现 notice，说明 pip 版本过低，可以执行 <code>pip install --upgrade pip</code> 来升级。</em></p>
+<p>注：可能会因为源的问题导致更新 pip 失败！</p>
+<ul>
+<li>配置 pip 换源</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p ~/.pip</span><br><span class="line"><span class="built_in">cat</span> &gt; ~/.pip/pip.conf &lt;&lt;<span class="string">EOF</span></span><br><span class="line"><span class="string">[global]</span></span><br><span class="line"><span class="string">index-url = https://mirrors.aliyun.com/pypi/simple/</span></span><br><span class="line"><span class="string">trusted-host = mirrors.aliyun.com</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[install]</span></span><br><span class="line"><span class="string">use-deprecated=legacy-resolver</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-安装命令行编辑工具"><a href="#4-2-安装命令行编辑工具" class="headerlink" title="4.2 安装命令行编辑工具"></a>4.2 安装命令行编辑工具</h3><h4 id="4-2-1-XML-编辑工具"><a href="#4-2-1-XML-编辑工具" class="headerlink" title="4.2.1 XML 编辑工具"></a>4.2.1 XML 编辑工具</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y xmlstarlet</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2-2-INI-与-Java-Properties-编辑工具"><a href="#4-2-2-INI-与-Java-Properties-编辑工具" class="headerlink" title="4.2.2 INI 与 Java Properties 编辑工具"></a>4.2.2 INI 与 Java Properties 编辑工具</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y crudini</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="5-设置系统时区"><a href="#5-设置系统时区" class="headerlink" title="5. 设置系统时区"></a>5. 设置系统时区</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">yes</span>|<span class="built_in">cp</span> /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="6-安装时间同步服务"><a href="#6-安装时间同步服务" class="headerlink" title="6. 安装时间同步服务"></a>6. 安装时间同步服务</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install -y chrony</span><br><span class="line">systemctl <span class="built_in">enable</span> chronyd</span><br><span class="line">systemctl start chronyd</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="7-禁用-IPv6"><a href="#7-禁用-IPv6" class="headerlink" title="7. 禁用 IPv6"></a>7. 禁用 IPv6</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;net.ipv6.conf.all.disable_ipv6 = 1&quot;</span> &gt;&gt;  /etc/sysctl.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;net.ipv6.conf.default.disable_ipv6 = 1&quot;</span> &gt;&gt;  /etc/sysctl.conf</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="8-删除安装日志"><a href="#8-删除安装日志" class="headerlink" title="8. 删除安装日志"></a>8. 删除安装日志</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -f ~/anaconda-ks.cfg  ~/install.log  ~/install.log.syslog</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="9-禁用-SELinux"><a href="#9-禁用-SELinux" class="headerlink" title="9. 禁用 SELinux"></a>9. 禁用 SELinux</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> SELINUX=disabled&gt;/etc/selinux/config</span><br><span class="line"><span class="built_in">echo</span> SELINUXTYPE=targeted&gt;&gt;/etc/selinux/config</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="10-关闭防火墙"><a href="#10-关闭防火墙" class="headerlink" title="10. 关闭防火墙"></a>10. 关闭防火墙</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br><span class="line">systemctl stop firewalld</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="11-设置最大文件句柄"><a href="#11-设置最大文件句柄" class="headerlink" title="11. 设置最大文件句柄"></a>11. 设置最大文件句柄</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;* soft nofile 65535&quot;</span> | <span class="built_in">sudo</span> <span class="built_in">tee</span> -a /etc/security/limits.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;* hard nofile 65535&quot;</span> | <span class="built_in">sudo</span> <span class="built_in">tee</span> -a /etc/security/limits.conf</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="12-优化-SSH-服务"><a href="#12-优化-SSH-服务" class="headerlink" title="12. 优化 SSH 服务"></a>12. 优化 SSH 服务</h2><ul>
+<li>修改 sshd_config</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">&quot;s/#UseDNS yes/UseDNS no/&quot;</span> /etc/ssh/sshd_config</span><br><span class="line">sed -i <span class="string">&quot;s/GSSAPIAuthentication yes/GSSAPIAuthentication no/&quot;</span> /etc/ssh/sshd_config</span><br><span class="line">sed -i <span class="string">&quot;s/GSSAPICleanupCredentials yes/GSSAPICleanupCredentials no/&quot;</span> /etc/ssh/sshd_config</span><br><span class="line">sed -i <span class="string">&quot;s/#MaxAuthTries 6/MaxAuthTries 10/&quot;</span> /etc/ssh/sshd_config</span><br><span class="line">sed -i <span class="string">&quot;s/#ClientAliveInterval 0/ClientAliveInterval 30/&quot;</span> /etc/ssh/sshd_config</span><br><span class="line">sed -i <span class="string">&quot;s/#ClientAliveCountMax 3/ClientAliveCountMax 10/&quot;</span> /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>重载配置</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl reload sshd</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="13-设置主机名"><a href="#13-设置主机名" class="headerlink" title="13. 设置主机名"></a>13. 设置主机名</h2><h3 id="13-1-初始化本地解析设置"><a href="#13-1-初始化本地解析设置" class="headerlink" title="13.1 初始化本地解析设置"></a>13.1 初始化本地解析设置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4&#x27;</span> &gt; /etc/hosts</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="14-重启"><a href="#14-重启" class="headerlink" title="14. 重启"></a>14. 重启</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
+
+<hr>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2025-10-02 16:02:48
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/CentOS7/" title="CentOS7">
+                        #CentOS7
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2024/11/26/ArchLinux%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CentOS7%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%8E%E4%BC%98%E5%8C%96%E9%85%8D%E7%BD%AE"><span class="toc-text">CentOS7初始化与优化配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%85%8D%E7%BD%AE-YUM"><span class="toc-text">1. 配置 YUM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E4%BB%85%E5%AE%89%E8%A3%85-64-%E4%BD%8D%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="toc-text">1.1 仅安装 64 位软件包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%BC%BA%E5%88%B6-YUM-%E4%BD%BF%E7%94%A8-IPv4"><span class="toc-text">1.2 强制 YUM 使用 IPv4</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%9B%B4%E6%96%B0%E7%B3%BB%E7%BB%9F"><span class="toc-text">2. 更新系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-YUM-%E6%8D%A2%E6%BA%90"><span class="toc-text">2.1 YUM 换源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E6%9B%B4%E6%96%B0"><span class="toc-text">2.2 更新</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-EPEL-%E9%95%9C%E5%83%8F%E8%AE%BE%E7%BD%AE"><span class="toc-text">3. EPEL 镜像设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%AE%89%E8%A3%85-EPEL-%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="toc-text">3.1 安装 EPEL 软件包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E8%AE%BE%E7%BD%AE%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">3.2 设置国内镜像服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E5%88%9B%E5%BB%BA-YUM-%E7%BC%93%E5%AD%98"><span class="toc-text">3.3 创建 YUM 缓存</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%AE%89%E8%A3%85%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6"><span class="toc-text">4. 安装常用软件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E5%AE%89%E8%A3%85-Python-3-10"><span class="toc-text">4.1 安装 Python 3.10+</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-1-%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96%EF%BC%9AOpenSSL-1-1"><span class="toc-text">4.1.1 安装依赖：OpenSSL 1.1+</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-2-%E5%AE%89%E8%A3%85-Python-3-10"><span class="toc-text">4.1.2 安装 Python 3.10+</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E5%AE%89%E8%A3%85%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%BC%96%E8%BE%91%E5%B7%A5%E5%85%B7"><span class="toc-text">4.2 安装命令行编辑工具</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-1-XML-%E7%BC%96%E8%BE%91%E5%B7%A5%E5%85%B7"><span class="toc-text">4.2.1 XML 编辑工具</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-2-INI-%E4%B8%8E-Java-Properties-%E7%BC%96%E8%BE%91%E5%B7%A5%E5%85%B7"><span class="toc-text">4.2.2 INI 与 Java Properties 编辑工具</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E8%AE%BE%E7%BD%AE%E7%B3%BB%E7%BB%9F%E6%97%B6%E5%8C%BA"><span class="toc-text">5. 设置系统时区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%AE%89%E8%A3%85%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1"><span class="toc-text">6. 安装时间同步服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E7%A6%81%E7%94%A8-IPv6"><span class="toc-text">7. 禁用 IPv6</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E5%88%A0%E9%99%A4%E5%AE%89%E8%A3%85%E6%97%A5%E5%BF%97"><span class="toc-text">8. 删除安装日志</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E7%A6%81%E7%94%A8-SELinux"><span class="toc-text">9. 禁用 SELinux</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99"><span class="toc-text">10. 关闭防火墙</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E8%AE%BE%E7%BD%AE%E6%9C%80%E5%A4%A7%E6%96%87%E4%BB%B6%E5%8F%A5%E6%9F%84"><span class="toc-text">11. 设置最大文件句柄</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-%E4%BC%98%E5%8C%96-SSH-%E6%9C%8D%E5%8A%A1"><span class="toc-text">12. 优化 SSH 服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-%E8%AE%BE%E7%BD%AE%E4%B8%BB%E6%9C%BA%E5%90%8D"><span class="toc-text">13. 设置主机名</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#13-1-%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9C%AC%E5%9C%B0%E8%A7%A3%E6%9E%90%E8%AE%BE%E7%BD%AE"><span class="toc-text">13.1 初始化本地解析设置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-%E9%87%8D%E5%90%AF"><span class="toc-text">14. 重启</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2025 Oranges</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+    <div class="footer-views">
+      
+          本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        
+      
+          本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        
+      
+          本站访客数<span id="busuanzi_value_site_uv"></span>人
+        
+      
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + CentOS7%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%8E%E4%BC%98%E5%8C%96%E9%85%8D%E7%BD%AE + '&url=' + http%3A%2F%2Fexample.com%2F2024%2F11%2F21%2FCentOS7%25E5%2588%259D%25E5%25A7%258B%25E5%258C%2596%25E4%25B8%258E%25E4%25BC%2598%25E5%258C%2596%25E9%2585%258D%25E7%25BD%25AE%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2024/11/21/CentOS7%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%8E%E4%BC%98%E5%8C%96%E9%85%8D%E7%BD%AE/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  </body>
+</html>

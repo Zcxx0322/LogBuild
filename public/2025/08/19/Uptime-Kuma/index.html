@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="John Doe" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
+    
+      Uptime-Kuma 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/img/zcxx0322.png">
+    <link rel="icon" href="/img/icon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+    
+<link rel="stylesheet" href="/css/figcaption/mac-block.css">
+
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a target="_blank" rel="noopener" href="https://github.com/Zcxx0322">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/img/zcxx0322.png" alt="">
+      
+    </a>
+    <div class="nickname"><a target="_blank" rel="noopener" href="https://github.com/Zcxx0322">Zcxx0322</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/friends/">
+          <a href="/friends/">Friends</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">Uptime-Kuma</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2025-10-02 16:03:52
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/Uptime-Kuma/" title="Uptime-Kuma">
+                    #Uptime-Kuma
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="Uptime-Kuma-安装指南"><a href="#Uptime-Kuma-安装指南" class="headerlink" title="Uptime Kuma 安装指南"></a>Uptime Kuma 安装指南</h1><h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h2><p>Uptime Kuma 是一款开源、免费且易于使用的自托管监控工具。它兼容多种平台，包括 Linux、Windows 10 (x64) 和 Windows Server。</p>
+<p>Uptime Kuma 的仪表板简洁高效，功能强大，让监控服务正常运行时间变得前所未有的简单。</p>
+<h2 id="2-Windows（Docker方式）"><a href="#2-Windows（Docker方式）" class="headerlink" title="2. Windows（Docker方式）"></a>2. Windows（Docker方式）</h2><h3 id="2-1-环境准备"><a href="#2-1-环境准备" class="headerlink" title="2.1 环境准备"></a>2.1 环境准备</h3><ul>
+<li>Windows 10 以上操作系统</li>
+<li><a target="_blank" rel="noopener" href="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=dd-smartbutton&utm_location=module&_gl=1*1irokkm*_gcl_au*MTk2NTU1MjQ0NC4xNzU1NTc1NzU4*_ga*NTM4MzAyMTMyLjE3NTE0Mjg3ODg.*_ga_XJWPQMJYHQ*czE3NTU1ODM4OTAkbzEwJGcxJHQxNzU1NTg1OTUzJGo1MCRsMCRoMA..">Docker Desktop</a></li>
+<li>Uptime Kuma 版本：1.23.16</li>
+</ul>
+<h3 id="2-2-开启-Hyper-V-虚拟化技术"><a href="#2-2-开启-Hyper-V-虚拟化技术" class="headerlink" title="2.2 开启 Hyper-V 虚拟化技术"></a>2.2 开启 Hyper-V 虚拟化技术</h3><p>控制面板 → 程序和功能 → 启用或关闭 Windows 功能 → Hyper-V → 勾选 Hyper-V 工具和 Hyper-V 管理平台</p>
+<p><img src="/img/kuma1.png"></p>
+<h3 id="2-3-安装-Docker-Desktop"><a href="#2-3-安装-Docker-Desktop" class="headerlink" title="2.3 安装 Docker Desktop"></a>2.3 安装 Docker Desktop</h3><p>按照常规流程安装 Docker Desktop。</p>
+<h3 id="2-4-拉取-Uptime-Kuma-镜像"><a href="#2-4-拉取-Uptime-Kuma-镜像" class="headerlink" title="2.4 拉取 Uptime Kuma 镜像"></a>2.4 拉取 Uptime Kuma 镜像</h3><p><img src="/img/kuma2.png"></p>
+<h3 id="2-5-运行-Uptime-Kuma"><a href="#2-5-运行-Uptime-Kuma" class="headerlink" title="2.5 运行 Uptime Kuma"></a>2.5 运行 Uptime Kuma</h3><p>在终端中运行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建数据卷</span></span><br><span class="line">docker volume create uptime-kuma</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动容器</span></span><br><span class="line">docker run -d --restart=always -p 3001:3001 -v uptime-kuma:/app/data --name uptime-kuma --network host louislam/uptime-kuma:1.23.16</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-6-访问使用"><a href="#2-6-访问使用" class="headerlink" title="2.6 访问使用"></a>2.6 访问使用</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1:3001</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-Windows（NPM方式）"><a href="#3-Windows（NPM方式）" class="headerlink" title="3. Windows（NPM方式）"></a>3. Windows（NPM方式）</h2><h3 id="3-1-环境准备"><a href="#3-1-环境准备" class="headerlink" title="3.1 环境准备"></a>3.1 环境准备</h3><ul>
+<li>Windows 10 (x64), Windows Server 2012 R2 (x64) 或更高版本</li>
+<li><a target="_blank" rel="noopener" href="https://git-scm.com/downloads/win">Git</a></li>
+<li><a target="_blank" rel="noopener" href="https://nodejs.org/en/download/current/">Node.js</a> 14 &#x2F; 16 &#x2F; 18 &#x2F; 20.4</li>
+<li><a target="_blank" rel="noopener" href="https://docs.npmjs.com/cli/">npm</a> ≥ 7</li>
+<li><a target="_blank" rel="noopener" href="https://pm2.keymetrics.io/">pm2</a></li>
+<li>Uptime Kuma 版本：1.23.16</li>
+</ul>
+<h3 id="3-2-安装-Node-js-20-19-4"><a href="#3-2-安装-Node-js-20-19-4" class="headerlink" title="3.2 安装 Node.js 20.19.4"></a>3.2 安装 Node.js 20.19.4</h3><p>下载链接：<a target="_blank" rel="noopener" href="https://nodejs.org/dist/v20.19.4/node-v20.19.4-x64.msi">https://nodejs.org/dist/v20.19.4/node-v20.19.4-x64.msi</a></p>
+<h3 id="3-3-安装-Uptime-Kuma"><a href="#3-3-安装-Uptime-Kuma" class="headerlink" title="3.3 安装 Uptime Kuma"></a>3.3 安装 Uptime Kuma</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置 npm 镜像源</span></span><br><span class="line">npm config <span class="built_in">set</span> registry https://registry.npmmirror.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># 克隆仓库</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/louislam/uptime-kuma.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果存在网络问题，可使用加速地址（加速节点参考 https://ghproxy.link/）</span></span><br><span class="line">git <span class="built_in">clone</span> https://ghfast.top/github.com/louislam/uptime-kuma.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装依赖</span></span><br><span class="line"><span class="built_in">cd</span> uptime-kuma</span><br><span class="line">git checkout 1.23.16</span><br><span class="line">npm run setup</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果 npm run setup 下载前端文件较慢，可以修改 extra/download-dist.js 文件中的 const url</span></span><br><span class="line"><span class="comment"># 修改为：https://ghfast.top/github.com/louislam/uptime-kuma/releases/download/1.23.16/dist.tar.gz</span></span><br><span class="line"><span class="comment"># 保存后重新执行 npm run setup</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-4-配置-PM2"><a href="#3-4-配置-PM2" class="headerlink" title="3.4 配置 PM2"></a>3.4 配置 PM2</h3><p>PM2 主要用于进程管理和服务守护。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 PM2</span></span><br><span class="line">npm install pm2 -g</span><br><span class="line">pm2 install pm2-logrotate</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动进程</span></span><br><span class="line">pm2 start server/server.js --name uptime-kuma</span><br><span class="line"></span><br><span class="line"><span class="comment"># 实时监控资源使用情况</span></span><br><span class="line">pm2 monit</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置开机自启</span></span><br><span class="line">pm2 save &amp;&amp; pm2 startup</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-5-访问使用"><a href="#3-5-访问使用" class="headerlink" title="3.5 访问使用"></a>3.5 访问使用</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1:3001</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-CentOS-7（NPM方式）"><a href="#4-CentOS-7（NPM方式）" class="headerlink" title="4. CentOS 7（NPM方式）"></a>4. CentOS 7（NPM方式）</h2><h3 id="4-1-环境准备"><a href="#4-1-环境准备" class="headerlink" title="4.1 环境准备"></a>4.1 环境准备</h3><ul>
+<li>CentOS Linux release 7.9.2009 (Core)</li>
+<li>内核版本：3.10.0-1160.119.1.el7.x86_64</li>
+<li><a target="_blank" rel="noopener" href="https://git-scm.com/downloads/win">Git</a></li>
+<li><a target="_blank" rel="noopener" href="https://nodejs.org/en/download/current/">Node.js</a> 18 &#x2F; 20.4</li>
+<li><a target="_blank" rel="noopener" href="https://docs.npmjs.com/cli/">npm</a> ≥ 7</li>
+<li><a target="_blank" rel="noopener" href="https://pm2.keymetrics.io/">pm2</a></li>
+<li>Uptime Kuma 版本：2.0.0-beta.2</li>
+</ul>
+<h3 id="4-2-安装-Node-js"><a href="#4-2-安装-Node-js" class="headerlink" title="4.2 安装 Node.js"></a>4.2 安装 Node.js</h3><p>由于 CentOS 7 默认的 glibc 版本较低，需要选择基于 glibc 2.17 构建的 Node.js 20。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载 Node.js</span></span><br><span class="line"><span class="built_in">cd</span> /opt</span><br><span class="line">wget -c https://unofficial-builds.nodejs.org/download/release/v20.12.2/node-v20.12.2-linux-x64-glibc-217.tar.xz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 Node.js</span></span><br><span class="line"><span class="built_in">cd</span> /usr/local</span><br><span class="line">tar -xvf /opt/node-v20.12.2-linux-x64-glibc-217.tar.xz</span><br><span class="line"><span class="built_in">mv</span> node-v20.12.2-linux-x64-glibc-217 node-v20.12.2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置环境变量</span></span><br><span class="line"><span class="built_in">cat</span> &gt;&gt; /etc/profile &lt;&lt; <span class="string">&#x27;EOF&#x27;</span></span><br><span class="line"><span class="built_in">export</span> NODE_HOME=/usr/local/node-v20.12.2</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$NODE_HOME</span>/bin</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使环境变量生效</span></span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置 npm 镜像源</span></span><br><span class="line">npm config <span class="built_in">set</span> registry https://registry.npmmirror.com</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-安装-Uptime-Kuma"><a href="#4-3-安装-Uptime-Kuma" class="headerlink" title="4.3 安装 Uptime Kuma"></a>4.3 安装 Uptime Kuma</h3><blockquote>
+<p><strong>注意：</strong></p>
+<ul>
+<li>安装脚本默认会将 git 分支切换回 main，需要修改 package.json 文件</li>
+<li>建议将 dist.tar.gz 下载链接修改为国内加速源</li>
+</ul>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 克隆仓库</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/louislam/uptime-kuma.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果存在网络问题，可使用加速地址</span></span><br><span class="line">git <span class="built_in">clone</span> https://ghfast.top/github.com/louislam/uptime-kuma.git</span><br><span class="line"><span class="built_in">cd</span> uptime-kuma</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换到指定版本分支</span></span><br><span class="line">git checkout release-2.0.0-beta.2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改 package.json 文件，避免安装脚本自动切换分支</span></span><br><span class="line">vim package.json</span><br></pre></td></tr></table></figure>
+
+<p>将 scripts 部分修改为：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;setup&quot;</span><span class="punctuation">:</span> <span class="string">&quot;npm ci --omit dev &amp;&amp; npm run download-dist&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置 dist.tar.gz 下载链接为国内加速源</span></span><br><span class="line">vim extra/download-dist.js</span><br></pre></td></tr></table></figure>
+
+<p>修改为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://ghfast.top/github.com/louislam/uptime-kuma/releases/download/2.0.0-beta.2/dist.tar.gz</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 执行安装脚本</span></span><br><span class="line">npm run setup</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-4-配置-PM2"><a href="#4-4-配置-PM2" class="headerlink" title="4.4 配置 PM2"></a>4.4 配置 PM2</h3><p>PM2 主要用于进程管理和服务守护。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 PM2</span></span><br><span class="line">npm install pm2 -g</span><br><span class="line">pm2 install pm2-logrotate</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动进程</span></span><br><span class="line">pm2 start server/server.js --name uptime-kuma</span><br><span class="line"></span><br><span class="line"><span class="comment"># 实时监控资源使用情况</span></span><br><span class="line">pm2 monit</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置开机自启</span></span><br><span class="line">pm2 save &amp;&amp; pm2 startup</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-5-访问使用"><a href="#4-5-访问使用" class="headerlink" title="4.5 访问使用"></a>4.5 访问使用</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1:3001</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-PM2-命令清单"><a href="#5-PM2-命令清单" class="headerlink" title="5. PM2 命令清单"></a>5. PM2 命令清单</h2><p>以下是常用的 PM2 命令清单，适用于管理 Uptime Kuma 或其他 Node.js 应用：</p>
+<h3 id="5-1-安装和基础操作"><a href="#5-1-安装和基础操作" class="headerlink" title="5.1 安装和基础操作"></a>5.1 安装和基础操作</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 全局安装 PM2</span></span><br><span class="line">npm install pm2 -g</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动应用</span></span><br><span class="line">pm2 start server.js --name uptime-kuma</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看运行中的进程列表</span></span><br><span class="line">pm2 list</span><br><span class="line">pm2 status</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-2-进程管理"><a href="#5-2-进程管理" class="headerlink" title="5.2 进程管理"></a>5.2 进程管理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 停止指定应用</span></span><br><span class="line">pm2 stop uptime-kuma</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启指定应用</span></span><br><span class="line">pm2 restart uptime-kuma</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除指定应用</span></span><br><span class="line">pm2 delete uptime-kuma</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止/重启/删除所有应用</span></span><br><span class="line">pm2 stop all</span><br><span class="line">pm2 restart all</span><br><span class="line">pm2 delete all</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-3-日志管理"><a href="#5-3-日志管理" class="headerlink" title="5.3 日志管理"></a>5.3 日志管理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看应用日志（实时输出）</span></span><br><span class="line">pm2 logs uptime-kuma</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看错误日志</span></span><br><span class="line">pm2 logs uptime-kuma --err</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看最近 100 行日志</span></span><br><span class="line">pm2 logs uptime-kuma --lines 100</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-4-自动重启与开机自启"><a href="#5-4-自动重启与开机自启" class="headerlink" title="5.4 自动重启与开机自启"></a>5.4 自动重启与开机自启</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 保存当前进程列表，开机自动恢复</span></span><br><span class="line">pm2 save</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成开机启动脚本</span></span><br><span class="line">pm2 startup</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除开机启动设置</span></span><br><span class="line">pm2 unstartup</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-5-资源监控"><a href="#5-5-资源监控" class="headerlink" title="5.5 资源监控"></a>5.5 资源监控</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 实时监控 CPU/内存等资源使用情况</span></span><br><span class="line">pm2 monit</span><br></pre></td></tr></table></figure>
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2025/07/23/Phpipam/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2025-10-02 16:03:52
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/Uptime-Kuma/" title="Uptime-Kuma">
+                        #Uptime-Kuma
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2025/09/01/Nginx/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Uptime-Kuma-%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97"><span class="toc-text">Uptime Kuma 安装指南</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%AE%80%E4%BB%8B"><span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Windows%EF%BC%88Docker%E6%96%B9%E5%BC%8F%EF%BC%89"><span class="toc-text">2. Windows（Docker方式）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-text">2.1 环境准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%BC%80%E5%90%AF-Hyper-V-%E8%99%9A%E6%8B%9F%E5%8C%96%E6%8A%80%E6%9C%AF"><span class="toc-text">2.2 开启 Hyper-V 虚拟化技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%AE%89%E8%A3%85-Docker-Desktop"><span class="toc-text">2.3 安装 Docker Desktop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E6%8B%89%E5%8F%96-Uptime-Kuma-%E9%95%9C%E5%83%8F"><span class="toc-text">2.4 拉取 Uptime Kuma 镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E8%BF%90%E8%A1%8C-Uptime-Kuma"><span class="toc-text">2.5 运行 Uptime Kuma</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-%E8%AE%BF%E9%97%AE%E4%BD%BF%E7%94%A8"><span class="toc-text">2.6 访问使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Windows%EF%BC%88NPM%E6%96%B9%E5%BC%8F%EF%BC%89"><span class="toc-text">3. Windows（NPM方式）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-text">3.1 环境准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%AE%89%E8%A3%85-Node-js-20-19-4"><span class="toc-text">3.2 安装 Node.js 20.19.4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E5%AE%89%E8%A3%85-Uptime-Kuma"><span class="toc-text">3.3 安装 Uptime Kuma</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E9%85%8D%E7%BD%AE-PM2"><span class="toc-text">3.4 配置 PM2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-%E8%AE%BF%E9%97%AE%E4%BD%BF%E7%94%A8"><span class="toc-text">3.5 访问使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-CentOS-7%EF%BC%88NPM%E6%96%B9%E5%BC%8F%EF%BC%89"><span class="toc-text">4. CentOS 7（NPM方式）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-text">4.1 环境准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E5%AE%89%E8%A3%85-Node-js"><span class="toc-text">4.2 安装 Node.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E5%AE%89%E8%A3%85-Uptime-Kuma"><span class="toc-text">4.3 安装 Uptime Kuma</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-%E9%85%8D%E7%BD%AE-PM2"><span class="toc-text">4.4 配置 PM2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-%E8%AE%BF%E9%97%AE%E4%BD%BF%E7%94%A8"><span class="toc-text">4.5 访问使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-PM2-%E5%91%BD%E4%BB%A4%E6%B8%85%E5%8D%95"><span class="toc-text">5. PM2 命令清单</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E5%AE%89%E8%A3%85%E5%92%8C%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C"><span class="toc-text">5.1 安装和基础操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86"><span class="toc-text">5.2 进程管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86"><span class="toc-text">5.3 日志管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-%E8%87%AA%E5%8A%A8%E9%87%8D%E5%90%AF%E4%B8%8E%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF"><span class="toc-text">5.4 自动重启与开机自启</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5-%E8%B5%84%E6%BA%90%E7%9B%91%E6%8E%A7"><span class="toc-text">5.5 资源监控</span></a></li></ol></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2025 Oranges</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+    <div class="footer-views">
+      
+          本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        
+      
+          本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        
+      
+          本站访客数<span id="busuanzi_value_site_uv"></span>人
+        
+      
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + Uptime-Kuma + '&url=' + http%3A%2F%2Fexample.com%2F2025%2F08%2F19%2FUptime-Kuma%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2025/08/19/Uptime-Kuma/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  </body>
+</html>

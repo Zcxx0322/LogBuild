@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="John Doe" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
+    
+      Phpipam 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/img/zcxx0322.png">
+    <link rel="icon" href="/img/icon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+    
+<link rel="stylesheet" href="/css/figcaption/mac-block.css">
+
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a target="_blank" rel="noopener" href="https://github.com/Zcxx0322">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/img/zcxx0322.png" alt="">
+      
+    </a>
+    <div class="nickname"><a target="_blank" rel="noopener" href="https://github.com/Zcxx0322">Zcxx0322</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/friends/">
+          <a href="/friends/">Friends</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">Phpipam</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2025-10-02 16:03:47
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/phpipam/" title="phpipam">
+                    #phpipam
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>phpipam 是一款开源的 Web IP 地址管理应用程序 (IPAM)。其目标是提供轻量、现代且实用的 IP 地址管理。</p>
+<h1 id="2-环境准备"><a href="#2-环境准备" class="headerlink" title="2. 环境准备"></a>2. 环境准备</h1><ul>
+<li><p>CentOS7</p>
+<ul>
+<li>系统镜像下载：<a target="_blank" rel="noopener" href="https://mirrors.aliyun.com/centos/7/isos/x86_64/">https://mirrors.aliyun.com/centos/7/isos/x86_64/</a></li>
+<li>系统初始化配置（可选）：<a target="_blank" rel="noopener" href="https://zcxx0322.github.io/2024/11/21/%E5%88%9D%E5%A7%8B%E5%8C%96%E9%85%8D%E7%BD%AECentOS7/">https://zcxx0322.github.io/2024/11/21/%E5%88%9D%E5%A7%8B%E5%8C%96%E9%85%8D%E7%BD%AECentOS7/</a></li>
+</ul>
+</li>
+<li><p>phpipam</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/phpipam/phpipam/releases/download/v1.7.3/phpipam-v1.7.3.tgz">https://github.com/phpipam/phpipam/releases/download/v1.7.3/phpipam-v1.7.3.tgz</a></li>
+</ul>
+</li>
+<li><p>Mysql5.7</p>
+</li>
+<li><p>Apache</p>
+</li>
+<li><p>PHP7.4+</p>
+</li>
+</ul>
+<h1 id="3-Mysql"><a href="#3-Mysql" class="headerlink" title="3. Mysql"></a>3. Mysql</h1><h2 id="3-1-新增Yum仓库"><a href="#3-1-新增Yum仓库" class="headerlink" title="3.1. 新增Yum仓库"></a>3.1. 新增Yum仓库</h2><p><em><strong>新增仓库</strong></em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y https://dev.mysql.com/get/mysql80-community-release-el7-7.noarch.rpm</span><br></pre></td></tr></table></figure>
+
+<p>*** 导入公钥***</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-mysql*</span><br></pre></td></tr></table></figure>
+
+<p>*** 默认禁用MySQL仓库***</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager --<span class="built_in">disable</span> mysql-connectors-community | egrep <span class="string">&#x27;(\[mysql-connectors-community\])|enabled&#x27;</span></span><br><span class="line">yum-config-manager --<span class="built_in">disable</span> mysql-tools-community | egrep <span class="string">&#x27;(\[mysql-tools-community\])|enabled&#x27;</span></span><br><span class="line">yum-config-manager --<span class="built_in">disable</span> mysql80-community | egrep <span class="string">&#x27;(\[mysql80-community\])|enabled&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-2-安装Mysql5-7"><a href="#3-2-安装Mysql5-7" class="headerlink" title="3.2. 安装Mysql5.7"></a>3.2. 安装Mysql5.7</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum --enablerepo=mysql57-community install -y mysql-community-server</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-3-初始化Mysql5-7"><a href="#3-3-初始化Mysql5-7" class="headerlink" title="3.3. 初始化Mysql5.7"></a>3.3. 初始化Mysql5.7</h2><p><em><strong>设置日志</strong></em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /var/log/mysqld</span><br><span class="line"><span class="built_in">touch</span> /var/log/mysqld/error.log</span><br><span class="line"><span class="built_in">chown</span> -R mysql:mysql /var/log/mysqld</span><br><span class="line"></span><br><span class="line">crudini --<span class="built_in">set</span> --existing /etc/my.cnf mysqld log-error /var/log/mysqld/error.log</span><br></pre></td></tr></table></figure>
+
+<p><em><strong>设置MySQL数据目录</strong></em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /data/mysql</span><br><span class="line"></span><br><span class="line">crudini --<span class="built_in">set</span> --existing /etc/my.cnf mysqld datadir /data/mysql</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-4-配置Mysql5-7"><a href="#3-4-配置Mysql5-7" class="headerlink" title="3.4. 配置Mysql5.7"></a>3.4. 配置Mysql5.7</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">crudini --<span class="built_in">set</span> /etc/my.cnf mysqld default-storage-engine InnoDB</span><br><span class="line">crudini --<span class="built_in">set</span> /etc/my.cnf mysqld disabled_storage_engines <span class="string">&#x27;&quot;MyISAM&quot;&#x27;</span></span><br><span class="line"></span><br><span class="line">crudini --<span class="built_in">set</span> /etc/my.cnf mysqld bind-address 0.0.0.0</span><br><span class="line">crudini --<span class="built_in">set</span> /etc/my.cnf mysqld max_connections 1000</span><br><span class="line"></span><br><span class="line">crudini --<span class="built_in">set</span> /etc/my.cnf mysqld general_log OFF</span><br><span class="line">crudini --<span class="built_in">set</span> /etc/my.cnf mysqld general_log_file /var/log/mysqld/general.log</span><br><span class="line"></span><br><span class="line">crudini --<span class="built_in">set</span> /etc/my.cnf mysqld long_query_time 3</span><br><span class="line">crudini --<span class="built_in">set</span> /etc/my.cnf mysqld slow_query_log ON</span><br><span class="line">crudini --<span class="built_in">set</span> /etc/my.cnf mysqld slow_query_log_file /var/log/mysqld/slow_query.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启兼容模式，兼容老MySQL代码，比如使用空字符串代替NULL插入数据</span></span><br><span class="line">crudini --<span class="built_in">set</span> /etc/my.cnf mysqld sql_mode <span class="string">&#x27;&quot;&quot;&#x27;</span></span><br><span class="line"></span><br><span class="line">crudini --<span class="built_in">set</span> /etc/my.cnf mysqld skip-name-resolve <span class="string">&#x27;OFF&#x27;</span></span><br><span class="line"></span><br><span class="line">crudini --<span class="built_in">set</span> /etc/my.cnf mysqldump max_allowed_packet 100M</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;quick&quot;</span> &gt;&gt; /etc/my.cnf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;quote-names&quot;</span> &gt;&gt; /etc/my.cnf</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-5-启动Mysql5-7"><a href="#3-5-启动Mysql5-7" class="headerlink" title="3.5. 启动Mysql5.7"></a>3.5. 启动Mysql5.7</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> mysqld</span><br><span class="line"></span><br><span class="line">systemctl start mysqld</span><br><span class="line"></span><br><span class="line">systemctl status mysqld</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-6-配置Mysql密码"><a href="#3-6-配置Mysql密码" class="headerlink" title="3.6. 配置Mysql密码"></a>3.6. 配置Mysql密码</h2><p><em><strong>临时密码有不常用的特殊字符，不便日常管理。不降低安全性的前提性，更改MySQL密码</strong></em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">MYSQL_TMP_ROOT_PASSWORD=$(grep <span class="string">&#x27;A temporary password&#x27;</span> /var/log/mysqld/error.log | <span class="built_in">tail</span> -n 1 | awk <span class="string">&#x27;&#123;print $NF&#125;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> BY_MYSQL_ROOT_PASSWORD=geek</span><br><span class="line"><span class="comment"># 永久保存临时配置（重新登录或重启都有效）</span></span><br><span class="line">sed -i <span class="string">&#x27;/export BY_/d&#x27;</span> ~/.bash_profile &amp;&amp; <span class="built_in">env</span> | grep BY_ | awk <span class="string">&#x27;&#123;print &quot;export &quot;$1&#125;&#x27;</span> &gt;&gt; ~/.bash_profile</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">&quot;  MySQL用户名：root\nMySQL临时密码：<span class="variable">$&#123;MYSQL_TMP_ROOT_PASSWORD&#125;</span>\n  MySQL新密码：<span class="variable">$&#123;BY_MYSQL_ROOT_PASSWORD&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line">mysqladmin -uroot -p<span class="string">&quot;<span class="variable">$&#123;MYSQL_TMP_ROOT_PASSWORD&#125;</span>&quot;</span> password <span class="variable">$&#123;BY_MYSQL_ROOT_PASSWORD&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><em>终端输出</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MySQL用户名：root</span><br><span class="line">MySQL临时密码：caJ&lt;TYnjX8iC</span><br><span class="line">MySQL新密码：geek</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-7-修改Mysql密码策略"><a href="#3-7-修改Mysql密码策略" class="headerlink" title="3.7. 修改Mysql密码策略"></a>3.7. 修改Mysql密码策略</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set global validate_password_policy=0;</span><br><span class="line">set global validate_password_length=0;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-8-创建phpipam用户-数据库"><a href="#3-8-创建phpipam用户-数据库" class="headerlink" title="3.8. 创建phpipam用户&#x2F;数据库"></a>3.8. 创建phpipam用户&#x2F;数据库</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE phpipam;</span><br><span class="line">CREATE USER &#x27;phpipam&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;geek&#x27;;</span><br><span class="line">GRANT ALL PRIVILEGES ON phpipam.* TO &#x27;phpipam&#x27;@&#x27;localhost&#x27;;	</span><br><span class="line">GRANT ALL PRIVILEGES ON *.* TO &#x27;phpipam&#x27;@&#x27;本机IP&#x27; IDENTIFIED BY &#x27;geek&#x27; WITH GRANT OPTION; </span><br><span class="line">FLUSH PRIVILEGES;</span><br><span class="line">EXIT;</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-Apache"><a href="#4-Apache" class="headerlink" title="4. Apache"></a>4. Apache</h1><h2 id="4-1-安装httpd"><a href="#4-1-安装httpd" class="headerlink" title="4.1. 安装httpd"></a>4.1. 安装httpd</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum install httpd -y</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> --now httpd</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-2-配置httpd"><a href="#4-2-配置httpd" class="headerlink" title="4.2. 配置httpd"></a>4.2. 配置httpd</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/httpd/conf.d/phpipam.conf</span><br><span class="line"></span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">    ServerName 修改为想要的IP地址</span><br><span class="line">    DocumentRoot /var/www/html/phpipam</span><br><span class="line">    &lt;Directory /var/www/html/phpipam&gt;</span><br><span class="line">        Options FollowSymLinks</span><br><span class="line">        AllowOverride All</span><br><span class="line">        Require all granted</span><br><span class="line">    &lt;/Directory&gt;</span><br><span class="line">    ErrorLog /var/log/httpd/phpipam_error.log</span><br><span class="line">    CustomLog /var/log/httpd/phpipam_access.log combined</span><br><span class="line">&lt;/VirtualHost&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启httpd服务</span></span><br><span class="line"><span class="built_in">sudo</span> systemctl restart httpd</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-PHP"><a href="#5-PHP" class="headerlink" title="5. PHP"></a>5. PHP</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum install epel-release -y</span><br><span class="line"><span class="built_in">sudo</span> yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm -y</span><br><span class="line"><span class="built_in">sudo</span> yum-config-manager --<span class="built_in">enable</span> remi-php74  <span class="comment"># 启用 PHP 7.4</span></span><br><span class="line"><span class="built_in">sudo</span> yum install php php-cli php-mysqlnd php-json php-gd php-ldap php-curl php-zip php-mbstring php-xml php-bcmath php-gmp php-pear -y</span><br></pre></td></tr></table></figure>
+
+<h1 id="6-phpipam"><a href="#6-phpipam" class="headerlink" title="6. phpipam"></a>6. phpipam</h1><h2 id="6-1-下载phpipam"><a href="#6-1-下载phpipam" class="headerlink" title="6.1. 下载phpipam"></a>6.1. 下载phpipam</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /tmp</span><br><span class="line">wget -c https://github.com/phpipam/phpipam/releases/download/v1.7.3/phpipam-v1.7.3.tgz </span><br><span class="line">tar -xzvf phpipam-v1.7.3.tgz</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mv</span> phpipam /var/www/html/</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chown</span> -R apache:apache /var/www/html/phpipam</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-2-配置phpipam"><a href="#6-2-配置phpipam" class="headerlink" title="6.2. 配置phpipam"></a>6.2. 配置phpipam</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> /var/www/html/phpipam/config.dist.php /var/www/html/phpipam/config.php</span><br><span class="line">vim  /var/www/html/phpipam/config.php</span><br><span class="line"></span><br><span class="line"><span class="variable">$db</span>[<span class="string">&#x27;host&#x27;</span>] = <span class="string">&#x27;虚拟机IP&#x27;</span>; // 使用虚拟机实际IP </span><br><span class="line"></span><br><span class="line"><span class="variable">$db</span>[<span class="string">&#x27;user&#x27;</span>] = <span class="string">&#x27;phpipam&#x27;</span>;         // 专用用户 </span><br><span class="line"></span><br><span class="line"><span class="variable">$db</span>[<span class="string">&#x27;pass&#x27;</span>] = <span class="string">&#x27;geek&#x27;</span>; </span><br><span class="line"></span><br><span class="line"><span class="variable">$db</span>[<span class="string">&#x27;name&#x27;</span>] = <span class="string">&#x27;phpipam&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="6-3-配置-Cron-任务"><a href="#6-3-配置-Cron-任务" class="headerlink" title="6.3. 配置 Cron 任务"></a>6.3. 配置 Cron 任务</h2><p>用于扫描网络状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> crontab -e</span><br><span class="line"></span><br><span class="line">*/5 * * * * /usr/bin/php /var/www/html/phpipam/functions/scripts/pingCheck.php</span><br><span class="line">*/5 * * * * /usr/bin/php /var/www/html/phpipam/functions/scripts/discoveryCheck.php</span><br></pre></td></tr></table></figure>
+
+<h1 id="7-关闭SELinux和防火墙"><a href="#7-关闭SELinux和防火墙" class="headerlink" title="7. 关闭SELinux和防火墙"></a>7. 关闭SELinux和防火墙</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> SELINUX=disabled&gt;/etc/selinux/config</span><br><span class="line"><span class="built_in">echo</span> SELINUXTYPE=targeted&gt;&gt;/etc/selinux/config</span><br><span class="line"></span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br><span class="line">systemctl stop firewalld</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启虚拟机</span></span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+
+<h1 id="8-访问phpipam开始安装"><a href="#8-访问phpipam开始安装" class="headerlink" title="8. 访问phpipam开始安装"></a>8. 访问phpipam开始安装</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://虚拟机IP/phpipam/</span><br></pre></td></tr></table></figure>
+
+<h1 id="9-常见问题解决"><a href="#9-常见问题解决" class="headerlink" title="9. 常见问题解决"></a>9. 常见问题解决</h1><ul>
+<li><strong>PHP 扩展缺失</strong>：根据报错安装对应扩展（如 <code>php-pecl-zip</code>）。</li>
+<li><strong>文件权限问题</strong>：确保 <code>/var/www/html/phpipam</code> 属主为 <code>apache</code>。</li>
+<li><strong>数据库连接错误</strong>：检查数据库用户权限及密码。</li>
+<li><strong>页面空白</strong>：检查 PHP 错误日志 <code>/var/log/php-fpm/error.log</code>。</li>
+</ul>
+<p>完成以上步骤后，即可通过 Web 界面管理 IP 地址。如需 HTTPS，可使用 Let’s Encrypt 配置 SSL 证</p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2025/03/14/Mysql/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2025-10-02 16:03:47
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/phpipam/" title="phpipam">
+                        #phpipam
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2025/08/19/Uptime-Kuma/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E7%AE%80%E4%BB%8B"><span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-text">2. 环境准备</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Mysql"><span class="toc-text">3. Mysql</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E6%96%B0%E5%A2%9EYum%E4%BB%93%E5%BA%93"><span class="toc-text">3.1. 新增Yum仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E5%AE%89%E8%A3%85Mysql5-7"><span class="toc-text">3.2. 安装Mysql5.7</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-%E5%88%9D%E5%A7%8B%E5%8C%96Mysql5-7"><span class="toc-text">3.3. 初始化Mysql5.7</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-%E9%85%8D%E7%BD%AEMysql5-7"><span class="toc-text">3.4. 配置Mysql5.7</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-%E5%90%AF%E5%8A%A8Mysql5-7"><span class="toc-text">3.5. 启动Mysql5.7</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6-%E9%85%8D%E7%BD%AEMysql%E5%AF%86%E7%A0%81"><span class="toc-text">3.6. 配置Mysql密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-7-%E4%BF%AE%E6%94%B9Mysql%E5%AF%86%E7%A0%81%E7%AD%96%E7%95%A5"><span class="toc-text">3.7. 修改Mysql密码策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-8-%E5%88%9B%E5%BB%BAphpipam%E7%94%A8%E6%88%B7-%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">3.8. 创建phpipam用户&#x2F;数据库</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-Apache"><span class="toc-text">4. Apache</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-%E5%AE%89%E8%A3%85httpd"><span class="toc-text">4.1. 安装httpd</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-%E9%85%8D%E7%BD%AEhttpd"><span class="toc-text">4.2. 配置httpd</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-PHP"><span class="toc-text">5. PHP</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-phpipam"><span class="toc-text">6. phpipam</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-%E4%B8%8B%E8%BD%BDphpipam"><span class="toc-text">6.1. 下载phpipam</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-%E9%85%8D%E7%BD%AEphpipam"><span class="toc-text">6.2. 配置phpipam</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-%E9%85%8D%E7%BD%AE-Cron-%E4%BB%BB%E5%8A%A1"><span class="toc-text">6.3. 配置 Cron 任务</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-%E5%85%B3%E9%97%ADSELinux%E5%92%8C%E9%98%B2%E7%81%AB%E5%A2%99"><span class="toc-text">7. 关闭SELinux和防火墙</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-%E8%AE%BF%E9%97%AEphpipam%E5%BC%80%E5%A7%8B%E5%AE%89%E8%A3%85"><span class="toc-text">8. 访问phpipam开始安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3"><span class="toc-text">9. 常见问题解决</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2025 Oranges</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+    <div class="footer-views">
+      
+          本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        
+      
+          本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        
+      
+          本站访客数<span id="busuanzi_value_site_uv"></span>人
+        
+      
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + Phpipam + '&url=' + http%3A%2F%2Fexample.com%2F2025%2F07%2F23%2FPhpipam%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2025/07/23/Phpipam/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  </body>
+</html>

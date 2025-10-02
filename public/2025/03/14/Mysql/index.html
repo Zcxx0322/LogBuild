@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="John Doe" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
+    
+      Mysql 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/img/zcxx0322.png">
+    <link rel="icon" href="/img/icon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+    
+<link rel="stylesheet" href="/css/figcaption/mac-block.css">
+
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a target="_blank" rel="noopener" href="https://github.com/Zcxx0322">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/img/zcxx0322.png" alt="">
+      
+    </a>
+    <div class="nickname"><a target="_blank" rel="noopener" href="https://github.com/Zcxx0322">Zcxx0322</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/friends/">
+          <a href="/friends/">Friends</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">Mysql</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2025-10-02 16:03:03
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/Mysql/" title="Mysql">
+                    #Mysql
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="1-安装Mysql"><a href="#1-安装Mysql" class="headerlink" title="1. 安装Mysql"></a>1. 安装Mysql</h1><h2 id="1-1-Archlinux"><a href="#1-1-Archlinux" class="headerlink" title="1.1 Archlinux"></a>1.1 Archlinux</h2><h3 id="1-1-1-安装并初始化Mysql"><a href="#1-1-1-安装并初始化Mysql" class="headerlink" title="1.1.1. 安装并初始化Mysql"></a>1.1.1. 安装并初始化Mysql</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S mysql</span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> mysqld --initialize --user=mysql --basedir=/usr --datadir=/var/lib/mysql</span><br></pre></td></tr></table></figure>
+
+<p>观察终端输出可以发现初始化完成后，随机生成了初始帐号密码：</p>
+<ul>
+<li>root@localhost</li>
+<li>o,FRbratO8U6<br>帐号密码是随即生成的，请注意自行保存，后面有用！</li>
+</ul>
+<p><font color=red><em>终端输出</em></font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">2025-03-14T02:41:41.212250Z 0 [System] [MY-015017] [Server] MySQL Server Initialization - start.</span><br><span class="line">2025-03-14T02:41:41.213204Z 0 [Warning] [MY-010915] [Server] &#x27;NO_ZERO_DATE&#x27;, &#x27;NO_ZERO_IN_DATE&#x27; and &#x27;ERROR_FOR_DIVISION_BY_ZERO&#x27; sql modes should be used with strict mode. They will be merged with strict mode in a future release.</span><br><span class="line">2025-03-14T02:41:41.213243Z 0 [System] [MY-013169] [Server] /usr/bin/mysqld (mysqld 9.2.0) initializing of server in progress as process 19340</span><br><span class="line">2025-03-14T02:41:41.225654Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.</span><br><span class="line">2025-03-14T02:41:41.492273Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.</span><br><span class="line">2025-03-14T02:41:42.326345Z 6 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost: o,FRbratO8U6</span><br><span class="line">2025-03-14T02:41:44.238961Z 0 [System] [MY-015018] [Server] MySQL Server Initialization - end.</span><br><span class="line">[zcx@archlinux LogBuild]$ grep &#x27;temporary password&#x27; /var/log/mysqld.log</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-1-2-启动Mysql服务"><a href="#1-1-2-启动Mysql服务" class="headerlink" title="1.1.2. 启动Mysql服务"></a>1.1.2. 启动Mysql服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">systemctl start mysqld.service</span><br><span class="line"></span><br><span class="line">systemctl status mysqld.service</span><br><span class="line"></span><br><span class="line">systemctl <span class="built_in">enable</span> mysqld.service</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-1-3-登陆Mysql"><a href="#1-1-3-登陆Mysql" class="headerlink" title="1.1.3. 登陆Mysql"></a>1.1.3. 登陆Mysql</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 输入密码即可</span></span><br><span class="line">mysql -u root -p </span><br><span class="line">Enter password:</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-1-4-修改root密码"><a href="#1-1-4-修改root密码" class="headerlink" title="1.1.4. 修改root密码"></a>1.1.4. 修改root密码</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter user <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> identified by <span class="string">&#x27;geek&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p><font color=red>下次登陆时，使用更改后的密码即可！</font></p>
+<h2 id="1-2-CentOS"><a href="#1-2-CentOS" class="headerlink" title="1.2. CentOS"></a>1.2. CentOS</h2><h3 id="1-2-1-新增Yum仓库"><a href="#1-2-1-新增Yum仓库" class="headerlink" title="1.2.1. 新增Yum仓库"></a>1.2.1. 新增Yum仓库</h3><p><em>新增仓库</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y https://dev.mysql.com/get/mysql80-community-release-el7-7.noarch.rpm</span><br></pre></td></tr></table></figure>
+
+<p><em>导入公钥</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-mysql*</span><br></pre></td></tr></table></figure>
+
+<p><em>默认禁用MySQL仓库</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager --<span class="built_in">disable</span> mysql-connectors-community | egrep <span class="string">&#x27;(\[mysql-connectors-community\])|enabled&#x27;</span></span><br><span class="line">yum-config-manager --<span class="built_in">disable</span> mysql-tools-community | egrep <span class="string">&#x27;(\[mysql-tools-community\])|enabled&#x27;</span></span><br><span class="line">yum-config-manager --<span class="built_in">disable</span> mysql80-community | egrep <span class="string">&#x27;(\[mysql80-community\])|enabled&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-2-安装Mysql5-7"><a href="#1-2-2-安装Mysql5-7" class="headerlink" title="1.2.2. 安装Mysql5.7"></a>1.2.2. 安装Mysql5.7</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum --enablerepo=mysql57-community install -y mysql-community-server</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-3-初始化Mysql5-7"><a href="#1-2-3-初始化Mysql5-7" class="headerlink" title="1.2.3. 初始化Mysql5.7"></a>1.2.3. 初始化Mysql5.7</h3><p><em>设置日志</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /var/log/mysqld</span><br><span class="line"><span class="built_in">touch</span> /var/log/mysqld/error.log</span><br><span class="line"><span class="built_in">chown</span> -R mysql:mysql /var/log/mysqld</span><br><span class="line"></span><br><span class="line">crudini --<span class="built_in">set</span> --existing /etc/my.cnf mysqld log-error /var/log/mysqld/error.log</span><br></pre></td></tr></table></figure>
+
+<p><em>设置MySQL数据目录</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /data/mysql</span><br><span class="line"></span><br><span class="line">crudini --<span class="built_in">set</span> --existing /etc/my.cnf mysqld datadir /data/mysql</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-4-配置Mysql5-7"><a href="#1-2-4-配置Mysql5-7" class="headerlink" title="1.2.4. 配置Mysql5.7"></a>1.2.4. 配置Mysql5.7</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">crudini --<span class="built_in">set</span> /etc/my.cnf mysqld default-storage-engine InnoDB</span><br><span class="line">crudini --<span class="built_in">set</span> /etc/my.cnf mysqld disabled_storage_engines <span class="string">&#x27;&quot;MyISAM&quot;&#x27;</span></span><br><span class="line"></span><br><span class="line">crudini --<span class="built_in">set</span> /etc/my.cnf mysqld bind-address 0.0.0.0</span><br><span class="line">crudini --<span class="built_in">set</span> /etc/my.cnf mysqld max_connections 1000</span><br><span class="line"></span><br><span class="line">crudini --<span class="built_in">set</span> /etc/my.cnf mysqld general_log OFF</span><br><span class="line">crudini --<span class="built_in">set</span> /etc/my.cnf mysqld general_log_file /var/log/mysqld/general.log</span><br><span class="line"></span><br><span class="line">crudini --<span class="built_in">set</span> /etc/my.cnf mysqld long_query_time 3</span><br><span class="line">crudini --<span class="built_in">set</span> /etc/my.cnf mysqld slow_query_log ON</span><br><span class="line">crudini --<span class="built_in">set</span> /etc/my.cnf mysqld slow_query_log_file /var/log/mysqld/slow_query.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启兼容模式，兼容老MySQL代码，比如使用空字符串代替NULL插入数据</span></span><br><span class="line">crudini --<span class="built_in">set</span> /etc/my.cnf mysqld sql_mode <span class="string">&#x27;&quot;&quot;&#x27;</span></span><br><span class="line"></span><br><span class="line">crudini --<span class="built_in">set</span> /etc/my.cnf mysqld skip-name-resolve <span class="string">&#x27;OFF&#x27;</span></span><br><span class="line"></span><br><span class="line">crudini --<span class="built_in">set</span> /etc/my.cnf mysqldump max_allowed_packet 100M</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;quick&quot;</span> &gt;&gt; /etc/my.cnf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;quote-names&quot;</span> &gt;&gt; /etc/my.cnf</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-5-启动Mysql5-7"><a href="#1-2-5-启动Mysql5-7" class="headerlink" title="1.2.5. 启动Mysql5.7"></a>1.2.5. 启动Mysql5.7</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> mysqld</span><br><span class="line"></span><br><span class="line">systemctl start mysqld</span><br><span class="line"></span><br><span class="line">systemctl status mysqld</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-6-修改密码"><a href="#1-2-6-修改密码" class="headerlink" title="1.2.6. 修改密码"></a>1.2.6. 修改密码</h3><p><em>临时密码有不常用的特殊字符，不便日常管理。不降低安全性的前提性，更改MySQL密码</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">MYSQL_TMP_ROOT_PASSWORD=$(grep <span class="string">&#x27;A temporary password&#x27;</span> /var/log/mysqld/error.log | <span class="built_in">tail</span> -n 1 | awk <span class="string">&#x27;&#123;print $NF&#125;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里我的密码设置为geek</span></span><br><span class="line"><span class="built_in">export</span> BY_MYSQL_ROOT_PASSWORD=geek</span><br><span class="line"><span class="comment"># 永久保存临时配置（重新登录或重启都有效）</span></span><br><span class="line">sed -i <span class="string">&#x27;/export BY_/d&#x27;</span> ~/.bash_profile &amp;&amp; <span class="built_in">env</span> | grep BY_ | awk <span class="string">&#x27;&#123;print &quot;export &quot;$1&#125;&#x27;</span> &gt;&gt; ~/.bash_profile</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">&quot;  MySQL用户名：root\nMySQL临时密码：<span class="variable">$&#123;MYSQL_TMP_ROOT_PASSWORD&#125;</span>\n  MySQL新密码：<span class="variable">$&#123;BY_MYSQL_ROOT_PASSWORD&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line">mysqladmin -uroot -p<span class="string">&quot;<span class="variable">$&#123;MYSQL_TMP_ROOT_PASSWORD&#125;</span>&quot;</span> password <span class="variable">$&#123;BY_MYSQL_ROOT_PASSWORD&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><em><font color=red>终端输出</font></em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MySQL用户名：root</span><br><span class="line">MySQL临时密码：caJ&lt;TYnjX8iC</span><br><span class="line">MySQL新密码：geek</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-7-本机无密码配置"><a href="#1-2-7-本机无密码配置" class="headerlink" title="1.2.7. 本机无密码配置"></a>1.2.7. 本机无密码配置</h3><p><em>脚本无人化配置（自动输入密码）</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">unbuffer expect -c <span class="string">&quot;</span></span><br><span class="line"><span class="string">spawn mysql_config_editor set --skip-warn --login-path=client --host=localhost --user=root --password</span></span><br><span class="line"><span class="string">expect -nocase \&quot;Enter password:\&quot; &#123;send \&quot;<span class="variable">$&#123;BY_MYSQL_ROOT_PASSWORD&#125;</span>\n\&quot;; interact&#125;</span></span><br><span class="line"><span class="string">&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><em><font color=red>终端输出</font></em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">spawn mysql_config_editor set --skip-warn --login-path=client --host=localhost --user=root --password</span><br><span class="line">Enter password: </span><br></pre></td></tr></table></figure>
+
+<p><em>查看MySQL无密码配置清单</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql_config_editor <span class="built_in">print</span> --all</span><br></pre></td></tr></table></figure>
+
+<p><em><font color=red>终端输出</font></em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[client]</span><br><span class="line">user = root</span><br><span class="line">password = *****</span><br><span class="line">host = localhost</span><br></pre></td></tr></table></figure>
+
+<p><em><font color=red>无密码登录测试</font></em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -e <span class="string">&quot;show databases;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-8-修改密码策略-可选"><a href="#1-2-8-修改密码策略-可选" class="headerlink" title="1.2.8. 修改密码策略(可选)"></a>1.2.8. 修改密码策略(可选)</h3><p><em>默认的密码复杂度要求太高导致修改密码报错可以执行</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set global validate_password_policy=0;</span><br><span class="line">set global validate_password_length=0;</span><br></pre></td></tr></table></figure>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2025/03/12/KVM/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2025-10-02 16:03:03
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/Mysql/" title="Mysql">
+                        #Mysql
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2025/07/23/Phpipam/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85Mysql"><span class="toc-text">1. 安装Mysql</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-Archlinux"><span class="toc-text">1.1 Archlinux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-1-%E5%AE%89%E8%A3%85%E5%B9%B6%E5%88%9D%E5%A7%8B%E5%8C%96Mysql"><span class="toc-text">1.1.1. 安装并初始化Mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-2-%E5%90%AF%E5%8A%A8Mysql%E6%9C%8D%E5%8A%A1"><span class="toc-text">1.1.2. 启动Mysql服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-3-%E7%99%BB%E9%99%86Mysql"><span class="toc-text">1.1.3. 登陆Mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-4-%E4%BF%AE%E6%94%B9root%E5%AF%86%E7%A0%81"><span class="toc-text">1.1.4. 修改root密码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-CentOS"><span class="toc-text">1.2. CentOS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-%E6%96%B0%E5%A2%9EYum%E4%BB%93%E5%BA%93"><span class="toc-text">1.2.1. 新增Yum仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-%E5%AE%89%E8%A3%85Mysql5-7"><span class="toc-text">1.2.2. 安装Mysql5.7</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-3-%E5%88%9D%E5%A7%8B%E5%8C%96Mysql5-7"><span class="toc-text">1.2.3. 初始化Mysql5.7</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-4-%E9%85%8D%E7%BD%AEMysql5-7"><span class="toc-text">1.2.4. 配置Mysql5.7</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-5-%E5%90%AF%E5%8A%A8Mysql5-7"><span class="toc-text">1.2.5. 启动Mysql5.7</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-6-%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81"><span class="toc-text">1.2.6. 修改密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-7-%E6%9C%AC%E6%9C%BA%E6%97%A0%E5%AF%86%E7%A0%81%E9%85%8D%E7%BD%AE"><span class="toc-text">1.2.7. 本机无密码配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-8-%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81%E7%AD%96%E7%95%A5-%E5%8F%AF%E9%80%89"><span class="toc-text">1.2.8. 修改密码策略(可选)</span></a></li></ol></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2025 Oranges</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+    <div class="footer-views">
+      
+          本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        
+      
+          本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        
+      
+          本站访客数<span id="busuanzi_value_site_uv"></span>人
+        
+      
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + Mysql + '&url=' + http%3A%2F%2Fexample.com%2F2025%2F03%2F14%2FMysql%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2025/03/14/Mysql/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  </body>
+</html>

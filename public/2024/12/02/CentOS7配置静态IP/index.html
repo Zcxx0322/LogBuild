@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="John Doe" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
+    
+      CentOS7配置静态IP 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/img/zcxx0322.png">
+    <link rel="icon" href="/img/icon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+    
+<link rel="stylesheet" href="/css/figcaption/mac-block.css">
+
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a target="_blank" rel="noopener" href="https://github.com/Zcxx0322">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/img/zcxx0322.png" alt="">
+      
+    </a>
+    <div class="nickname"><a target="_blank" rel="noopener" href="https://github.com/Zcxx0322">Zcxx0322</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/friends/">
+          <a href="/friends/">Friends</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">CentOS7配置静态IP</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2025-10-02 16:02:57
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/CentOS7/" title="CentOS7">
+                    #CentOS7
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <hr>
+<h1 id="1-环境准备"><a href="#1-环境准备" class="headerlink" title="1. 环境准备"></a>1. 环境准备</h1><ol>
+<li><strong>Oracle VM VirtualBox</strong><br> 下载地址：<a target="_blank" rel="noopener" href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a></li>
+<li><strong>CentOS 7.9</strong><br> 下载地址：<a target="_blank" rel="noopener" href="https://mirrors.aliyun.com/centos/7.9.2009/isos/x86_64/?spm=a2c6h.25603864.0.0.3dccf5adbnhdJY">https://mirrors.aliyun.com/centos/7.9.2009/isos/x86_64/?spm=a2c6h.25603864.0.0.3dccf5adbnhdJY</a></li>
+</ol>
+<hr>
+<h1 id="2-调整网络模式"><a href="#2-调整网络模式" class="headerlink" title="2. 调整网络模式"></a>2. 调整网络模式</h1><p><em>设置 → 网络 → 网卡1</em></p>
+<ul>
+<li>连接方式：桥接网卡</li>
+<li>名称：本机上网使用的网卡名称</li>
+</ul>
+<p><img src="/img/network1.png" alt="image-20241205104936386"></p>
+<hr>
+<h1 id="3-网卡自启配置（可选）"><a href="#3-网卡自启配置（可选）" class="headerlink" title="3. 网卡自启配置（可选）"></a>3. 网卡自启配置（可选）</h1><p><font color='red'>如果在安装系统界面已经连接了网络，这一步可以跳过！</font></p>
+<h2 id="3-1-检查网卡名称"><a href="#3-1-检查网卡名称" class="headerlink" title="3.1. 检查网卡名称"></a>3.1. 检查网卡名称</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmcli device status</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-2-配置网卡为开机自启"><a href="#3-2-配置网卡为开机自启" class="headerlink" title="3.2. 配置网卡为开机自启"></a>3.2. 配置网卡为开机自启</h2><p>假设网卡名称为 <code>enp0s3</code>（请根据实际情况替换）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmcli connection modify enp0s3 connection.autoconnect <span class="built_in">yes</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-3-验证网卡配置"><a href="#3-3-验证网卡配置" class="headerlink" title="3.3. 验证网卡配置"></a>3.3. 验证网卡配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmcli connection show enp0s3 | grep autoconnect</span><br></pre></td></tr></table></figure>
+
+<p><strong>输出示例</strong></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">connection.autoconnect:                 <span class="title">yes</span></span></span><br><span class="line"><span class="function"><span class="title">connection.autoconnect</span>-<span class="title">priority</span>:        0</span></span><br><span class="line"><span class="function"><span class="title">connection.autoconnect</span>-<span class="title">retries</span>:         -1 (<span class="title">default</span>)</span></span><br><span class="line"><span class="function"><span class="title">connection.autoconnect</span>-<span class="title">slaves</span>:          -1 (<span class="title">default</span>)</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="4-配置静态-IP"><a href="#4-配置静态-IP" class="headerlink" title="4. 配置静态 IP"></a>4. 配置静态 IP</h1><h2 id="4-1-方法一：修改网卡配置文件"><a href="#4-1-方法一：修改网卡配置文件" class="headerlink" title="4.1. 方法一：修改网卡配置文件"></a>4.1. 方法一：修改网卡配置文件</h2><h3 id="4-1-1-查看宿主机-IP"><a href="#4-1-1-查看宿主机-IP" class="headerlink" title="4.1.1. 查看宿主机 IP"></a>4.1.1. 查看宿主机 IP</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipconfig</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/network3.png" alt="image-20241205113859194"></p>
+<p><font color='red'>可以看到宿主机的网关为192.168.148.20，请记住它，待会儿要用！！！！！！！</font></p>
+<h3 id="4-1-2-编辑配置文件"><a href="#4-1-2-编辑配置文件" class="headerlink" title="4.1.2. 编辑配置文件"></a>4.1.2. 编辑配置文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysconfig/network-scripts/ifcfg-enp0s3</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>修改<font color='red'>BOOTPROTO&#x3D;static</font>，既然要配置静态IP，那肯定要关闭DHCP嘛对吧！</p>
+<p>添加<font color='red'>IPADDR&#x3D;192.168.148.100</font>，IP不用多说吧，<strong>IP地址必须与网关在同一个网段</strong>，否则通信无法正常进行。</p>
+<p>添加<font color='red'>GATEWAY&#x3D;192.168.148.20</font>，来源于宿主机的网关。</p>
+<p>添加<font color='red'>NETMASK&#x3D;255.255.255.0</font></p>
+<p>添加<font color='red'>DNS1&#x3D;8.8.8.8</font></p>
+<p>添加<font color='red'>DNS2&#x3D;8.8.4.4</font></p>
+</li>
+</ul>
+<p><img src="/img/network4.png" alt="image-20241205114551520"></p>
+<h3 id="4-1-3-重启服务"><a href="#4-1-3-重启服务" class="headerlink" title="4.1.3. 重启服务"></a>4.1.3. 重启服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart network</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-1-4-验证网络连通性"><a href="#4-1-4-验证网络连通性" class="headerlink" title="4.1.4. 验证网络连通性"></a>4.1.4. 验证网络连通性</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="4-2-方法二：使用-nmcli-工具"><a href="#4-2-方法二：使用-nmcli-工具" class="headerlink" title="4.2. 方法二：使用 nmcli 工具"></a>4.2. 方法二：使用 nmcli 工具</h2><h3 id="4-2-1-查看网卡名称"><a href="#4-2-1-查看网卡名称" class="headerlink" title="4.2.1. 查看网卡名称"></a>4.2.1. 查看网卡名称</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmcli device status</span><br></pre></td></tr></table></figure>
+
+<p><strong>输出示例</strong></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DEVICE  <span class="built_in">TYPE</span>      STATE      CONNECTION</span><br><span class="line">enp0s3  ethernet  connected  enp0s3</span><br><span class="line">lo      loopback  unmanaged  --</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-2-配置静态-IP"><a href="#4-2-2-配置静态-IP" class="headerlink" title="4.2.2. 配置静态 IP"></a>4.2.2. 配置静态 IP</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nmcli connection modify enp0s3 ipv4.addresses 192.168.148.100/24</span><br><span class="line">nmcli connection modify enp0s3 ipv4.gateway 192.168.148.20</span><br><span class="line">nmcli connection modify enp0s3 ipv4.dns <span class="string">&quot;8.8.8.8,8.8.4.4&quot;</span></span><br><span class="line">nmcli connection modify enp0s3 ipv4.method manual</span><br><span class="line">nmcli connection up enp0s3</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-3-验证配置"><a href="#4-2-3-验证配置" class="headerlink" title="4.2.3. 验证配置"></a>4.2.3. 验证配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmcli -f ipv4.addresses,ipv4.gateway,ipv4.dns connection show enp0s3</span><br></pre></td></tr></table></figure>
+
+<p><strong>输出示例</strong></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ipv4.addresses:                         192.168.148.100/24</span></span><br><span class="line"><span class="function"><span class="title">ipv4.gateway</span>:                           192.168.148.20</span></span><br><span class="line"><span class="function"><span class="title">ipv4.dns</span>:                               8.8.8.8,8.8.4.4</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-4-验证网络连通性"><a href="#4-2-4-验证网络连通性" class="headerlink" title="4.2.4. 验证网络连通性"></a>4.2.4. 验证网络连通性</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-5-恢复-DHCP-模式（可选）"><a href="#4-2-5-恢复-DHCP-模式（可选）" class="headerlink" title="4.2.5. 恢复 DHCP 模式（可选）"></a>4.2.5. 恢复 DHCP 模式（可选）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nmcli connection modify enp0s3 ipv4.method auto</span><br><span class="line">nmcli connection up enp0s3</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-6-删除-nmcli-静态配置（可选）"><a href="#4-2-6-删除-nmcli-静态配置（可选）" class="headerlink" title="4.2.6. 删除 nmcli 静态配置（可选）"></a>4.2.6. 删除 nmcli 静态配置（可选）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nmcli connection delete enp0s3</span><br><span class="line">nmcli device connect enp0s3</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="4-3-方法三：使用-nmtui-工具"><a href="#4-3-方法三：使用-nmtui-工具" class="headerlink" title="4.3. 方法三：使用 nmtui 工具"></a>4.3. 方法三：使用 nmtui 工具</h2><h3 id="4-3-1-进入交互界面"><a href="#4-3-1-进入交互界面" class="headerlink" title="4.3.1. 进入交互界面"></a>4.3.1. 进入交互界面</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmtui</span><br></pre></td></tr></table></figure>
+
+<p>按照提示进入网卡配置界面</p>
+<p><img src="/img/network5.png" alt="image-20241207104541968"></p>
+<h3 id="4-3-2-配置步骤"><a href="#4-3-2-配置步骤" class="headerlink" title="4.3.2. 配置步骤"></a>4.3.2. 配置步骤</h3><ol>
+<li>IPv4 CONFIGURATION <code>&lt;Automatic&gt;</code> ——-&gt;&gt;&gt; <font color='red'>IPv4 CONFIGURATION<code> &lt;Manual&gt;</code></font></li>
+<li><font color='red'><code> show</code></font></li>
+<li><font color='red'><code>[X] Automatically connect</code></font></li>
+<li><font color='red'><code> &lt;OK&gt;</code></font></li>
+<li><font color='red'><code> &lt;back&gt;</code></font></li>
+<li><font color='red'><code> &lt;quit&gt;</code></font></li>
+</ol>
+<p><img src="/img/network6.png" alt="image-20241207105524062"></p>
+<h3 id="4-3-3-重启系统"><a href="#4-3-3-重启系统" class="headerlink" title="4.3.3. 重启系统"></a>4.3.3. 重启系统</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-4-验证-IP"><a href="#4-3-4-验证-IP" class="headerlink" title="4.3.4. 验证 IP"></a>4.3.4. 验证 IP</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip a</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-5-验证网络连通性"><a href="#4-3-5-验证网络连通性" class="headerlink" title="4.3.5. 验证网络连通性"></a>4.3.5. 验证网络连通性</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<hr>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2024/11/26/ArchLinux%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2025-10-02 16:02:57
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/CentOS7/" title="CentOS7">
+                        #CentOS7
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2025/03/12/KVM/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-text">1. 环境准备</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E8%B0%83%E6%95%B4%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F"><span class="toc-text">2. 调整网络模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E7%BD%91%E5%8D%A1%E8%87%AA%E5%90%AF%E9%85%8D%E7%BD%AE%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="toc-text">3. 网卡自启配置（可选）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E6%A3%80%E6%9F%A5%E7%BD%91%E5%8D%A1%E5%90%8D%E7%A7%B0"><span class="toc-text">3.1. 检查网卡名称</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E9%85%8D%E7%BD%AE%E7%BD%91%E5%8D%A1%E4%B8%BA%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF"><span class="toc-text">3.2. 配置网卡为开机自启</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-%E9%AA%8C%E8%AF%81%E7%BD%91%E5%8D%A1%E9%85%8D%E7%BD%AE"><span class="toc-text">3.3. 验证网卡配置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81-IP"><span class="toc-text">4. 配置静态 IP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A%E4%BF%AE%E6%94%B9%E7%BD%91%E5%8D%A1%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">4.1. 方法一：修改网卡配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-1-%E6%9F%A5%E7%9C%8B%E5%AE%BF%E4%B8%BB%E6%9C%BA-IP"><span class="toc-text">4.1.1. 查看宿主机 IP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-2-%E7%BC%96%E8%BE%91%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">4.1.2. 编辑配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-3-%E9%87%8D%E5%90%AF%E6%9C%8D%E5%8A%A1"><span class="toc-text">4.1.3. 重启服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-4-%E9%AA%8C%E8%AF%81%E7%BD%91%E7%BB%9C%E8%BF%9E%E9%80%9A%E6%80%A7"><span class="toc-text">4.1.4. 验证网络连通性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E4%BD%BF%E7%94%A8-nmcli-%E5%B7%A5%E5%85%B7"><span class="toc-text">4.2. 方法二：使用 nmcli 工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-1-%E6%9F%A5%E7%9C%8B%E7%BD%91%E5%8D%A1%E5%90%8D%E7%A7%B0"><span class="toc-text">4.2.1. 查看网卡名称</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-2-%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81-IP"><span class="toc-text">4.2.2. 配置静态 IP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-3-%E9%AA%8C%E8%AF%81%E9%85%8D%E7%BD%AE"><span class="toc-text">4.2.3. 验证配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-4-%E9%AA%8C%E8%AF%81%E7%BD%91%E7%BB%9C%E8%BF%9E%E9%80%9A%E6%80%A7"><span class="toc-text">4.2.4. 验证网络连通性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-5-%E6%81%A2%E5%A4%8D-DHCP-%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="toc-text">4.2.5. 恢复 DHCP 模式（可选）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-6-%E5%88%A0%E9%99%A4-nmcli-%E9%9D%99%E6%80%81%E9%85%8D%E7%BD%AE%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="toc-text">4.2.6. 删除 nmcli 静态配置（可选）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-%E6%96%B9%E6%B3%95%E4%B8%89%EF%BC%9A%E4%BD%BF%E7%94%A8-nmtui-%E5%B7%A5%E5%85%B7"><span class="toc-text">4.3. 方法三：使用 nmtui 工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-1-%E8%BF%9B%E5%85%A5%E4%BA%A4%E4%BA%92%E7%95%8C%E9%9D%A2"><span class="toc-text">4.3.1. 进入交互界面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-2-%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4"><span class="toc-text">4.3.2. 配置步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-3-%E9%87%8D%E5%90%AF%E7%B3%BB%E7%BB%9F"><span class="toc-text">4.3.3. 重启系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-4-%E9%AA%8C%E8%AF%81-IP"><span class="toc-text">4.3.4. 验证 IP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-5-%E9%AA%8C%E8%AF%81%E7%BD%91%E7%BB%9C%E8%BF%9E%E9%80%9A%E6%80%A7"><span class="toc-text">4.3.5. 验证网络连通性</span></a></li></ol></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2025 Oranges</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+    <div class="footer-views">
+      
+          本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        
+      
+          本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        
+      
+          本站访客数<span id="busuanzi_value_site_uv"></span>人
+        
+      
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + CentOS7%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81IP + '&url=' + http%3A%2F%2Fexample.com%2F2024%2F12%2F02%2FCentOS7%25E9%2585%258D%25E7%25BD%25AE%25E9%259D%2599%25E6%2580%2581IP%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2024/12/02/CentOS7%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81IP/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  </body>
+</html>
