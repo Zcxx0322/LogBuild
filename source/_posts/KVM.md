@@ -50,7 +50,39 @@ sudo virsh net-autostart default
 brctl show
 ```
 
-# 2. 常用命令
+# 2. Fedora安装KVM
+
+## 2.1. 安装软件
+```bash
+sudo dnf install @virtualization
+```
+
+## 2.2. 启动并设置服务自启
+```bash
+sudo systemctl enable --now libvirtd
+```
+
+## 2.3.配置用户权限
+将用户加入libvirt组：
+```bash
+sudo usermod -aG libvirt $USER
+```
+
+## 2.4. 使新加入的用户组权限生效
+```bash
+注销并重新登录
+
+或执行
+
+newgrp libvirt
+```
+
+## 2.5. 修改默认硬盘镜像目录权限
+```bash
+sudo setfacl -m u:你的用户名:rwx /var/lib/libvirt/images
+```
+
+# 3. 常用命令
 
 ```bash
 # 进入root
@@ -63,13 +95,13 @@ qemu-img create -f qcow2 /var/lib/libvirt/images/vm1 10G
 virt-install \
 --name vm1 \
 --ram 4096 \
---disk path=/var/lib/libvirt/images/vm1.img,size=10 \
+--disk path=/var/lib/libvirt/images/vm1,size=10 \
 --vcpus 4 \
 --cpu host-model,topology.sockets=1,topology.cores=4,topology.threads=1 \
 --os-variant centos7 \
 --network bridge=virbr0 \
 --console pty,target_type=serial \
---cdrom=/var/lib/libvirt/images/CentOS-7-x86_64-Minimal-2009.iso \
+--cdrom=/var/lib/libvirt/images/CentOS-7-x86_64-Minimal-1908.iso \
 --graphics vnc,password=geek,port=-1,listen=0.0.0.0
 
 # 列出已创建的虚拟机
@@ -96,6 +128,7 @@ virsh undefine vm1.xml
 # 如果创建了虚拟机而忘记记录IP，可以用这条命令连接虚拟机
 virt-viewer -c qemu:///system vm1
 ```
+
 
 
 
