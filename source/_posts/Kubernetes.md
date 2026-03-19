@@ -12,9 +12,9 @@ categories: Kubernetes
 - [CentOS Stream 9](CentOS-Stream-9-latest-x86_64-dvd1.iso)  
 - Kubernetesb版本：v1.28.2
 - Kubernetesb网络插件：flannel
-- 192.168.2.100 node1 (master)
-- 192.168.2.101 node2 (worker)
-- 192.168.2.102 node3 (worker)
+- 192.168.2.100 node1 （master）
+- 192.168.2.101 node2 （worker）
+- 192.168.2.102 node3 （worker）
 
 ## 3. 系统配置(所有节点)
 ```bash
@@ -95,7 +95,7 @@ sudo dnf install -y kubelet kubeadm kubectl
 sudo systemctl enable kubelet
 ```
 
-### 6.3. 初始化Kubernetes集群(master)
+### 6.3. 初始化Kubernetes集群（master）
 ```bash
 # --apiserver-advertise-address=这里填写的IP要和master节点的一致
 kubeadm init \
@@ -184,26 +184,26 @@ kubeadm init \
 kubeadm join 192.168.2.100:6443 --token 1s8frr.vlyg2sw7e9hpdov7 \
          --discovery-token-ca-cert-hash sha256:284f7e8a02f1007f45417629b048b716a7d210b15de14eab54d99da898efa163
 ```
-### 6.5. 按照输出提示创建和声明目录(master)
+### 6.5. 按照输出提示创建和声明目录（master）
 ```bash
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
-### 6.6. 部署网络插件(master)
+### 6.6. 部署网络插件（master）
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 ```
 
-### 6.7. 验证主节点状态(master)
+### 6.7. 验证主节点状态（master）
 ```bash
 [root@node1 ~]# kubectl get nodes
 NAME    STATUS   ROLES           AGE   VERSION
 node1   Ready    control-plane   92s   v1.28.2
 
 # 建议检查所有 Pod 是否正常运行：
-kubectl get pods --all-namespaces(master)
+kubectl get pods --all-namespaces（master）
 
 # [root@node1 ~]# kubectl get pods --all-namespaces
 # NAMESPACE      NAME                            READY   STATUS    RESTARTS   AGE
@@ -217,13 +217,13 @@ kubectl get pods --all-namespaces(master)
 # kube-system    kube-scheduler-node1            1/1     Running   0          82s
 ```
 
-## 7. 工作节点加入集群(worker)
+## 7. 工作节点加入集群（worker）
 ```bash
 kubeadm join 192.168.2.100:6443 --token 1s8frr.vlyg2sw7e9hpdov7 \
          --discovery-token-ca-cert-hash sha256:284f7e8a02f1007f45417629b048b716a7d210b15de14eab54d99da898efa163
 ```
 
-## 7.1. 验证状态(master)
+## 7.1. 验证状态（master）
 ```bash
 kubectl get nodes
 
@@ -234,7 +234,7 @@ node2   Ready    <none>          3m13s   v1.28.2
 node3   Ready    <none>          3m10s   v1.28.2
 ```
 
-## 7.2. 配置角色(master)
+## 7.2. 配置角色（master）
 ```bash
 kubectl label node node2 node-role.kubernetes.io/worker=worker
 kubectl label node node3 node-role.kubernetes.io/worker=worker
@@ -247,7 +247,7 @@ kubectl label node node3 node-role.kubernetes.io/worker=worker
 # node3   Ready    worker          43m   v1.28.2
 ```
 
-## 7.3. 如果需要在子节点访问kubernetes集群(master)
+## 7.3. 如果需要在子节点访问kubernetes集群（master）
 ```bash
 scp $HOME/.kube/config root@192.168.2.101:~/.kube/config
 scp $HOME/.kube/config root@192.168.2.102:~/.kube/config
@@ -313,7 +313,89 @@ https://192.168.2.100:端口号
 选择 "Token" 模式，粘贴刚才生成的长字符串。
 ```
 
+# 二. 安装存储插件（nfs）并测试
 
+## 1. 准备NFS服务端（master）
+
+### 1.1. 安装NFS组件
+```bash
+yum install -y nfs-utils
+```
+
+### 1.2. 创建共享目录并赋权
+```bash
+mkdir -p /opt/k8s/data
+chmod 777 /opt/k8s/data
+```
+
+### 1.3. 配置共享规则
+```bash
+echo "/opt/k8s/data *(rw,sync,no_root_squash)" > /etc/exports
+```
+
+### 1.4. 启动服务
+```bash
+systemctl restart rpcbind
+systemctl restart nfs-server
+systemctl enable rpcbind
+systemctl enable nfs-server
+```
+
+## 2. 准备NFS客户端（worker）
+```bash
+yum install -y nfs-utils
+
+# 测试是否能看到master的共享目录
+showmount -e 192.168.2.100
+
+--------------------------
+[root@node2 ~]# showmount -e 192.168.2.100
+Export list for 192.168.2.100:
+/opt/k8s/data *
+--------------------------
+```
+
+## 3. 挂载NFS共享目录
+```bash
+sudo mkdir -p /nfs/data
+
+vim /etc/fstab
+-------------------------------------
+加入一行：server:/nfs_share /mnt/nfs nfs defaults 0 0
+# server:/nfs_share`是NFS服务器和共享目录的地址，`/mnt/nfs`是本地挂载点的路径
+192.168.2.100:/opt/k8s/data /nfs/data nfs defaults 0 0
+-------------------------------------
+
+systemctl daemon-reload
+
+# 挂载并验证
+sudo mount -a
+
+#  看到`192.168.2.100:/opt/k8s/data`的挂载说明成功
+df -h
+---------
+......
+192.168.2.100:/opt/k8s/data   20G  3.7G   17G  19% /nfs/data
+......
+---------
+
+# 加入开机启动，并重启验证
+sudo systemctl enable nfs-client.target
+sudo systemctl enable rpcbind
+```
+
+# 4. 验证NFS是否可用
+```bash
+# 在worker上创建一个测试文件并写入内容，然后在master上检查文件是否存在并是否包含相同的内容
+----------
+# worker
+echo "Hello Server" > /nfs/data/hello.txt
+
+# master
+cat /opt/k8s/hello.txt
+
+如果输出的内容为 "Hello Server"，则说明NFS配置正确，可用性正常
+```
 
 
 
