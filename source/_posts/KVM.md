@@ -4,6 +4,7 @@ date: 2025-03-12 11:09:50
 tags: KVM
 categories: KVM
 ---
+
 # 1. Archlinux使用KVM
 
 ## 1.1. 安装KVM包
@@ -46,29 +47,34 @@ sudo virsh net-start default
 # 设置网桥开机启动
 sudo virsh net-autostart default
 
-# 查看网桥状态 
+# 查看网桥状态
 brctl show
 ```
 
 # 2. Fedora安装KVM
 
 ## 2.1. 安装软件
+
 ```bash
 sudo dnf install @virtualization
 ```
 
 ## 2.2. 启动并设置服务自启
+
 ```bash
 sudo systemctl enable --now libvirtd
 ```
 
 ## 2.3.配置用户权限
+
 将用户加入libvirt组：
+
 ```bash
 sudo usermod -aG libvirt $USER
 ```
 
 ## 2.4. 使新加入的用户组权限生效
+
 ```bash
 注销并重新登录
 
@@ -78,6 +84,7 @@ newgrp libvirt
 ```
 
 ## 2.5. 修改默认硬盘镜像目录权限
+
 ```bash
 sudo setfacl -m u:你的用户名:rwx /var/lib/libvirt/images
 ```
@@ -128,16 +135,3 @@ virsh undefine vm1.xml
 # 如果创建了虚拟机而忘记记录IP，可以用这条命令连接虚拟机
 virt-viewer -c qemu:///system vm1
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-

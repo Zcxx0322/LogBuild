@@ -9,7 +9,7 @@ categories: Kubernetes
 
 ## 1. 环境准备
 
-- [CentOS Stream 9](CentOS-Stream-9-latest-x86_64-dvd1.iso)  
+- [CentOS Stream 9](CentOS-Stream-9-latest-x86_64-dvd1.iso)
 - Kubernetesb版本：v1.28.2
 - Kubernetesb网络插件：flannel
 - 192.168.2.100 node1 （master）
@@ -17,6 +17,7 @@ categories: Kubernetes
 - 192.168.2.102 node3 （worker）
 
 ## 3. 系统配置(所有节点)
+
 ```bash
 # 域名解析
 cat <<EOF >> /etc/hosts
@@ -56,12 +57,15 @@ sudo sysctl --system
 ```
 
 ## 4. 安装基础工具(所有节点)
+
 ```bash
 yum install -y wget vim net-tools telnet
 ```
 
 ## 5. 安装containerd(所有节点)
+
 k8s依赖容器运行时（v1.24 弃用 dockershim）（如果需要使用docker，需要安装cri-dockerd组件），我们这里直接使用containerd。
+
 ```bash
 sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
 sudo dnf update
@@ -81,12 +85,15 @@ $ sudo systemctl enable containerd
 ```
 
 ## 6. 安装Kubernetes集群及网络插件
+
 ### 6.1. 添加Kubernetes仓库(所有节点)
+
 ```bash
 $ cat <<EOF > /etc/yum.repos.d/kubernetes.repo[kubernetes]name=Kubernetesbaseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/enabled=1gpgcheck=0repo_gpgcheck=0gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpgEOF
 ```
 
 ### 6.2. 安装Kubernetes modules(所有节点)
+
 ```bash
 sudo dnf update
 
@@ -96,6 +103,7 @@ sudo systemctl enable kubelet
 ```
 
 ### 6.3. 初始化Kubernetes集群（master）
+
 ```bash
 # --apiserver-advertise-address=这里填写的IP要和master节点的一致
 kubeadm init \
@@ -179,12 +187,16 @@ kubeadm init \
 # kubeadm join 192.168.2.100:6443 --token 1s8frr.vlyg2sw7e9hpdov7 \
 #         --discovery-token-ca-cert-hash sha256:284f7e8a02f1007f45417629b048b716a7d210b15de14eab54d99da898efa163
 ```
+
 ### 6.4. 保存好加入集群命令
+
 ```bash
 kubeadm join 192.168.2.100:6443 --token 1s8frr.vlyg2sw7e9hpdov7 \
          --discovery-token-ca-cert-hash sha256:284f7e8a02f1007f45417629b048b716a7d210b15de14eab54d99da898efa163
 ```
+
 ### 6.5. 按照输出提示创建和声明目录（master）
+
 ```bash
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
@@ -192,11 +204,13 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
 ### 6.6. 部署网络插件（master）
+
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 ```
 
 ### 6.7. 验证主节点状态（master）
+
 ```bash
 [root@node1 ~]# kubectl get nodes
 NAME    STATUS   ROLES           AGE   VERSION
@@ -218,12 +232,14 @@ kubectl get pods --all-namespaces（master）
 ```
 
 ## 7. 工作节点加入集群（worker）
+
 ```bash
 kubeadm join 192.168.2.100:6443 --token 1s8frr.vlyg2sw7e9hpdov7 \
          --discovery-token-ca-cert-hash sha256:284f7e8a02f1007f45417629b048b716a7d210b15de14eab54d99da898efa163
 ```
 
 ## 7.1. 验证状态（master）
+
 ```bash
 kubectl get nodes
 
@@ -235,6 +251,7 @@ node3   Ready    <none>          3m10s   v1.28.2
 ```
 
 ## 7.2. 配置角色（master）
+
 ```bash
 kubectl label node node2 node-role.kubernetes.io/worker=worker
 kubectl label node node3 node-role.kubernetes.io/worker=worker
@@ -248,6 +265,7 @@ kubectl label node node3 node-role.kubernetes.io/worker=worker
 ```
 
 ## 7.3. 如果需要在子节点访问kubernetes集群（master）
+
 ```bash
 scp $HOME/.kube/config root@192.168.2.101:~/.kube/config
 scp $HOME/.kube/config root@192.168.2.102:~/.kube/config
@@ -259,7 +277,9 @@ scp $HOME/.kube/config root@192.168.2.102:~/.kube/config
 # node2   Ready    worker          46m   v1.28.2
 # node3   Ready    worker          46m   v1.28.2
 ```
+
 ## 8. 安装Dashboard
+
 ```bash
 # 执行官方提供的 YAML 配置
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
@@ -318,22 +338,26 @@ https://192.168.2.100:端口号
 ## 1. 准备NFS服务端（master）
 
 ### 1.1. 安装NFS组件
+
 ```bash
 yum install -y nfs-utils
 ```
 
 ### 1.2. 创建共享目录并赋权
+
 ```bash
 mkdir -p /opt/k8s/data
 chmod 777 /opt/k8s/data
 ```
 
 ### 1.3. 配置共享规则
+
 ```bash
 echo "/opt/k8s/data *(rw,sync,no_root_squash)" > /etc/exports
 ```
 
 ### 1.4. 启动服务
+
 ```bash
 systemctl restart rpcbind
 systemctl restart nfs-server
@@ -342,6 +366,7 @@ systemctl enable nfs-server
 ```
 
 ## 2. 准备NFS客户端（worker）
+
 ```bash
 yum install -y nfs-utils
 
@@ -356,6 +381,7 @@ Export list for 192.168.2.100:
 ```
 
 ## 3. 挂载NFS共享目录
+
 ```bash
 sudo mkdir -p /nfs/data
 
@@ -385,6 +411,7 @@ sudo systemctl enable rpcbind
 ```
 
 # 4. 验证NFS是否可用
+
 ```bash
 # 在worker上创建一个测试文件并写入内容，然后在master上检查文件是否存在并是否包含相同的内容
 ----------
@@ -396,12 +423,3 @@ cat /opt/k8s/hello.txt
 
 如果输出的内容为 "Hello Server"，则说明NFS配置正确，可用性正常
 ```
-
-
-
-
-
-
-
-
-

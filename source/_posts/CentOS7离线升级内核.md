@@ -5,14 +5,14 @@ tags: CentOS7
 categories: CentOS7
 ---
 
-------
+---
 
 # CentOS7 离线升级内核
 
 - **原内核版本**：3.10.0-1160.el7.x86_64
 - **升级后内核版本**：5.4.261-1.el7.elrepo.x86_64
 
-------
+---
 
 ## 1. 环境确认
 
@@ -22,7 +22,7 @@ uname -r
 arch
 ```
 
-------
+---
 
 ## 2. 准备 RPM 包
 
@@ -37,7 +37,7 @@ arch
 下载源：
  https://mirrors.coreix.net/elrepo-archive-archive/kernel/el7/x86_64/RPMS/
 
-------
+---
 
 ## 3. 移除旧工具（避免冲突）
 
@@ -45,7 +45,7 @@ arch
 yum remove -y kernel-tools kernel-tools-libs
 ```
 
-------
+---
 
 ## 4. 安装新内核及工具
 
@@ -61,7 +61,7 @@ yum localinstall -y kernel-lt-5.4.261-1.el7.elrepo.x86_64.rpm \
                     kernel-lt-tools-libs-5.4.261-1.el7.elrepo.x86_64.rpm
 ```
 
-------
+---
 
 ## 5. 更新 GRUB 引导配置
 
@@ -76,7 +76,7 @@ awk -F\' '$1=="menuentry " {print $2}' /etc/grub2.cfg
 grub2-set-default 0
 ```
 
-------
+---
 
 ## 6. 重启并验证
 
@@ -92,7 +92,7 @@ uname -r
 5.4.261-1.el7.elrepo.x86_64
 ```
 
-------
+---
 
 ## 7. 回退方案
 
@@ -110,5 +110,5 @@ uname -r
 
    （其中 `1` 表示旧内核在 grub 菜单中的顺序）
 
-------
+---
 

@@ -50,7 +50,7 @@ systemctl enable mysqld.service
 
 ```bash
 # 输入密码即可
-mysql -u root -p 
+mysql -u root -p
 Enter password:
 ```
 
@@ -188,7 +188,7 @@ expect -nocase \"Enter password:\" {send \"${BY_MYSQL_ROOT_PASSWORD}\n\"; intera
 
 ```terminal
 spawn mysql_config_editor set --skip-warn --login-path=client --host=localhost --user=root --password
-Enter password: 
+Enter password:
 ```
 
 *查看MySQL无密码配置清单*

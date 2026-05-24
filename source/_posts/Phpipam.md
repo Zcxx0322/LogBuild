@@ -143,8 +143,8 @@ set global validate_password_length=0;
 ```mysql
 CREATE DATABASE phpipam;
 CREATE USER 'phpipam'@'localhost' IDENTIFIED BY 'geek';
-GRANT ALL PRIVILEGES ON phpipam.* TO 'phpipam'@'localhost';	
-GRANT ALL PRIVILEGES ON *.* TO 'phpipam'@'本机IP' IDENTIFIED BY 'geek' WITH GRANT OPTION; 
+GRANT ALL PRIVILEGES ON phpipam.* TO 'phpipam'@'localhost';
+GRANT ALL PRIVILEGES ON *.* TO 'phpipam'@'本机IP' IDENTIFIED BY 'geek' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 EXIT;
 ```
@@ -194,7 +194,7 @@ sudo yum install php php-cli php-mysqlnd php-json php-gd php-ldap php-curl php-z
 
 ```bash
 cd /tmp
-wget -c https://github.com/phpipam/phpipam/releases/download/v1.7.3/phpipam-v1.7.3.tgz 
+wget -c https://github.com/phpipam/phpipam/releases/download/v1.7.3/phpipam-v1.7.3.tgz
 tar -xzvf phpipam-v1.7.3.tgz
 sudo mv phpipam /var/www/html/
 sudo chown -R apache:apache /var/www/html/phpipam
@@ -206,11 +206,11 @@ sudo chown -R apache:apache /var/www/html/phpipam
 cp /var/www/html/phpipam/config.dist.php /var/www/html/phpipam/config.php
 vim  /var/www/html/phpipam/config.php
 
-$db['host'] = '虚拟机IP'; // 使用虚拟机实际IP 
+$db['host'] = '虚拟机IP'; // 使用虚拟机实际IP
 
-$db['user'] = 'phpipam';         // 专用用户 
+$db['user'] = 'phpipam';         // 专用用户
 
-$db['pass'] = 'geek'; 
+$db['pass'] = 'geek';
 
 $db['name'] = 'phpipam'
 ```
@@ -253,6 +253,3 @@ http://虚拟机IP/phpipam/
 - **页面空白**：检查 PHP 错误日志 `/var/log/php-fpm/error.log`。
 
 完成以上步骤后，即可通过 Web 界面管理 IP 地址。如需 HTTPS，可使用 Let's Encrypt 配置 SSL 证
-
-
-

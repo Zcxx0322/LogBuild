@@ -5,7 +5,7 @@ categories: CentOS7
 date: 2024-12-02 11:40:27
 ---
 
-------
+---
 
 # 1. 环境准备
 
@@ -14,7 +14,7 @@ date: 2024-12-02 11:40:27
 2. **CentOS 7.9**
     下载地址：https://mirrors.aliyun.com/centos/7.9.2009/isos/x86_64/?spm=a2c6h.25603864.0.0.3dccf5adbnhdJY
 
-------
+---
 
 # 2. 调整网络模式
 
@@ -25,7 +25,7 @@ date: 2024-12-02 11:40:27
 
 ![image-20241205104936386](/img/network1.png)
 
-------
+---
 
 # 3. 网卡自启配置（可选）
 
@@ -60,7 +60,7 @@ connection.autoconnect-retries:         -1 (default)
 connection.autoconnect-slaves:          -1 (default)
 ```
 
-------
+---
 
 # 4. 配置静态 IP
 
@@ -108,7 +108,7 @@ systemctl restart network
 ping www.baidu.com
 ```
 
-------
+---
 
 ## 4.2. 方法二：使用 nmcli 工具
 
@@ -170,7 +170,7 @@ nmcli connection delete enp0s3
 nmcli device connect enp0s3
 ```
 
-------
+---
 
 ## 4.3. 方法三：使用 nmtui 工具
 
@@ -186,7 +186,7 @@ nmtui
 
 ### 4.3.2. 配置步骤
 
-1. IPv4 CONFIGURATION `<Automatic>` ------->>> <font color='red'>IPv4 CONFIGURATION` <Manual>`</font>
+1. IPv4 CONFIGURATION `<Automatic>` ---->>> <font color='red'>IPv4 CONFIGURATION` <Manual>`</font>
 2. <font color='red'>` show`</font>
 3. <font color='red'>`[X] Automatically connect`</font>
 4. <font color='red'>` <OK>`</font>
@@ -213,5 +213,5 @@ ip a
 ping www.baidu.com
 ```
 
-------
+---
 

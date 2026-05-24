@@ -20,7 +20,7 @@ date: 2024-11-26 14:35:57
 
 # 1. 建立硬盘分区
 
-```bash	
+```bash
 cfdisk
 ```
 
@@ -82,7 +82,7 @@ Writing superblocks and filesystem accounting information: done
 
 ## 2.2. 格式化交换分区（未设置就跳过）
 
-```bash	
+```bash
 mkswap /dev/sda2
 ```
 
@@ -185,7 +185,7 @@ EOF
 
 ## 5.2. 安装基础包
 
-```bash	
+```bash
 pacstrap /mnt base
 ```
 
@@ -212,7 +212,7 @@ EOF
 ## 7.2. 安装vim sudo
 
 ```bash
-pacman -S vim sudo 
+pacman -S vim sudo
 ```
 
 ## 7.3. 设置时区
@@ -247,7 +247,7 @@ echo "LANG=en_US.UTF-8" > /etc/locale.conf
 
 <font color="red">全局设置为英文，tty控制台不会乱码，新用户默认目录也是英文名称，方便使用。</font>
 
-<font color="red">新用户登录桌面后，自行找到控制面板中的 “Region and Language”（区域和语言）设置为 `汉语` 即可。设置后，如果提示更新目录名称为中文，请选择 “保留旧的文件名”，除非你想在终端经常打中文目录名称（累死你~~）。</font>
+<font color="red">新用户登录桌面后，自行找到控制面板中的 "Region and Language"（区域和语言）设置为 `汉语` 即可。设置后，如果提示更新目录名称为中文，请选择 "保留旧的文件名"，除非你想在终端经常打中文目录名称（累死你~~）。</font>
 
 ## 7.5. 键盘布局
 
@@ -416,4 +416,3 @@ sudo systemctl start systemd-timesyncd
 sudo systemctl enable sshd
 sudo systemctl mask tmp.mount
 ```
-

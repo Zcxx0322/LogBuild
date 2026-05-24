@@ -1262,6 +1262,7 @@ sestatus
 ```
 
 如果 SELinux 启用，可以临时关闭：
+
 ```bash
 setenforce 0
 ```

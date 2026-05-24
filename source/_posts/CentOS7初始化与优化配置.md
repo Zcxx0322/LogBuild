@@ -5,7 +5,7 @@ categories: CentOS7
 date: 2024-11-21 17:50:36
 ---
 
-------
+---
 
 # CentOS7初始化与优化配置
 
@@ -23,7 +23,7 @@ echo "exclude=*.i386 *.i586 *.i686" >> /etc/yum.conf
 echo 'ip_resolve=4' >> /etc/yum.conf
 ```
 
-------
+---
 
 ## 2. 更新系统
 
@@ -62,7 +62,7 @@ yum makecache
 yum update -y
 ```
 
-------
+---
 
 ## 3. EPEL 镜像设置
 
@@ -88,7 +88,7 @@ sed -e 's!^metalink=!#metalink=!g' \
 yum makecache
 ```
 
-------
+---
 
 ## 4. 安装常用软件
 
@@ -204,7 +204,7 @@ echo -e "执行命令：pip${pkg_ver_num} list\n" && pip${pkg_ver_num} list
 执行命令：pip310 list
 
 Package    Version
----------- -------
+------- ----
 pip        22.1.2
 setuptools 58.1.0
 
@@ -244,7 +244,7 @@ yum install -y xmlstarlet
 yum install -y crudini
 ```
 
-------
+---
 
 ## 5. 设置系统时区
 
@@ -252,7 +252,7 @@ yum install -y crudini
 yes|cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 ```
 
-------
+---
 
 ## 6. 安装时间同步服务
 
@@ -262,7 +262,7 @@ systemctl enable chronyd
 systemctl start chronyd
 ```
 
-------
+---
 
 ## 7. 禁用 IPv6
 
@@ -271,7 +271,7 @@ echo "net.ipv6.conf.all.disable_ipv6 = 1" >>  /etc/sysctl.conf
 echo "net.ipv6.conf.default.disable_ipv6 = 1" >>  /etc/sysctl.conf
 ```
 
-------
+---
 
 ## 8. 删除安装日志
 
@@ -279,7 +279,7 @@ echo "net.ipv6.conf.default.disable_ipv6 = 1" >>  /etc/sysctl.conf
 rm -f ~/anaconda-ks.cfg  ~/install.log  ~/install.log.syslog
 ```
 
-------
+---
 
 ## 9. 禁用 SELinux
 
@@ -288,7 +288,7 @@ echo SELINUX=disabled>/etc/selinux/config
 echo SELINUXTYPE=targeted>>/etc/selinux/config
 ```
 
-------
+---
 
 ## 10. 关闭防火墙
 
@@ -297,7 +297,7 @@ systemctl disable firewalld
 systemctl stop firewalld
 ```
 
-------
+---
 
 ## 11. 设置最大文件句柄
 
@@ -306,7 +306,7 @@ echo "* soft nofile 65535" | sudo tee -a /etc/security/limits.conf
 echo "* hard nofile 65535" | sudo tee -a /etc/security/limits.conf
 ```
 
-------
+---
 
 ## 12. 优化 SSH 服务
 
@@ -327,7 +327,7 @@ sed -i "s/#ClientAliveCountMax 3/ClientAliveCountMax 10/" /etc/ssh/sshd_config
 systemctl reload sshd
 ```
 
-------
+---
 
 ## 13. 设置主机名
 
@@ -337,7 +337,7 @@ systemctl reload sshd
 echo '127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4' > /etc/hosts
 ```
 
-------
+---
 
 ## 14. 重启
 
@@ -345,5 +345,5 @@ echo '127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomai
 reboot
 ```
 
-------
+---
 

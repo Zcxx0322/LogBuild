@@ -217,7 +217,6 @@ ansible-playbook -i inventory.ini first-playbook.yml
 
 ---
 
-
 ## 常见问题与解决方案
 
 - **Host key checking**：首次连接会提示确认主机密钥，可临时在 `ansible.cfg` 中禁用（不推荐生产）：
