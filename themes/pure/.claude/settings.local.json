@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:zcxx0322.github.io)"
+      "WebFetch(domain:zcxx0322.github.io)",
+      "Bash(hexo generate *)",
+      "Bash(hexo clean *)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(echo \"---deployer installed: $?\")"
     ]
   }
 }
