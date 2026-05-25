@@ -97,7 +97,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: oranges
+theme: pure
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
@@ -108,3 +108,10 @@ deploy:
   branch: main
   message: "文档更新"
 
+
+
+# hexo-generator-search
+search:
+  path: search.xml
+  field: post
+  content: true

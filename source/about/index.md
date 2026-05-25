@@ -1,6 +1,4 @@
 ---
-title: about
-type: "about"
-categories:
-tags:
+title: 关于
+layout: about
 ---
