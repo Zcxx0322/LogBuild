@@ -3,6 +3,8 @@ title: CentOS7离线升级内核
 date: 2025-09-01 11:09:50
 tags: CentOS7
 categories: CentOS7
+series: CentOS7 基础配置
+series_order: 3
 ---
 
 ---

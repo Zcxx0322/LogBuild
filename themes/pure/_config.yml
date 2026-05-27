@@ -32,9 +32,16 @@ social:
 # ----------------------------------------------------------------
 post:
   excerpt_length: 200        # 无 <!-- more --> 时自动截取的摘要长度（字符数）
-  show_updated: false        # 是否在文章底部显示"最后更新"时间
+  show_updated: true        # 是否在文章底部显示"最后更新"时间
   copyright: true            # 是否在文章底部显示版权声明
   copyright_text: "转载请注明出处。"
+  series:
+    enable: true             # 是否启用文章系列导航
+  outdated:
+    enable: true             # 是否启用文章时效提醒
+    days: 365                # 发布时间超过多少天后提醒
+    basis: date              # date（发布时间）| updated（更新时间）
+    message: "技术细节可能随版本变化，请结合当前环境验证。"
 
 # ----------------------------------------------------------------
 # 文章目录（TOC）

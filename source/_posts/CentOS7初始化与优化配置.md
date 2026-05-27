@@ -3,11 +3,17 @@ title: CentOS7初始化与优化配置
 tags: CentOS7
 categories: CentOS7
 date: 2024-11-21 17:50:36
+series: CentOS7 基础配置
+series_order: 1
 ---
 
 ---
 
 # CentOS7初始化与优化配置
+
+:::tip
+建议在执行初始化脚本前先备份关键配置文件，并确认当前主机没有正在运行的重要业务。
+:::
 
 ## 1. 配置 YUM
 

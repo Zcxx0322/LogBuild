@@ -3,6 +3,8 @@ title: CentOS7配置静态IP
 tags: CentOS7
 categories: CentOS7
 date: 2024-12-02 11:40:27
+series: CentOS7 基础配置
+series_order: 2
 ---
 
 ---
