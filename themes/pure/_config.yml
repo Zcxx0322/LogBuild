@@ -78,15 +78,15 @@ search:
 # 评论系统（将 enable 设为 true 并选择一个 provider）
 # ----------------------------------------------------------------
 comments:
-  enable: false
+  enable: true
   provider: giscus           # giscus | waline | disqus | valine
 
   # Giscus（基于 GitHub Discussions），前往 https://giscus.app 获取参数
   giscus:
-    repo: ""
-    repo_id: ""
-    category: ""
-    category_id: ""
+    repo: "Zcxx0322/Zcxx0322.github.io"
+    repo_id: "R_kgDOQev4PQ"
+    category: "Announcements"
+    category_id: "DIC_kwDOQev4Pc4C97e7"
     mapping: pathname
     reactions_enabled: 1
     emit_metadata: 0
