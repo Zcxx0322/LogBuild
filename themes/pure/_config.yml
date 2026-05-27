@@ -6,7 +6,7 @@
 favicon: /favicon.ico
 
 # Logo 图片路径；留空则显示站点标题文字
-logo:
+logo: /img/zcxx0322.png
 
 # ----------------------------------------------------------------
 # 导航菜单（名称: 路径）
@@ -24,7 +24,7 @@ menu:
 social:
   github: https://github.com/Zcxx0322
   twitter:
-  email: 3611744356@qq.com
+  email: 
   rss: 
 
 # ----------------------------------------------------------------
@@ -34,7 +34,7 @@ post:
   excerpt_length: 200        # 无 <!-- more --> 时自动截取的摘要长度（字符数）
   show_updated: false        # 是否在文章底部显示"最后更新"时间
   copyright: true            # 是否在文章底部显示版权声明
-  copyright_text: "本文采用 CC BY-NC-SA 4.0 许可协议，转载请注明出处。"
+  copyright_text: "转载请注明出处。"
 
 # ----------------------------------------------------------------
 # 文章目录（TOC）
