@@ -212,7 +212,83 @@ host = localhost
 mysql -e "show databases;"
 ```
 
-### 1.2.8. 修改密码策略(可选)
+## 1.3. Ubuntu
+
+### 1.3.1. 更新软件包列表
+
+```bash
+sudo apt update
+```
+
+### 1.3.2.  查看可用的安装包
+
+```bash
+sudo apt search mysql-server
+```
+
+终端输出：
+
+```terminal
+root@ubuntu:~# sudo apt search mysql-server
+Sorting... Done
+Full Text Search... Done
+default-mysql-server/noble 1.1.0build1 all
+  MySQL database server binaries and system database setup (metapackage)
+
+default-mysql-server-core/noble 1.1.0build1 all
+  MySQL database server binaries (metapackage)
+
+mysql-server/noble-updates,noble-security 8.0.46-0ubuntu0.24.04.2 all
+  MySQL database server (metapackage depending on the latest version)
+
+mysql-server-8.0/noble-updates,noble-security 8.0.46-0ubuntu0.24.04.2 amd64
+  MySQL database server binaries and system database setup
+
+mysql-server-core-8.0/noble-updates,noble-security 8.0.46-0ubuntu0.24.04.2 amd64
+  MySQL database server binaries
+```
+
+### 1.3.3. 安装MySql8.0
+
+```bash
+sudo apt install -y mysql-server-8.0
+```
+
+如果不加`-y` 会在安装过程中，系统将提示你设置MySQL的root密码。确保密码足够强，且记住它，因为你将在以后需要用到它。
+
+### 1.3.4. 启动MySQL服务
+
+```bash
+systemctl enable --now mysql
+
+systemctl status mysql
+```
+
+### 1.3.5. 配置MySQL密码
+
+```bash
+# 登录mysql，在默认安装时如果没有让我们设置密码，则直接回车就能登录成功。
+mysql -uroot -p
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '新密码';
+
+flush privileges;
+```
+
+### 1.3.6. 配置MySQL
+
+这是为了让外部网络能够连接本机的MySQL
+
+```bash
+vim /etc/mysql/mysql.conf.d/mysqld.cnf
+
+# 修改 bind-address
+bind-address = 0.0.0.0
+
+sudo systemctl restart mysql
+```
+
+# 2. 修改密码策略(可选)
 
 *默认的密码复杂度要求太高导致修改密码报错可以执行*
 
