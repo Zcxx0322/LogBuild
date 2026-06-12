@@ -75,11 +75,9 @@ sudo apt install -y \
   docker-buildx-plugin \
   docker-compose-plugin
   
-  
 sudo systemctl enable docker
 sudo systemctl start docker
 sudo systemctl status docker
-
 
 docker --version
 docker compose version
@@ -122,15 +120,13 @@ cd /opt/harbor
 
 sudo cp harbor.yml.tmpl harbor.yml
 
+sed -i '/^[[:space:]]*https:/,/^[[:space:]]*private_key:/ s/^/#/' /opt/harbor/harbor.yml
+
 sudo vim harbor.yml
 
 hostname: harbor.example.com
 http:
   port: 80
-https:
-  port: 443
-  certificate: /data/cert/harbor.example.com.crt
-  private_key: /data/cert/harbor.example.com.key
 harbor_admin_password: Harbor@12345
 database:
   password: root123
@@ -153,6 +149,8 @@ log:
 ### 4.3. 安装 Harbor
 
 ```bash
+docker load -i harbor.v2.14.4.tar.gz
+
 sudo ./prepare
 
 sudo ./install.sh --with-trivy
@@ -170,7 +168,7 @@ vim /etc/hosts
 harbor部署服务器ip:harbor.test.com
 
 # 浏览器访问
-https://harbor.test.com
+http://harbor.test.com
 
 # 默认账号
 用户名：admin
