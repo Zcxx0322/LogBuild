@@ -42,7 +42,7 @@ post:
   outdated:
     enable: true
     days: 365
-    basis: date
+    basis: updated
     message: "技术细节可能随版本变化，请结合当前环境验证。"
 
 # ----------------------------------------------------------------
