@@ -54,6 +54,288 @@ sudo virsh net-autostart default
 brctl show
 ```
 
+## 1.5. 无图形化安装虚拟机
+
+```text
+Arch Linux 宿主机
+系统级 libvirt：qemu:///system
+镜像：/var/lib/libvirt/images/noble-server-cloudimg-amd64.img
+虚拟机名：ubuntu-noble01
+```
+
+### 1.5.1. 安装依赖
+
+```bash
+sudo pacman -Syu
+sudo pacman -S --needed qemu-full libvirt virt-install dnsmasq iptables-nft bridge-utils cloud-image-utils
+
+wget https://mirrors.tuna.tsinghua.edu.cn/ubuntu-cloud-images/noble/20260518/noble-server-cloudimg-amd64.img -O /var/lib/libvirt/images/
+```
+
+启动 libvirt：
+
+```bash
+sudo systemctl enable --now libvirtd
+```
+
+加入用户组：
+
+```bash
+sudo usermod -aG libvirt,kvm $USER
+```
+
+重新登录，或重启：
+
+```bash
+reboot
+```
+
+### 1.5.2. 设置默认使用系统级 libvirt
+
+如果你用 bash：
+
+```bash
+echo 'export LIBVIRT_DEFAULT_URI=qemu:///system' >> ~/.bashrc
+source ~/.bashrc
+```
+
+如果你用 zsh：
+
+```bash
+echo 'export LIBVIRT_DEFAULT_URI=qemu:///system' >> ~/.zshrc
+source ~/.zshrc
+```
+
+验证：
+
+```bash
+virsh uri
+```
+
+应输出：
+
+```text
+qemu:///system
+```
+
+### 1.5.3. 创建并启动 default 网络
+
+查看网络：
+
+```bash
+sudo virsh -c qemu:///system net-list --all
+```
+
+如果没有 `default`，执行：
+
+```bash
+cat > /tmp/default-network.xml <<'EOF'
+<network>
+  <name>default</name>
+  <forward mode='nat'/>
+  <bridge name='virbr0' stp='on' delay='0'/>
+  <ip address='192.168.122.1' netmask='255.255.255.0'>
+    <dhcp>
+      <range start='192.168.122.2' end='192.168.122.254'/>
+    </dhcp>
+  </ip>
+</network>
+EOF
+
+sudo virsh -c qemu:///system net-define /tmp/default-network.xml
+```
+
+启动并设置自启：
+
+```bash
+sudo virsh -c qemu:///system net-start default
+sudo virsh -c qemu:///system net-autostart default
+```
+
+### 1.5.4. 准备虚拟机磁盘
+
+```bash
+cd /var/lib/libvirt/images
+
+sudo cp noble-server-cloudimg-amd64.img ubuntu-noble01.qcow2
+sudo qemu-img resize ubuntu-noble01.qcow2 30G
+sudo chmod 644 ubuntu-noble01.qcow2
+```
+
+### 1.5.5. 创建 cloud-init 配置
+
+```bash
+sudo mkdir -p /var/lib/libvirt/images/cloud-init/ubuntu-noble01
+cd /var/lib/libvirt/images/cloud-init/ubuntu-noble01
+```
+
+创建 `user-data`：
+
+- 用户名：name: ubuntu
+- 密码：plain_text_passwd: ubuntu123
+
+```bash
+sudo tee user-data > /dev/null <<'EOF'
+#cloud-config
+hostname: ubuntu-noble01
+manage_etc_hosts: true
+
+users:
+  - name: ubuntu
+    groups: sudo
+    shell: /bin/bash
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    lock_passwd: false
+    plain_text_passwd: ubuntu123
+
+ssh_pwauth: true
+disable_root: true
+
+package_update: true
+packages:
+  - qemu-guest-agent
+  - vim
+  - curl
+  - wget
+
+growpart:
+  mode: auto
+  devices:
+    - /
+
+resize_rootfs: true
+timezone: Asia/Shanghai
+
+runcmd:
+  - systemctl enable --now qemu-guest-agent
+  - sed -i 's/^#PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_config
+  - sed -i 's/^PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_config
+  - systemctl restart ssh
+EOF
+```
+
+创建 `meta-data`：
+
+```bash
+sudo tee meta-data > /dev/null <<'EOF'
+instance-id: ubuntu-noble01
+local-hostname: ubuntu-noble01
+EOF
+```
+
+生成 ISO：
+
+```bash
+sudo cloud-localds seed.iso user-data meta-data
+sudo chmod 644 seed.iso
+```
+
+### 1.5.6. 创建虚拟机
+
+如果之前失败过，先清理：
+
+```bash
+sudo virsh -c qemu:///system destroy ubuntu-noble01 2>/dev/null || true
+sudo virsh -c qemu:///system undefine ubuntu-noble01 --nvram 2>/dev/null || true
+```
+
+创建：
+
+```bash
+sudo virt-install \
+  --connect qemu:///system \
+  --name ubuntu-noble01 \
+  --memory 3072 \
+  --vcpus 2 \
+  --cpu host-model \
+  --disk path=/var/lib/libvirt/images/ubuntu-noble01.qcow2,format=qcow2,bus=virtio \
+  --disk path=/var/lib/libvirt/images/cloud-init/ubuntu-noble01/seed.iso,device=cdrom \
+  --os-variant ubuntu24.04 \
+  --network network=default,model=virtio \
+  --graphics none \
+  --console pty,target_type=serial \
+  --import \
+  --noautoconsole
+```
+
+如果 `ubuntu24.04` 不支持，改成：
+
+```bash
+--os-variant ubuntu22.04
+```
+
+### 1.5.7. 查看虚拟机和 IP
+
+查看虚拟机：
+
+```bash
+sudo virsh -c qemu:///system list --all
+```
+
+查看 IP：
+
+```bash
+sudo virsh -c qemu:///system net-dhcp-leases default
+```
+
+或：
+
+```bash
+sudo virsh -c qemu:///system domifaddr ubuntu-noble01
+```
+
+### 1.5.8. 登录
+
+假设 IP 是 `192.168.122.100`：
+
+```bash
+ssh ubuntu@192.168.122.100
+```
+
+密码：
+
+```text
+ubuntu123
+```
+
+### 1.5.9. 常用命令
+
+启动：
+
+```bash
+sudo virsh -c qemu:///system start ubuntu-noble01
+```
+
+关机：
+
+```bash
+sudo virsh -c qemu:///system shutdown ubuntu-noble01
+```
+
+强制关机：
+
+```bash
+sudo virsh -c qemu:///system destroy ubuntu-noble01
+```
+
+控制台：
+
+```bash
+sudo virsh -c qemu:///system console ubuntu-noble01
+```
+
+删除虚拟机：
+
+```bash
+sudo virsh -c qemu:///system destroy ubuntu-noble01 2>/dev/null || true
+sudo virsh -c qemu:///system undefine ubuntu-noble01 --nvram 2>/dev/null || true
+sudo rm -f /var/lib/libvirt/images/ubuntu-noble01.qcow2
+sudo rm -rf /var/lib/libvirt/images/cloud-init/ubuntu-noble01
+echo '[]' | sudo tee /var/lib/libvirt/dnsmasq/virbr0.status
+```
+
+
+
 # 2. Fedora安装KVM
 
 ## 2.1. 安装软件
@@ -137,4 +419,24 @@ virsh undefine vm1.xml
 
 # 如果创建了虚拟机而忘记记录IP，可以用这条命令连接虚拟机
 virt-viewer -c qemu:///system vm1
+
+
+sudo virt-install \
+  --name ubuntu-noble01 \
+  --memory 3072 \
+  --vcpus 2 \
+  --cpu host \
+  --disk path=/var/lib/libvirt/images/ubuntu-noble01.qcow2,format=qcow2,bus=virtio \
+  --disk path=/var/lib/libvirt/images/cloud-init/ubuntu-noble01/seed.iso,device=cdrom \
+  --os-variant ubuntu24.04 \
+  --network network=default,model=virtio \
+  --graphics none \
+  --console pty,target_type=serial \
+  --import \
+  --noautoconsole
 ```
+
+
+
+
+
