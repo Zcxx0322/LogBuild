@@ -12,7 +12,7 @@ comments: true
 
 ### ✍️ 关于博客
 
-本博客使用 [Hexo](https://hexo.io/) 构建，主题为 **[pure](https://github.com/Zcxx0322/hexo-theme-pure)**。  
+本博客使用 [Hexo](https://hexo.io/) 构建，主题为 **[oranges](https://github.com/zchengsite/hexo-theme-oranges)**。  
 
 内容主要涵盖：
 - 软件部署
