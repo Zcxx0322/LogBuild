@@ -1,7 +1,8 @@
 ---
 title: Kubernetes
 date: 2026-03-18 10:52:24
-tags: Kubernetes
+tags:
+  - Kubernetes
 categories: Kubernetes
 ---
 
