@@ -361,60 +361,63 @@ kubectl -n kube-system exec -it etcd-rke2-master01 -- etcdctl \
 ### 6.1 安装 Docker
 
 ```bash
-# 更新系统
-sudo apt update && sudo apt upgrade -y
+# 安装依赖
+apt-get update
+apt-get install -y ca-certificates curl gnupg lsb-release
+
+# 添加 Docker 官方 GPG key
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+chmod a+r /etc/apt/keyrings/docker.gpg
+
+# 添加 Docker apt 源
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] \
+  https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
+  | tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 # 安装 Docker
-curl -fsSL https://get.docker.com | sudo sh -
+apt-get update
+apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
-sudo systemctl enable docker
-sudo systemctl start docker
-
-# 添加当前用户到 docker 组（可选）
-sudo usermod -aG docker $USER
-newgrp docker
+# 启用并启动 Docker
+systemctl enable docker
+systemctl start docker
 ```
 
 ### 6.2 配置 Docker 镜像加速（可选，推荐）
 
 ```bash
-sudo mkdir -p /etc/docker
-
-sudo tee /etc/docker/daemon.json > /dev/null << 'EOF'
+cat > /etc/docker/daemon.json << EOF
 {
   "registry-mirrors": [
-    "https://docker.m.daocloud.io",
-    "https://docker.unsee.tech",
-    "https://docker.1ms.run"
+    "https://docker.1ms.run",
+    "https://docker.xuanyuan.me",
+    "https://hub.rat.dev"
   ]
 }
 EOF
 
-sudo systemctl restart docker
+systemctl restart docker
 ```
 
 ### 6.3 运行 Rancher 容器
 
 ```bash
-# 创建持久化目录
-sudo mkdir -p /opt/rancher
-
-# 运行 Rancher（单节点 Docker 模式）
-sudo docker run -d \
-  --name rancher \
+docker run -d \
   --restart=unless-stopped \
+  --name rancher \
   -p 80:80 \
   -p 443:443 \
-  -v /opt/rancher:/var/lib/rancher \
   --privileged \
-  rancher/rancher:latest
+  -v /var/lib/rancher:/var/lib/rancher \
+  rancher/rancher:v2.8.5
 ```
 
 ### 6.4 获取初始密码并登录
 
 ```bash
 # 等待约 1-2 分钟后查看日志获取 Bootstrap Password
-sudo docker logs rancher 2>&1 | grep "Bootstrap Password:"
+docker logs rancher 2>&1 | grep "Bootstrap Password"
 ```
 
 打开浏览器访问 `https://192.168.122.15`，输入上述密码，然后：
